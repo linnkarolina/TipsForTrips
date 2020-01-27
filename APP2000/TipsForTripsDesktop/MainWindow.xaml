@@ -8,8 +8,9 @@
         Title="TipsForTrips" Height="450" Width="800">
   <Grid>
     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="282" VerticalAlignment="Top" Width="784">
-      <ScrollBar x:Name="scrollBar" Width="Auto"/>
+      <Slider x:Name="slider"/>
     </Border>
     <ScrollViewer HorizontalAlignment="Left" Height="410" Margin="694,10,-0.4,0" VerticalAlignment="Top" Width="100"/>
+    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="70" Margin="104,315,0,0" TextWrapping="Wrap" Text="TipsForTrips is an application made for your well being!" VerticalAlignment="Top" Width="590"/>
   </Grid>
 </Window>

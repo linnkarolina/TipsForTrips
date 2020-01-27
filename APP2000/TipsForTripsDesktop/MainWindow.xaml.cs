@@ -24,5 +24,10 @@ namespace TipsForTripsDesktop
         {
             InitializeComponent();
         }
+
+        public void Slider()
+        {
+            
+        }
     }
 }
