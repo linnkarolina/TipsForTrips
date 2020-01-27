@@ -7,9 +7,17 @@
         mc:Ignorable="d"
         Title="TipsForTrips" Height="450" Width="800">
   <Grid>
-    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="282" VerticalAlignment="Top" Width="784">
-      <Slider x:Name="slider"/>
-    </Border>
-    <ScrollViewer HorizontalAlignment="Left" Height="410" Margin="694,10,-0.4,0" VerticalAlignment="Top" Width="100"/>
-    </Grid>
+    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="282" VerticalAlignment="Top" Width="784" Margin="0,82,0,0">
+     </Border>
+    <ScrollViewer HorizontalAlignment="Left" Height="338" Margin="694,82,-0.4,0" VerticalAlignment="Top" Width="100"/>
+    <Menu x:Name="menu" HorizontalAlignment="Left" Height="82" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0">
+      <MenuItem Header="File">
+      </MenuItem>
+      <MenuItem Header="Profile"/>
+      <MenuItem Header="Map">
+      </MenuItem>
+      <MenuItem Header="File">
+      </MenuItem>
+    </Menu>
+   </Grid>
 </Window>
