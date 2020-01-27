@@ -11,6 +11,5 @@
       <Slider x:Name="slider"/>
     </Border>
     <ScrollViewer HorizontalAlignment="Left" Height="410" Margin="694,10,-0.4,0" VerticalAlignment="Top" Width="100"/>
-    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="70" Margin="104,315,0,0" TextWrapping="Wrap" Text="TipsForTrips is an application made for your well being!" VerticalAlignment="Top" Width="590"/>
-  </Grid>
+    </Grid>
 </Window>
