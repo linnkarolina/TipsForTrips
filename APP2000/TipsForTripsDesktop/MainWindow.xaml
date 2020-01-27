@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:TipsForTripsDesktop"
         mc:Ignorable="d"
         Title="TipsForTrips" Height="450" Width="800">
-    <Grid>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="174" Margin="233,113,0,0" VerticalAlignment="Top" Width="337">
-            <ScrollBar x:Name="scrollBar" Width="Auto"/>
-        </Border>
-    </Grid>
+  <Grid>
+    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="282" VerticalAlignment="Top" Width="784">
+      <ScrollBar x:Name="scrollBar" Width="Auto"/>
+    </Border>
+    <ScrollViewer HorizontalAlignment="Left" Height="410" Margin="694,10,-0.4,0" VerticalAlignment="Top" Width="100"/>
+  </Grid>
 </Window>
