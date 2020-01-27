@@ -14,7 +14,7 @@ test-results/
 # Mac bundle stuff
 *.dmg
 *.app
-.vs
+*.vs/*.sqlite
 
 # content below from: https://github.com/github/gitignore/blob/master/Global/macOS.gitignore
 # General
