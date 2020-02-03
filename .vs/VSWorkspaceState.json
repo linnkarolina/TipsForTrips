@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\APP2000",
-    "\\APP2000\\TipsForTripsDesktop"
+    "\\APP2000\\APP2000",
+    "\\Webapp",
+    "\\Webapp\\WebApp",
+    "\\Webapp\\WebApp\\WebApp"
   ],
-  "SelectedNode": "\\APP2000.sql",
+  "SelectedNode": "\\Webapp\\WebApp\\WebApp\\WebApp.csproj",
   "PreviewInSolutionExplorer": false
 }
