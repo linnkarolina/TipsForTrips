@@ -7,14 +7,11 @@
         mc:Ignorable="d"
         Title="TipsForTrips" Height="450" Width="800">
   <Grid>
-    <Backgroundcolor>
-      
-    </Backgroundcolor>
     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="282" VerticalAlignment="Top" Width="784" Margin="0,82,0,0">
      </Border>
     <ScrollViewer HorizontalAlignment="Left" Height="338" Margin="694,82,-0.4,0" VerticalAlignment="Top" Width="100"/>
     <Menu x:Name="menu" HorizontalAlignment="Left" Height="82" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0">
-      <MenuItem Header="File">color = purple
+      <MenuItem Header="File">
       </MenuItem>
       <MenuItem Header="Profile">
       </MenuItem>
