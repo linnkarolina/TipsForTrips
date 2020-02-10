@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\APP2000",
+    "\\APP2000\\APP2000",
+    "\\Webapp",
+    "\\Webapp\\WebApp"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\Webapp\\WebApp\\WebApp.sln",
   "PreviewInSolutionExplorer": false
 }
