@@ -6,17 +6,18 @@
         xmlns:local="clr-namespace:TipsForTripsDesktop"
         mc:Ignorable="d"
         Title="TipsForTrips" Height="450" Width="800">
-  <Grid>
-    <ScrollViewer HorizontalAlignment="Left" Height="401" Margin="684,19,0,0" VerticalAlignment="Top" Width="100"/>
-    <Menu x:Name="menu" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0">
-      <MenuItem Header="File">
-      </MenuItem>
-      <MenuItem Header="Profile">
-      </MenuItem>
-      <MenuItem Header="Map">
-      </MenuItem>
-      <Button x:Name="LogOut" Click="OnClick" Foreground="Blue" Background="Yellow"> TEST
-      </Button>
-    </Menu>
-  </Grid>
+    <Grid Margin="0,0,3.6,0" >
+        <ScrollViewer HorizontalAlignment="Left" Height="401" Margin="684,19,0,0" VerticalAlignment="Top" Width="100"/>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0">
+            <MenuItem Header="File">
+            </MenuItem>
+            <MenuItem Header="Profile">
+            </MenuItem>
+            <MenuItem Header="Map">
+            </MenuItem>
+            <Button x:Name="LogOut" Click="OnClick" Foreground="Blue" Background="Yellow">TEST
+            </Button>
+        </Menu>
+        <DataGrid Name="dtGrid" ItemsSource="{Binding}" Margin="136,19,-4,0"/>
+    </Grid>
 </Window>

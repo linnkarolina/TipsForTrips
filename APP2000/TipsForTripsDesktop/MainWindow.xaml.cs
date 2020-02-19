@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +32,18 @@ namespace TipsForTripsDesktop
         {
             InitializeComponent();
             Test();
+
+            // Database connection
+
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3307;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+
+            MySqlCommand cmd = new MySqlCommand("select * from user;", MyCon);
+            MyCon.Open();
+            DataTable dt = new DataTable();
+            dt.Load(cmd.ExecuteReader());
+            MyCon.Close();
+
+            dtGrid.DataContext = dt;
         }
 
         public void Test()
