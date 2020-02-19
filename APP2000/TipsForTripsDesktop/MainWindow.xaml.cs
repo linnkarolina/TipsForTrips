@@ -35,7 +35,7 @@ namespace TipsForTripsDesktop
 
             // Database connection
 
-            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3307;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
 
             MySqlCommand cmd = new MySqlCommand("select * from user;", MyCon);
             MyCon.Open();
