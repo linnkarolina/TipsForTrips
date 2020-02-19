@@ -3,9 +3,10 @@
     "",
     "\\APP2000",
     "\\APP2000\\APP2000",
+    "\\APP2000\\TipsForTripsDesktop",
     "\\Webapp",
     "\\Webapp\\WebApp"
   ],
-  "SelectedNode": "\\Webapp\\WebApp\\WebApp.sln",
+  "SelectedNode": "\\APP2000\\TipsForTripsDesktop\\MainWindow.xaml",
   "PreviewInSolutionExplorer": false
 }
