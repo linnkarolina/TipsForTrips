@@ -22,16 +22,9 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        string username = "Test";
-        string password = "Test123";
-
-        string sqlUsername = "Test";
-        string sqlPassword = "Test123";
-
         public MainWindow()
         {
             InitializeComponent();
-            Test();
 
             // Database connection
 
@@ -44,34 +37,6 @@ namespace TipsForTripsDesktop
             MyCon.Close();
 
             dtGrid.DataContext = dt;
-        }
-
-        public void Test()
-        {
-            MessageBox.Show("Log in");
-            if (username.Equals(getUsername(sqlUsername)) && password.Equals(getPassword(sqlPassword)))
-            {
-                MessageBox.Show("Hei, Randi!");
-            }
-            else
-            {
-                MessageBox.Show("ERROR#3144 - Wrong username or password. Please try again!");
-            }
-        }
-
-        private string getUsername(string checkUsername)
-        {
-            return checkUsername;
-        }
-
-        private String getPassword(string checkPassword)
-        {
-            return checkPassword;
-        }
-
-        void OnClick(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hei, Randi!");
         }
     }
 }

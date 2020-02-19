@@ -15,8 +15,6 @@
             </MenuItem>
             <MenuItem Header="Map">
             </MenuItem>
-            <Button x:Name="LogOut" Click="OnClick" Foreground="Blue" Background="Yellow">TEST
-            </Button>
         </Menu>
         <DataGrid Name="dtGrid" ItemsSource="{Binding}" Margin="136,19,-4,0"/>
     </Grid>
