@@ -43,7 +43,7 @@ namespace TipsForTripsDesktop
 
             MyCon.Close();
 
-            adminName.DataContext = "Welcome " + name + "!";
+            adminName.DataContext = name;
         }
     }
 }
