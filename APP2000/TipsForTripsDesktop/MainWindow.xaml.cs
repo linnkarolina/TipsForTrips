@@ -27,16 +27,23 @@ namespace TipsForTripsDesktop
             InitializeComponent();
 
             // Database connection
+            string name;
 
             MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
 
-            MySqlCommand cmd = new MySqlCommand("select * from user;", MyCon);
+            MySqlCommand cmd = new MySqlCommand("select username from admin where ID_admin=1;", MyCon);
             MyCon.Open();
-            DataTable dt = new DataTable();
-            dt.Load(cmd.ExecuteReader());
+            var queryResult = cmd.ExecuteScalar();//Return an object so first check for null
+            if (queryResult != null)
+                // If we have result, then convert it from object to string.
+                name = Convert.ToString(queryResult);
+            else
+                // Else make id = "" so you can later check it.
+                name = "";
+
             MyCon.Close();
 
-            dtGrid.DataContext = dt;
+            adminName.DataContext = "Welcome " + name + "!";
         }
     }
 }
