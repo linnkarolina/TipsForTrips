@@ -1,5 +1,9 @@
 {
   "version": 1,
+<<<<<<< HEAD
   "dgSpecHash": "QSSouHpEu0bUtP91ZVjVBzODdXpTQ8aTbRcfAPPeJSRCTCJCqZRnLKLG5L0QUJC3CwxS/Mj/hf1ZAsLlN0CReQ==",
+=======
+  "dgSpecHash": "9FQa8ZUTSdGrF3X6CyVg98t+gDut9kXwAGb6Jdvj9n80981FJjvYTDSs7fCd8/PdJ5ng3cp+l/eKNgeAZWaduA==",
+>>>>>>> Tobias_Branch
   "success": true
 }

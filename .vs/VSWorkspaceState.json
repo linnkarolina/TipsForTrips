@@ -3,10 +3,18 @@
     "",
     "\\APP2000",
     "\\APP2000\\APP2000",
+<<<<<<< HEAD
     "\\Webapp",
     "\\Webapp\\WebApp",
     "\\Webapp\\WebApp\\WebApp"
   ],
   "SelectedNode": "\\Webapp\\WebApp\\WebApp\\WebApp.csproj",
+=======
+    "\\APP2000\\TipsForTripsDesktop",
+    "\\Webapp",
+    "\\Webapp\\WebApp"
+  ],
+  "SelectedNode": "\\APP2000\\TipsForTripsDesktop\\MainWindow.xaml",
+>>>>>>> Tobias_Branch
   "PreviewInSolutionExplorer": false
 }

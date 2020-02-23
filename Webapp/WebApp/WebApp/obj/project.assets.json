@@ -8,23 +8,39 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\tobia\\.nuget\\packages\\": {},
+=======
+    "C:\\Users\\Randi\\.nuget\\packages\\": {},
+>>>>>>> Tobias_Branch
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\tobia\\Documents\\GitHub\\TipsForTrips\\Webapp\\WebApp\\WebApp\\WebApp.csproj",
       "projectName": "WebApp",
       "projectPath": "C:\\Users\\tobia\\Documents\\GitHub\\TipsForTrips\\Webapp\\WebApp\\WebApp\\WebApp.csproj",
       "packagesPath": "C:\\Users\\tobia\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\tobia\\Documents\\GitHub\\TipsForTrips\\Webapp\\WebApp\\WebApp\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\Randi\\Documents\\GitHub\\TipsForTrips\\Webapp\\WebApp\\WebApp\\WebApp.csproj",
+      "projectName": "WebApp",
+      "projectPath": "C:\\Users\\Randi\\Documents\\GitHub\\TipsForTrips\\Webapp\\WebApp\\WebApp\\WebApp.csproj",
+      "packagesPath": "C:\\Users\\Randi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Randi\\Documents\\GitHub\\TipsForTrips\\Webapp\\WebApp\\WebApp\\obj\\",
+>>>>>>> Tobias_Branch
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\Randi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> Tobias_Branch
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],

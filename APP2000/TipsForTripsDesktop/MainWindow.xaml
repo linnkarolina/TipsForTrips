@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TipsForTripsDesktop"
         mc:Ignorable="d"
+<<<<<<< HEAD
         Title="TipsForTrips" Height="450" Width="800">
   <Grid>
     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="282" VerticalAlignment="Top" Width="784" Margin="0,82,0,0">
@@ -21,4 +22,32 @@
       </MenuItem>
     </Menu>
    </Grid>
+=======
+        Icon="tree.ico"
+        Title="Tips For Trips" Height="450" Width="800">
+    <Grid Margin="0,0,3.6,0" Background="#f3f3f4" HorizontalAlignment="Right" Width="790" RenderTransformOrigin="0.5,0.611">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="41*"/>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.513,0.499" Background="#2f4050" Grid.RowSpan="2">
+            <StackPanel Height="50" Background="#243745">
+                <TextBlock Text="Signed in as" FontFamily="Microsoft Sans Serif" Foreground="#f3f3f4" FontSize="10 pt" Padding="30 7 0 0" Height="30"/>
+                <TextBlock x:Name="adminName" Text="{Binding}" FontFamily="Microsoft Sans Serif" Foreground="#a3afc0" FontSize="8 pt" Padding="30 2.2 0 0" Height="28"/>
+            </StackPanel>
+            <TextBlock Text="Dashboard" FontFamily="Microsoft Sans Serif" Foreground="#a3afc0" FontSize="8 pt" Padding="30 10 0 0" Height="38"/>
+            <TextBlock Text="Places" FontFamily="Microsoft Sans Serif" Foreground="#a3afc0" FontSize="8 pt" Padding="30 0 0 0" Height="28"/>
+            <TextBlock Text="Users" FontFamily="Microsoft Sans Serif" Foreground="#a3afc0" FontSize="8 pt" Padding="30 0 0 0" Height="30"/>
+        </StackPanel>
+        <Border BorderThickness="3" BorderBrush="white" CornerRadius="10" HorizontalAlignment="Left" Height="221" Margin="150,20,0,0" VerticalAlignment="Top" Width="615" Grid.RowSpan="2" >
+            <Grid Background="white"  Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="11*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
+        <ScrollViewer HorizontalAlignment="Left" Height="410" Margin="712,0,0,0" VerticalAlignment="Top" Width="78" Grid.RowSpan="2"/>
+    </Grid>
+>>>>>>> Tobias_Branch
 </Window>
