@@ -28,16 +28,16 @@ namespace TipsForTripsDesktop
             ConnectToDatabase();
         }
 
-        public void ConnectToDatabase()
+        public string ConnectToDatabase()
         {
             // Database connection
             string name;
 
             MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
 
-            MySqlCommand cmd = new MySqlCommand("select username from admin where ID_admin=1;", MyCon);
+            MySqlCommand cmd = new MySqlCommand("SELECT username FROM admin WHERE ID_admin=1;", MyCon);
             MyCon.Open();
-            var queryResult = cmd.ExecuteScalar();//Return an object so first check for null
+            var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
             if (queryResult != null)
                 // If we have result, then convert it from object to string.
                 name = Convert.ToString(queryResult);
@@ -48,6 +48,8 @@ namespace TipsForTripsDesktop
             MyCon.Close();
 
             adminName.DataContext = name;
+
+            return name;
         }
     }
 }
