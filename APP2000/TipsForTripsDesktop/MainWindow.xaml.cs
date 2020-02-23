@@ -112,20 +112,5 @@ namespace TipsForTripsDesktop
 
             return name;
         }
-
-        private void Dash_Enter(object sende, System.EventArgs e)
-        {
-            ColorAnimation animation = new ColorAnimation();
-            animation.From = (Color)ColorConverter.ConvertFromString("#2f4050");
-            animation.To = (Color)ColorConverter.ConvertFromString("#243745"); 
-            animation.Duration = new Duration(TimeSpan.FromSeconds(1));
-            bDash.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2f4050"));
-            bDash.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
-        }
-
-        public void Dash_Leave(object sende, System.EventArgs e)
-        {
-
-        }
     }
 }
