@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace TipsForTripsDesktop
 {
     /// <summary>
@@ -48,6 +49,11 @@ namespace TipsForTripsDesktop
             MyCon.Close();
 
             adminName.DataContext = name;
+        }
+
+        public void animation()
+        {
+            
         }
     }
 }
