@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 
 
 namespace TipsForTripsDesktop
@@ -27,6 +28,64 @@ namespace TipsForTripsDesktop
         {
             InitializeComponent();
             ConnectToDatabase();
+        }
+        public void Dash_Enter(object sender, System.EventArgs e)
+        {
+            ColorAnimation animation = new ColorAnimation();
+            animation.From = (Color)ColorConverter.ConvertFromString("#2f4050");
+            animation.To = (Color)ColorConverter.ConvertFromString("#243745");
+            animation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+            Dashboard_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#243745"));
+            Dashboard_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+        }
+
+        public void Dash_Leave(object sender, System.EventArgs e)
+        {
+            ColorAnimation animation = new ColorAnimation();
+            animation.From = (Color)ColorConverter.ConvertFromString("#243745");
+            animation.To = (Color)ColorConverter.ConvertFromString("#2f4050");
+            animation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+            Dashboard_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2f4050"));
+            Dashboard_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+        }
+
+        public void Places_Enter(object sender, System.EventArgs e)
+        {
+            ColorAnimation animation = new ColorAnimation();
+            animation.From = (Color)ColorConverter.ConvertFromString("#2f4050");
+            animation.To = (Color)ColorConverter.ConvertFromString("#243745");
+            animation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+            Places_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#243745"));
+            Places_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+        }
+
+        public void Places_Leave(object sender, System.EventArgs e)
+        {
+            ColorAnimation animation = new ColorAnimation();
+            animation.From = (Color)ColorConverter.ConvertFromString("#243745");
+            animation.To = (Color)ColorConverter.ConvertFromString("#2f4050");
+            animation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+            Places_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2f4050"));
+            Places_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+        }
+        public void Users_Enter(object sender, System.EventArgs e)
+        {
+            ColorAnimation animation = new ColorAnimation();
+            animation.From = (Color)ColorConverter.ConvertFromString("#2f4050");
+            animation.To = (Color)ColorConverter.ConvertFromString("#243745");
+            animation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+            Users_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#243745"));
+            Users_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+        }
+
+        public void Users_Leave(object sender, System.EventArgs e)
+        {
+            ColorAnimation animation = new ColorAnimation();
+            animation.From = (Color)ColorConverter.ConvertFromString("#243745");
+            animation.To = (Color)ColorConverter.ConvertFromString("#2f4050");
+            animation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+            Users_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2f4050"));
+            Users_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
         }
 
         public string ConnectToDatabase()
@@ -51,11 +110,6 @@ namespace TipsForTripsDesktop
             adminName.DataContext = name;
 
             return name;
-        }
-
-        public void animation()
-        {
-            
         }
     }
 }
