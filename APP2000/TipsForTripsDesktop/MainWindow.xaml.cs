@@ -25,7 +25,11 @@ namespace TipsForTripsDesktop
         public MainWindow()
         {
             InitializeComponent();
+            ConnectToDatabase();
+        }
 
+        public void ConnectToDatabase()
+        {
             // Database connection
             string name;
 
