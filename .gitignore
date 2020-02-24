@@ -5,5 +5,6 @@ WebApplicationFinal/.vs/WebApplicationFinal/v16/.suo
 WebApplicationFinal/.vs/WebApplicationFinal/v16/Server/sqlite3/storage.ide-shm
 WebApplicationFinal/.vs/WebApplicationFinal/v16/Server/sqlite3/storage.ide-wal
 WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.csprojAssemblyReference.cache
+
 *.ide-shm
 *.ide-wal
