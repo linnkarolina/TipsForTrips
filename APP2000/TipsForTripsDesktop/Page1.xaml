@@ -9,6 +9,9 @@
       Title="Page1">
 
     <Grid>
-        
+        <Border BorderThickness="3" BorderBrush="white" CornerRadius="10" Grid.RowSpan="2" Margin="20">
+            <Grid Background="white"  Grid.RowSpan="2">
+            </Grid>
+        </Border>
     </Grid>
 </Page>
