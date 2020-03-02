@@ -31,6 +31,7 @@ namespace TipsForTripsDesktop
 
         public MainWindow()
         {
+            InitializeComponent();
             string query = "SELECT username FROM admin WHERE ID_admin = 1;";
             ConnectToDatabase(query);
         }
