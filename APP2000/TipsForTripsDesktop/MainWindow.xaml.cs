@@ -36,6 +36,10 @@ namespace TipsForTripsDesktop
             Content_Frame.Content = new Page1();
         }
 
+        /// <summary>
+        /// Menu color animation
+        /// </summary>
+
         public void Dash_Enter(object sender, System.EventArgs e)
         {
             ColorAnimation buttonAnimation = new ColorAnimation();
