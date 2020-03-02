@@ -13,7 +13,7 @@ namespace WebApplicationFinal.Controllers
     public class MysqlController : Controller
     {
         // GET: Mysql
-        public ActionResult Mysql()
+        public ActionResult Index()
         {
             List<MysqlClass> list1 = new List<MysqlClass>();
             string mainconn = ConfigurationManager.ConnectionStrings["app2000"].ConnectionString;
