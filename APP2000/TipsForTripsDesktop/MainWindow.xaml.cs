@@ -27,7 +27,8 @@ namespace TipsForTripsDesktop
         public MainWindow()
         {
             InitializeComponent();
-            ConnectToDatabase();
+            string query = "SELECT username FROM admin WHERE ID_admin = 1;";
+            ConnectToDatabase(query);
         }
 
         private void Dash_Click(object sender, RoutedEventArgs e)
@@ -137,14 +138,20 @@ namespace TipsForTripsDesktop
             Users_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
         }
 
-        public string ConnectToDatabase()
+        /// <summary>
+        /// Database connection
+        /// </summary>
+        public string ConnectToDatabase(string query)
         {
-            // Database connection
             string name;
 
+            // Azure connection
+            /* 
             MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
+            */
 
-            MySqlCommand cmd = new MySqlCommand("SELECT username FROM admin WHERE ID_admin=1;", MyCon);
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3307;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            MySqlCommand cmd = new MySqlCommand(query, MyCon);
             MyCon.Open();
             var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
             if (queryResult != null)
