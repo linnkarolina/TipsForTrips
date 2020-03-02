@@ -15,7 +15,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
 
 namespace TipsForTripsDesktop
 {
@@ -24,16 +24,46 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private bool check = true;
+        private bool dashStart = false;
+        private double width;
+
         public MainWindow()
         {
-            InitializeComponent();
             string query = "SELECT username FROM admin WHERE ID_admin = 1;";
             ConnectToDatabase(query);
         }
 
         private void Dash_Click(object sender, RoutedEventArgs e)
         {
+            if(dashStart == false)
+            {
+                width = SubMenu.ActualWidth;
+                //width = SubWidth.Width = new GridLength(1, GridUnitType.Star);
+                dashStart = true;
+            }
             Content_Frame.Content = new Page1();
+            if(check == false)
+            {
+                DoubleAnimation da = new DoubleAnimation();
+                da.From = width;
+                da.To = 0;
+                da.Duration = new Duration(TimeSpan.FromSeconds(1));
+                SubMenu.BeginAnimation(Grid.WidthProperty, da);
+                check = true;
+            }
+            else if (check == true)
+            {
+                SubMenu.Visibility = Visibility.Visible;
+                DoubleAnimation da = new DoubleAnimation();
+                da.From = 0;
+                da.To = width;
+                da.Duration = new Duration(TimeSpan.FromSeconds(1));
+                SubMenu.BeginAnimation(Grid.WidthProperty, da);
+                
+                check = false;
+            }
         }
 
         public void Dash_Enter(object sender, System.EventArgs e)
@@ -150,20 +180,30 @@ namespace TipsForTripsDesktop
             MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
             */
 
-            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3307;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3308;DATABASE=TipsForTrips;UID=root;PASSWORD=");
             MySqlCommand cmd = new MySqlCommand(query, MyCon);
             MyCon.Open();
             var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
             if (queryResult != null)
+            {
                 // If we have result, then convert it from object to string.
                 name = Convert.ToString(queryResult);
+                Console.WriteLine(name + " 1");
+            }
             else
+            {
                 // Else make id = "" so you can later check it.
                 name = "";
+                Console.WriteLine(name + " 2");
+            }
 
             MyCon.Close();
 
+            Console.WriteLine(name + " 3");
+
             adminName.DataContext = name;
+
+            Console.WriteLine(name + " 4");
 
             return name;
         }
