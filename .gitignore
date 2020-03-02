@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .vs/
 WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.csproj.FileListAbsolute.txt
 WebApplicationFinal/WebApplicationFinal/bin/WebApplicationFinal.dll
@@ -5,3 +6,19 @@ WebApplicationFinal/WebApplicationFinal/bin/WebApplicationFinal.pdb
 WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.csprojAssemblyReference.cache
 WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.dll
 WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.pdb
+=======
+
+WebApplicationFinal/.vs/WebApplicationFinal/v16/Server/sqlite3/storage.ide-wal
+WebApplicationFinal/.vs/WebApplicationFinal/v16/Server/sqlite3/storage.ide-shm
+WebApplicationFinal/.vs/WebApplicationFinal/v16/.suo
+WebApplicationFinal/.vs/WebApplicationFinal/v16/Server/sqlite3/storage.ide-shm
+WebApplicationFinal/.vs/WebApplicationFinal/v16/Server/sqlite3/storage.ide-wal
+WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.csprojAssemblyReference.cache
+
+*.ide-shm
+*.ide-wal
+WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.csprojAssemblyReference.cache
+WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.csproj.FileListAbsolute.txt
+WebApplicationFinal/.vs/WebApplicationFinal/xs/UserPrefs.xml
+WebApplicationFinal/.vs/WebApplicationFinal/xs/project-cache/WebApplicationFinal-Debug.json
+>>>>>>> parent of c952385... Merge branch 'master' into web-app-trygve
