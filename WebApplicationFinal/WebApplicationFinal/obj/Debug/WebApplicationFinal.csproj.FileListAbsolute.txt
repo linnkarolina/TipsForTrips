@@ -574,4 +574,7 @@ C:\Users\Trygve Valbø\source\repos\linnkarolina\TipsForTrips\WebApplicationFina
 C:\Users\Trygve Valbø\source\repos\linnkarolina\TipsForTrips\WebApplicationFinal\WebApplicationFinal\obj\Debug\WebApplicationFinal.csproj.CopyComplete
 C:\Users\Trygve Valbø\source\repos\linnkarolina\TipsForTrips\WebApplicationFinal\WebApplicationFinal\obj\Debug\WebApplicationFinal.dll
 C:\Users\Trygve Valbø\source\repos\linnkarolina\TipsForTrips\WebApplicationFinal\WebApplicationFinal\obj\Debug\WebApplicationFinal.pdb
+<<<<<<< HEAD
+>>>>>>> parent of c952385... Merge branch 'master' into web-app-trygve
+=======
 >>>>>>> parent of c952385... Merge branch 'master' into web-app-trygve

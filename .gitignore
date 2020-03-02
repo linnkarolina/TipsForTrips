@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 .vs/
 WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.csproj.FileListAbsolute.txt
 WebApplicationFinal/WebApplicationFinal/bin/WebApplicationFinal.dll
@@ -7,6 +8,8 @@ WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.csprojAsse
 WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.dll
 WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.pdb
 =======
+=======
+>>>>>>> parent of c952385... Merge branch 'master' into web-app-trygve
 
 WebApplicationFinal/.vs/WebApplicationFinal/v16/Server/sqlite3/storage.ide-wal
 WebApplicationFinal/.vs/WebApplicationFinal/v16/Server/sqlite3/storage.ide-shm
@@ -21,4 +24,7 @@ WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.csprojAsse
 WebApplicationFinal/WebApplicationFinal/obj/Debug/WebApplicationFinal.csproj.FileListAbsolute.txt
 WebApplicationFinal/.vs/WebApplicationFinal/xs/UserPrefs.xml
 WebApplicationFinal/.vs/WebApplicationFinal/xs/project-cache/WebApplicationFinal-Debug.json
+<<<<<<< HEAD
+>>>>>>> parent of c952385... Merge branch 'master' into web-app-trygve
+=======
 >>>>>>> parent of c952385... Merge branch 'master' into web-app-trygve

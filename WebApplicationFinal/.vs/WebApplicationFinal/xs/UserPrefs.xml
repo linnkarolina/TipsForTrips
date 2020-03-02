@@ -1,15 +1,24 @@
 ﻿<Properties StartupConfiguration="{ED878EBB-D68F-4AAE-899F-B4C102866CD7}|">
   <MonoDevelop.Ide.ItemProperties.WebApplicationFinal PreferredExecutionTarget="/Applications/Google Chrome.app" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="WebApplicationFinal/App_Start/RouteConfig.cs">
     <Files>
       <File FileName="WebApplicationFinal/Web.config" Line="11" Column="50" />
       <File FileName="WebApplicationFinal/App_Start/RouteConfig.cs" Line="1" Column="1" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebApplicationFinal/Views/Home/Index.cshtml">
+    <Files>
+      <File FileName="WebApplicationFinal/Views/Mysql/Mysql.cshtml" Line="18" Column="46" />
+      <File FileName="WebApplicationFinal/Views/Home/index.html" />
+      <File FileName="WebApplicationFinal/Views/Home/index.cshtml" Line="3" Column="85" />
+>>>>>>> parent of c952385... Merge branch 'master' into web-app-trygve
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="WebApplicationFinal" expanded="True">
             <Node name="WebApplicationFinal" expanded="True">
+<<<<<<< HEAD
               <Node name="App_Start" expanded="True">
                 <Node name="RouteConfig.cs" selected="True" />
               </Node>
@@ -18,6 +27,14 @@
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
                 <Node name="Mysql" expanded="True" />
+=======
+              <Node name="Models" expanded="True" />
+              <Node name="Photos" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True">
+                  <Node name="Index.cshtml" selected="True" />
+                </Node>
+>>>>>>> parent of c952385... Merge branch 'master' into web-app-trygve
               </Node>
             </Node>
           </Node>
@@ -27,9 +44,12 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
   <Debugger.DebugSourceFolders>
     <String>/Users/trygvevalbo/Library/Caches/VisualStudio/8.0/Symbols/mono/mono/d9001b5ae70c111d8f39e1584e62fbdda81b2502</String>
   </Debugger.DebugSourceFolders>
+=======
+>>>>>>> parent of c952385... Merge branch 'master' into web-app-trygve
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
