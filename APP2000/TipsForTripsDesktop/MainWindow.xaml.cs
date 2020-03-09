@@ -57,48 +57,60 @@ namespace TipsForTripsDesktop
             else if (check == true)
             {
                 SubMenu.Visibility = Visibility.Visible;
+                ParentMenu.Visibility = Visibility.Visible;
+                Storyboard sb = new Storyboard();
                 DoubleAnimation da = new DoubleAnimation();
                 da.From = 0;
                 da.To = width;
-                da.Duration = new Duration(TimeSpan.FromSeconds(1));
+                da.Duration = new Duration(TimeSpan.FromSeconds(1));// Animation target
+                Storyboard.SetTarget(da, SubMenu);
+                Storyboard.SetTargetProperty((da, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
                 SubMenu.BeginAnimation(Grid.WidthProperty, da);
-                
+                sb.Children.Add(da);
+                sb.Begin();
+
                 check = false;
             }
         }
 
         public void Dash_Enter(object sender, System.EventArgs e)
         {
-            ColorAnimation buttonAnimation = new ColorAnimation();
-            ColorAnimation textAnimation = new ColorAnimation();
+            if (check)
+            {
+                ColorAnimation buttonAnimation = new ColorAnimation();
+                ColorAnimation textAnimation = new ColorAnimation();
 
-            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
-            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
-            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            textAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
-            textAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
-            textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            Dashboard_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
-            Dashboard_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
-            Dashboard_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-            Dashboard_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+                buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
+                buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
+                buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
+                textAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
+                textAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
+                textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
+                Dashboard_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
+                Dashboard_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
+                Dashboard_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+                Dashboard_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+            }
         }
 
         public void Dash_Leave(object sender, System.EventArgs e)
         {
-            ColorAnimation buttonAnimation = new ColorAnimation();
-            ColorAnimation textAnimation = new ColorAnimation();
+            if (check)
+            {
+                ColorAnimation buttonAnimation = new ColorAnimation();
+                ColorAnimation textAnimation = new ColorAnimation();
 
-            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
-            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
-            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            textAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
-            textAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
-            textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            Dashboard_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
-            Dashboard_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
-            Dashboard_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-            Dashboard_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+                buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
+                buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
+                buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
+                textAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
+                textAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
+                textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
+                Dashboard_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
+                Dashboard_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
+                Dashboard_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+                Dashboard_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+            }
         }
 
         public void Places_Enter(object sender, System.EventArgs e)
