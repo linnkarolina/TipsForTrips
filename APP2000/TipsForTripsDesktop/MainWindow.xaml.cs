@@ -24,9 +24,7 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
-
         private bool check = true;
-        private bool dashStart = false;
         private double width;
 
         public MainWindow()
@@ -38,37 +36,33 @@ namespace TipsForTripsDesktop
 
         private void Dash_Click(object sender, RoutedEventArgs e)
         {
-            if(dashStart == false)
-            {
-                width = SubMenu.ActualWidth;
-                //width = SubWidth.Width = new GridLength(1, GridUnitType.Star);
-                dashStart = true;
-            }
+            Storyboard sb = new Storyboard();
+            DoubleAnimation da = new DoubleAnimation();
             Content_Frame.Content = new Page1();
             if(check == false)
             {
-                DoubleAnimation da = new DoubleAnimation();
+                width = SubMenu.ActualWidth;
                 da.From = width;
                 da.To = 0;
-                da.Duration = new Duration(TimeSpan.FromSeconds(1));
-                SubMenu.BeginAnimation(Grid.WidthProperty, da);
+                da.Duration = new Duration(TimeSpan.FromSeconds(0.4));
+                Storyboard.SetTarget(da, SubMenu);
+                Storyboard.SetTargetProperty(da, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
+                sb.Children.Add(da);
+                sb.Begin();
+                sb.Children.Remove(da);
                 check = true;
             }
             else if (check == true)
             {
-                SubMenu.Visibility = Visibility.Visible;
-                ParentMenu.Visibility = Visibility.Visible;
-                Storyboard sb = new Storyboard();
-                DoubleAnimation da = new DoubleAnimation();
+                width = SubMenu.ActualWidth;
                 da.From = 0;
                 da.To = width;
-                da.Duration = new Duration(TimeSpan.FromSeconds(1));// Animation target
+                da.Duration = new Duration(TimeSpan.FromSeconds(0.4));// Animation target
                 Storyboard.SetTarget(da, SubMenu);
-                Storyboard.SetTargetProperty((da, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
-                SubMenu.BeginAnimation(Grid.WidthProperty, da);
+                Storyboard.SetTargetProperty(da, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
                 sb.Children.Add(da);
                 sb.Begin();
-
+                sb.Children.Remove(da);
                 check = false;
             }
         }
@@ -179,6 +173,46 @@ namespace TipsForTripsDesktop
             Users_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
             Users_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
             Users_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+        }
+
+        public void Logout_Enter(object sender, System.EventArgs e)
+        {
+            if (check)
+            {
+                ColorAnimation buttonAnimation = new ColorAnimation();
+                ColorAnimation textAnimation = new ColorAnimation();
+
+                buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
+                buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
+                buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
+                textAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
+                textAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
+                textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
+                Log_out.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
+                Log_out.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
+                Log_out.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+                Log_out.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+            }
+        }
+
+        public void Logout_Leave(object sender, System.EventArgs e)
+        {
+            if (check)
+            {
+                ColorAnimation buttonAnimation = new ColorAnimation();
+                ColorAnimation textAnimation = new ColorAnimation();
+
+                buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
+                buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
+                buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
+                textAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
+                textAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
+                textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
+                Log_out.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
+                Log_out.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
+                Log_out.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+                Log_out.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+            }
         }
 
         /// <summary>

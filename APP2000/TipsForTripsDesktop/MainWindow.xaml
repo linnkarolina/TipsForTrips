@@ -69,43 +69,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
-            <Grid x:Name="ParentMenu" Grid.Column="0" Background="#324851">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1.5*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="6.5*" />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Background="Transparent">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Signed in as" FontFamily="Microsoft Sans Serif" Foreground="#f3f3f4" FontSize="10 pt" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                    <TextBlock Grid.Row="1" x:Name="adminName" Text="{Binding}" FontFamily="Microsoft Sans Serif" Foreground="#a3afc0" FontSize="8 pt" HorizontalAlignment="Center" />
-                </Grid>
-                <Button x:Name="Dashboard_Button" Grid.Row="1" Background="Transparent" Foreground="#86ac41" BorderBrush="Transparent" Click="Dash_Click" MouseEnter="Dash_Enter" MouseLeave="Dash_Leave" Style="{DynamicResource ButtonStyle1}">
-                    Dashboard
-                </Button>
-                <Button x:Name="Places_Button" Grid.Row="2" Background="Transparent" Foreground="#86ac41" BorderBrush="Transparent" MouseEnter="Places_Enter" MouseLeave="Places_Leave" Style="{DynamicResource ButtonStyle1}">
-                    Places
-                </Button>
-                <Button x:Name="Users_Button" Grid.Row="3" Background="Transparent" Foreground="#86ac41" BorderBrush="Transparent" MouseEnter="Users_Enter" MouseLeave="Users_Leave" Style="{DynamicResource ButtonStyle1}">
-                    Users
-                </Button>
-                <Grid Grid.Row="4">
-                </Grid>
-            </Grid>
             <Frame NavigationUIVisibility="Hidden" Grid.Column="2" x:Name="Content_Frame" Margin="0,0,-0.4,0"/>
-            </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" x:Name="SubWidth" />
-                <ColumnDefinition Width="4*" />
-            </Grid.ColumnDefinitions>
-            <Grid x:Name="SubMenu" Grid.Column="0" Background="#bed3d4" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+            <Grid x:Name="SubMenu" Grid.Column="0" Background="#bed3d4" RenderTransformOrigin="0.5,0.5">
                 <Grid.RenderTransform>
                     <TranslateTransform/>
                 </Grid.RenderTransform>
@@ -122,9 +87,41 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="0.5*" />
                 </Grid.RowDefinitions>
-                <Button Grid.Row="1">
+                <Button Grid.Row="1" Background="Transparent" Foreground="#324851" BorderBrush="Transparent">
                     Hei
                 </Button>
+            </Grid>
+            <Grid x:Name="ParentMenu" Grid.Column="0" Background="#324851">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.5*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Signed in as" FontFamily="Microsoft Sans Serif" Foreground="#f3f3f4" FontSize="10 pt" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <TextBlock Grid.Row="1" x:Name="adminName" Text="{Binding}" FontFamily="Microsoft Sans Serif" Foreground="#a3afc0" FontSize="8 pt" HorizontalAlignment="Center" />
+                </Grid>
+                <Button x:Name="Dashboard_Button" Grid.Row="1" Background="Transparent" Foreground="#86ac41" BorderBrush="Transparent" Click="Dash_Click" MouseEnter="Dash_Enter" MouseLeave="Dash_Leave" Style="{DynamicResource ButtonStyle1}">
+                    Dashboard
+                </Button>
+                <Button x:Name="Places_Button" Grid.Row="2" Background="Transparent" Foreground="#86ac41" BorderBrush="Transparent" MouseEnter="Places_Enter" MouseLeave="Places_Leave" Style="{DynamicResource ButtonStyle1}">
+                    Places
+                </Button>
+                <Button x:Name="Users_Button" Grid.Row="3" Background="Transparent" Foreground="#86ac41" BorderBrush="Transparent" MouseEnter="Users_Enter" MouseLeave="Users_Leave" Style="{DynamicResource ButtonStyle1}" >
+                    Users
+                </Button>
+                <Button x:Name="Log_out" Grid.Row="5" Background="Transparent" Foreground="#86ac41" BorderBrush="Transparent" MouseEnter="Logout_Enter" MouseLeave="Logout_Leave" Style="{DynamicResource ButtonStyle1}" >
+                    Log out
+                </Button>
+                <Grid Grid.Row="4"/>
             </Grid>
         </Grid>
     </Grid>
