@@ -235,22 +235,15 @@ namespace TipsForTripsDesktop
             {
                 // If we have result, then convert it from object to string.
                 name = Convert.ToString(queryResult);
-                Console.WriteLine(name + " 1");
             }
             else
             {
                 // Else make id = "" so you can later check it.
                 name = "";
-                Console.WriteLine(name + " 2");
             }
 
             MyCon.Close();
-
-            Console.WriteLine(name + " 3");
-
             adminName.DataContext = name;
-
-            Console.WriteLine(name + " 4");
 
             return name;
         }
