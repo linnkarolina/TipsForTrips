@@ -64,7 +64,7 @@ namespace TipsForTripsDesktop
                 da.To = width;
                 da.Duration = new Duration(TimeSpan.FromSeconds(1));// Animation target
                 Storyboard.SetTarget(da, SubMenu);
-                Storyboard.SetTargetProperty((da, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
+                Storyboard.SetTargetProperty(da, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
                 SubMenu.BeginAnimation(Grid.WidthProperty, da);
                 sb.Children.Add(da);
                 sb.Begin();
