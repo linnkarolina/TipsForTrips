@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TipsForTripsDesktop
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for Map.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class Map : Page
     {
-        public Page1()
+        public Map()
         {
             InitializeComponent();
         }

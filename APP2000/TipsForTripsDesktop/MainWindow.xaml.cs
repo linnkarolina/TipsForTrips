@@ -340,6 +340,7 @@ namespace TipsForTripsDesktop
         public void Button_Page_Click(object sender, System.EventArgs e)
         {
             Button b = (Button)sender;
+            // Revert animations
             if (checkButtonClick == false && checkArea == false)
             {
                 RotateArrowBack(Area_Tag);
@@ -364,7 +365,43 @@ namespace TipsForTripsDesktop
                 checkProfile = true;
                 checkButtonClick = true;
             }
-                Content_Frame.Content = new Page1();
+            // Go to a new page
+            if (b.Equals(Dashboard_Button))
+            {
+                Content_Frame.Content = new Dashboard();
+            }
+            else if (b.Equals(Places_Button))
+            {
+                Content_Frame.Content = new Places();
+            }
+            else if (b.Equals(Map_Button))
+            {
+                Content_Frame.Content = new Map();
+            }
+            else if (b.Equals(Tags_Button))
+            {
+                Content_Frame.Content = new Tags();
+            }
+            else if (b.Equals(Web_Button))
+            {
+                Content_Frame.Content = new Web_users();
+            }
+            else if (b.Equals(Admin_Button))
+            {
+                Content_Frame.Content = new Admin();
+            }
+            else if (b.Equals(Inbox_Button))
+            {
+                Content_Frame.Content = new Inbox();
+            }
+            else if (b.Equals(Basic_info_Button))
+            {
+                Content_Frame.Content = new Basic_info();
+            }
+            else if (b.Equals(Password_Button))
+            {
+                Content_Frame.Content = new Password();
+            }
         }
 
         /// <summary>
