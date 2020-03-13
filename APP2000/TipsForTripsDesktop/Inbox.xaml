@@ -9,6 +9,17 @@
       Title="Inbox">
 
     <Grid>
-        
+        <Border BorderThickness="3" BorderBrush="White" CornerRadius="10" Grid.RowSpan="2" Margin="20">
+            <Grid Background="White" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="6*" />
+                </Grid.RowDefinitions>
+                <!-- Title -->
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center">
+                            Inbox
+                </TextBlock>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

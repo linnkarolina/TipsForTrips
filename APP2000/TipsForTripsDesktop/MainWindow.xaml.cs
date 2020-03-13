@@ -32,10 +32,10 @@ namespace TipsForTripsDesktop
         private Button b;
         private Grid g;
 
-        public MainWindow()
+        public MainWindow(string username)
         {
             InitializeComponent();
-            string query = "SELECT username FROM admin WHERE ID_admin = 1;";
+            string query = "SELECT username FROM admin WHERE username='"+username+"';";
             ConnectToDatabase(query);
         }
 
@@ -314,12 +314,11 @@ namespace TipsForTripsDesktop
             ColorAnimation buttonAnimation = new ColorAnimation();
             ColorAnimation textAnimation = new ColorAnimation();
 
-            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#cff4d2"); // Mhm
+            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#cff4d2");
             buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#7be495");
             buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#7be495")); // Fix
+            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#7be495"));
             b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-            b.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
         }
 
         public void Submenu_Leave(object sender, System.EventArgs e)
@@ -329,11 +328,10 @@ namespace TipsForTripsDesktop
             ColorAnimation textAnimation = new ColorAnimation();
 
             buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#7be495");
-            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#cff4d2"); // Mhm
+            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#cff4d2");
             buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#cff4d2")); // Mhm
+            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#cff4d2"));
             b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-            b.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
         }
 
         // Go to pages
@@ -401,6 +399,12 @@ namespace TipsForTripsDesktop
             else if (b.Equals(Password_Button))
             {
                 Content_Frame.Content = new Password();
+            }
+            else if(b.Equals(Log_out_Button))
+            {
+                var Login = new Login_Window();
+                this.Close();
+                Login.Show();
             }
         }
 
