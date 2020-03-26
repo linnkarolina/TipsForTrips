@@ -31,9 +31,11 @@ namespace TipsForTripsDesktop
         private double width;
         private Button b;
         private Grid g;
+        private string user;
 
         public MainWindow(string username)
         {
+            user = username;
             InitializeComponent();
             string query = "SELECT username FROM admin WHERE username='"+username+"';";
             ConnectToDatabase(query);
@@ -398,7 +400,7 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Password_Button))
             {
-                Content_Frame.Content = new Password();
+                Content_Frame.Content = new Password(user);
             }
             else if(b.Equals(Log_out_Button))
             {
@@ -420,7 +422,7 @@ namespace TipsForTripsDesktop
             MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
             */
 
-            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3307;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3308;DATABASE=TipsForTrips;UID=root;PASSWORD=");
             MySqlCommand cmd = new MySqlCommand(query, MyCon);
             MyCon.Open();
             var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
