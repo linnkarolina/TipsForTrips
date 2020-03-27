@@ -31,9 +31,11 @@ namespace TipsForTripsDesktop
         private double width;
         private Button b;
         private Grid g;
+        private string user;
 
         public MainWindow(string username)
         {
+            user = username;
             InitializeComponent();
             string query = "SELECT username FROM admin WHERE username='"+username+"';";
             ConnectToDatabase(query);
@@ -394,11 +396,11 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Basic_info_Button))
             {
-                Content_Frame.Content = new Basic_info();
+                Content_Frame.Content = new Basic_info(user);
             }
             else if (b.Equals(Password_Button))
             {
-                Content_Frame.Content = new Password();
+                Content_Frame.Content = new Password(user);
             }
             else if(b.Equals(Log_out_Button))
             {
