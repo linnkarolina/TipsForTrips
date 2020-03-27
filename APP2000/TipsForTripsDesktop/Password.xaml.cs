@@ -30,9 +30,9 @@ namespace TipsForTripsDesktop
         // Button click
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string Cur_Pass = Current_Password.Text;
-            string New_Pass = New_Password.Text;
-            string Verify_Pass = Verify_Password.Text;
+            string Cur_Pass = Current_Password.Password.ToString();
+            string New_Pass = New_Password.Password.ToString();
+            string Verify_Pass = Verify_Password.Password.ToString();
             string query = "SELECT password FROM admin WHERE username='" + user + "';";
 
             if (ConnectToDatabase(query) != Cur_Pass)

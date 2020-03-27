@@ -396,7 +396,7 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Basic_info_Button))
             {
-                Content_Frame.Content = new Basic_info();
+                Content_Frame.Content = new Basic_info(user);
             }
             else if (b.Equals(Password_Button))
             {
