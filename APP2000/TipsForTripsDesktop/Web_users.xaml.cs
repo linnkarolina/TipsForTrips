@@ -30,12 +30,12 @@ namespace TipsForTripsDesktop
         public void UserTable()
         {
             DataTable dt = new DataTable();
-            DataColumn username = new DataColumn("username", typeof(string));
-            DataColumn password = new DataColumn("password", typeof(string));
-            DataColumn location = new DataColumn("location", typeof(string));
-            DataColumn email = new DataColumn("email", typeof(string));
-            DataColumn full_name = new DataColumn("full_name", typeof(string));
-            DataColumn phone_NR = new DataColumn("phone_NR", typeof(string));
+            DataColumn username = new DataColumn("Username", typeof(string));
+            DataColumn password = new DataColumn("Password", typeof(string));
+            DataColumn location = new DataColumn("Location", typeof(string));
+            DataColumn email = new DataColumn("E-mail", typeof(string));
+            DataColumn full_name = new DataColumn("Full name", typeof(string));
+            DataColumn phone_NR = new DataColumn("Phone", typeof(string));
 
             dt.Columns.Add(username);
             dt.Columns.Add(password);
@@ -55,6 +55,25 @@ namespace TipsForTripsDesktop
                 row[5] = ConnectToDatabase("SELECT phone_NR FROM user LIMIT " + i + ",1;");
                 dt.Rows.Add(row);
                 Table.ItemsSource = dt.DefaultView;
+            }
+        }
+
+        public void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
+                String username = drv[0].ToString();
+                String password = drv[1].ToString();
+                String location = drv[2].ToString();
+                String email = drv[3].ToString();
+                String full_name = drv[4].ToString();
+                String phone_NR = drv[5].ToString();
+                MessageBox.Show("Username " + username + ", Password " + password + location + email + full_name + phone_NR);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
             }
         }
 
@@ -121,6 +140,11 @@ namespace TipsForTripsDesktop
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             UserTable();
+        }
+
+        private void Table_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
         }
     }
 }
