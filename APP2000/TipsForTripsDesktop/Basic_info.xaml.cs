@@ -39,19 +39,19 @@ namespace TipsForTripsDesktop
             string Name = ConnectToDatabase(query);
             Username.Text = Name;
 
-            query = "SELECT full_name FROM user WHERE username = 'raneik';";
+            query = "SELECT full_name FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Full_Name.Text = Name;
 
-            query = "SELECT email FROM user WHERE username = 'raneik';";
+            query = "SELECT email FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Email.Text = Name;
 
-            query = "SELECT location FROM user WHERE username = 'raneik';";
+            query = "SELECT location FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Location.Text = Name;
 
-            query = "SELECT phone_NR FROM user WHERE username = 'raneik';";
+            query = "SELECT phone_NR FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Phone_Number.Text = Name;
         }
@@ -82,6 +82,20 @@ namespace TipsForTripsDesktop
             buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
             b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4296d6"));
             b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+        }
+
+        // Save click
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',location = '" + Location.Text + "',phone_NR = '" + Phone_Number.Text + "';");
+                MessageBox.Show("Your info has been changed.");
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
 
         // Delete click
