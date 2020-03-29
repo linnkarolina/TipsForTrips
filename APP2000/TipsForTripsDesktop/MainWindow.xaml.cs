@@ -15,7 +15,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
 
 namespace TipsForTripsDesktop
 {
@@ -24,122 +24,398 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private bool checkButtonClick = true;
+        private bool checkArea = true;
+        private bool checkUsers = true;
+        private bool checkProfile = true;
+        private double width;
+        private Button b;
+        private Grid g;
+        private string user;
+
+        public MainWindow(string username)
         {
+            user = username;
             InitializeComponent();
-            string query = "SELECT username FROM admin WHERE ID_admin = 1;";
+            string query = "SELECT username FROM admin WHERE username='"+username+"';";
             ConnectToDatabase(query);
         }
 
-        private void Dash_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Content_Frame.Content = new Page1();
+            b = (Button)sender;
+            if (b.Equals(Area_Button))
+            {
+                g = SubMenu_Area;
+            }
+            else if (b.Equals(Users_Button))
+            {
+                g = SubMenu_Users;
+            }
+            else if (b.Equals(Profile_Button))
+            {
+                g = SubMenu_Profile;
+            }
+            if(checkButtonClick == false && checkArea == false)
+            {
+                CloseSubMenu(SubMenu_Area);
+                RotateArrowBack(Area_Tag);
+                if(b.Equals(Users_Button))
+                {
+                    OpenSubMenu();
+                    RotateArrow(Users_Tag);
+
+                    checkUsers = false;
+                    checkArea = true;
+                    checkProfile = true;
+                }
+                else if (b.Equals(Profile_Button))
+                {
+                    OpenSubMenu();
+                    RotateArrow(Profile_Tag);
+
+                    checkUsers = true;
+                    checkArea = true;
+                    checkProfile = false;
+                }
+                else
+                {
+                    checkButtonClick = true;
+                    checkArea = true;
+                    checkUsers = true;
+                    checkProfile = true;
+                }
+            }
+            else if (checkButtonClick == false && checkUsers == false)
+            {
+                CloseSubMenu(SubMenu_Users);
+                RotateArrowBack(Users_Tag);
+                if (b.Equals(Area_Button))
+                {
+                    OpenSubMenu();
+                    RotateArrow(Area_Tag);
+
+                    checkUsers = true;
+                    checkArea = false;
+                    checkProfile = true;
+
+                }
+                else if (b.Equals(Profile_Button))
+                {
+                    OpenSubMenu();
+                    RotateArrow(Profile_Tag);
+
+                    checkUsers = true;
+                    checkArea = true;
+                    checkProfile = false;
+                }
+                else
+                {
+                    checkButtonClick = true;
+                    checkArea = true;
+                    checkUsers = true;
+                    checkProfile = true;
+                }
+            }
+            else if (checkButtonClick == false && checkProfile == false)
+            {
+                CloseSubMenu(SubMenu_Profile);
+                RotateArrowBack(Profile_Tag);
+                if (b.Equals(Users_Button))
+                {
+                    OpenSubMenu();
+                    RotateArrow(Users_Tag);
+
+                    checkUsers = false;
+                    checkArea = true;
+                    checkProfile = true;
+
+                }
+                else if (b.Equals(Area_Button))
+                {
+                    OpenSubMenu();
+                    RotateArrow(Area_Tag);
+
+                    checkUsers = true;
+                    checkArea = false;
+                    checkProfile = true;
+                }
+                else
+                {
+                    checkButtonClick = true;
+                    checkArea = true;
+                    checkUsers = true;
+                    checkProfile = true;
+                }
+            }
+            // If everything is true
+            else if (checkArea == true && checkUsers == true && checkProfile == true)
+            {
+                OpenSubMenu();
+                checkButtonClick = false;
+                if (b.Equals(Area_Button))
+                {
+                    checkArea = false;
+                    RotateArrow(Area_Tag);
+                }
+                else if (b.Equals(Users_Button))
+                {
+                    checkUsers = false;
+                    RotateArrow(Users_Tag);
+                }
+                else if (b.Equals(Profile_Button))
+                {
+                    checkProfile = false;
+                    RotateArrow(Profile_Tag);
+                }
+            }
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Menu color animation
         /// </summary>
 
         public void Dash_Enter(object sender, System.EventArgs e)
+=======
+        private void OpenSubMenu()
+>>>>>>> Tobias_Branch
         {
-            ColorAnimation buttonAnimation = new ColorAnimation();
-            ColorAnimation textAnimation = new ColorAnimation();
+            Storyboard sb = new Storyboard();
+            DoubleAnimation da = new DoubleAnimation();
+            width = g.ActualWidth;
+            da.From = 0;
+            da.To = width;
+            da.Duration = new Duration(TimeSpan.FromSeconds(0.4));// Animation target
+            Storyboard.SetTarget(da, g);
+            Storyboard.SetTargetProperty(da, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
+            sb.Children.Add(da);
+            sb.Begin();
+            sb.Children.Remove(da);
 
-            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
-            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
-            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            textAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
-            textAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
-            textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            Dashboard_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
-            Dashboard_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
-            Dashboard_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-            Dashboard_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+            if (checkArea == false)
+            {
+                Leave(Area_Button);
+                RotateArrowBack(Area_Tag);
+            }
+            if (checkUsers == false)
+            {
+                Leave(Users_Button);
+                RotateArrowBack(Users_Tag);
+            }
+            if (checkProfile == false)
+            {
+                Leave(Profile_Button);
+                RotateArrowBack(Profile_Tag);
+            }
         }
 
-        public void Dash_Leave(object sender, System.EventArgs e)
+        private void CloseSubMenu(Grid grid)
         {
-            ColorAnimation buttonAnimation = new ColorAnimation();
-            ColorAnimation textAnimation = new ColorAnimation();
-
-            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
-            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
-            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            textAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
-            textAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
-            textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            Dashboard_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
-            Dashboard_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
-            Dashboard_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-            Dashboard_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+            Storyboard sb = new Storyboard();
+            DoubleAnimation da = new DoubleAnimation();
+            width = grid.ActualWidth;
+            da.From = width;
+            da.To = 0;
+            da.Duration = new Duration(TimeSpan.FromSeconds(0.4));// Animation target
+            Storyboard.SetTarget(da, grid);
+            Storyboard.SetTargetProperty(da, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
+            sb.Children.Add(da);
+            sb.Begin();
+            sb.Children.Remove(da);
         }
 
-        public void Places_Enter(object sender, System.EventArgs e)
+        public void Button_Enter(object sender, System.EventArgs e)
         {
-            ColorAnimation buttonAnimation = new ColorAnimation();
-            ColorAnimation textAnimation = new ColorAnimation();
+            Button b = (Button)sender;
 
-            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
-            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
-            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            textAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
-            textAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
-            textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            Places_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
-            Places_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
-            Places_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-            Places_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+            if (checkArea == false && b.Equals(Area_Button))
+            {
+                // Nothing is supposed to happen
+            }
+            else if (checkUsers == false && b.Equals(Users_Button))
+            {
+                // Nothing is supposed to happen
+            }
+            else if (checkProfile == false && b.Equals(Profile_Button))
+            {
+                // Nothing is supposed to happen
+            }
+            else
+            {
+                Enter(b);
+            }
         }
 
-        public void Places_Leave(object sender, System.EventArgs e)
+        private void Enter(Button b)
         {
             ColorAnimation buttonAnimation = new ColorAnimation();
             ColorAnimation textAnimation = new ColorAnimation();
 
-            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
-            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
+            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#205072");
+            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#7be495");
             buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            textAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
-            textAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
+            textAnimation.From = (Color)ColorConverter.ConvertFromString("#7be495");
+            textAnimation.To = (Color)ColorConverter.ConvertFromString("#205072");
             textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            Places_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
-            Places_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
-            Places_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-            Places_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#7be495"));
+            b.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#205072"));
+            b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+            b.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
         }
 
-        public void Users_Enter(object sender, System.EventArgs e)
+        public void Button_Leave(object sender, System.EventArgs e)
         {
-            ColorAnimation buttonAnimation = new ColorAnimation();
-            ColorAnimation textAnimation = new ColorAnimation();
+            Button b = (Button)sender;
 
-            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
-            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
-            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            textAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
-            textAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
-            textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            Users_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
-            Users_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
-            Users_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-            Users_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+            if (checkArea == false && b.Equals(Area_Button))
+            {
+                // Nothing is supposed to happen
+            }
+            else if (checkUsers == false && b.Equals(Users_Button))
+            {
+                // Nothing is supposed to happen
+            }
+            else if (checkProfile == false && b.Equals(Profile_Button))
+            {
+                // Nothing is supposed to happen
+            }
+            else
+            {
+                Leave(b);
+            }
         }
 
-        public void Users_Leave(object sender, System.EventArgs e)
+        private void Leave (Button b)
         {
             ColorAnimation buttonAnimation = new ColorAnimation();
             ColorAnimation textAnimation = new ColorAnimation();
 
-            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#86ac41");
-            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#324851");
+            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#7be495");
+            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#205072");
             buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            textAnimation.From = (Color)ColorConverter.ConvertFromString("#324851");
-            textAnimation.To = (Color)ColorConverter.ConvertFromString("#86ac41");
+            textAnimation.From = (Color)ColorConverter.ConvertFromString("#205072");
+            textAnimation.To = (Color)ColorConverter.ConvertFromString("#7be495");
             textAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
-            Users_Button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#324851"));
-            Users_Button.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#86ac41"));
-            Users_Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-            Users_Button.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#205072"));
+            b.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#7be495"));
+            b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+            b.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, textAnimation);
+        }
+
+        private void RotateArrow (TextBlock tb)
+        {
+            var rotate = new DoubleAnimation(0, 90, TimeSpan.FromSeconds(0.4));
+            var rt = (RotateTransform)tb.RenderTransform;
+            rt.BeginAnimation(RotateTransform.AngleProperty, rotate);            
+        }
+
+        private void RotateArrowBack (TextBlock tb)
+        {
+            var rotate = new DoubleAnimation(90, 0, TimeSpan.FromSeconds(0.4));
+            var rt = (RotateTransform)tb.RenderTransform;
+            rt.BeginAnimation(RotateTransform.AngleProperty, rotate);
+        }
+
+        // Submenu enter and leave animations
+        public void Submenu_Enter(object sender, System.EventArgs e)
+        {
+            Button b = (Button)sender;
+            ColorAnimation buttonAnimation = new ColorAnimation();
+            ColorAnimation textAnimation = new ColorAnimation();
+
+            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#cff4d2");
+            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#7be495");
+            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
+            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#7be495"));
+            b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+        }
+
+        public void Submenu_Leave(object sender, System.EventArgs e)
+        {
+            Button b = (Button)sender;
+            ColorAnimation buttonAnimation = new ColorAnimation();
+            ColorAnimation textAnimation = new ColorAnimation();
+
+            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#7be495");
+            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#cff4d2");
+            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.33));
+            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#cff4d2"));
+            b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+        }
+
+        // Go to pages
+        public void Button_Page_Click(object sender, System.EventArgs e)
+        {
+            Button b = (Button)sender;
+            // Revert animations
+            if (checkButtonClick == false && checkArea == false)
+            {
+                RotateArrowBack(Area_Tag);
+                CloseSubMenu(SubMenu_Area);
+                Leave(Area_Button);
+                checkArea = true;
+                checkButtonClick = true;
+            }
+            else if (checkButtonClick == false && checkUsers == false)
+            {
+                RotateArrowBack(Users_Tag);
+                CloseSubMenu(SubMenu_Users);
+                Leave(Users_Button);
+                checkUsers = true;
+                checkButtonClick = true;
+            }
+            else if (checkButtonClick == false && checkProfile == false)
+            {
+                RotateArrowBack(Profile_Tag);
+                CloseSubMenu(SubMenu_Profile);
+                Leave(Profile_Button);
+                checkProfile = true;
+                checkButtonClick = true;
+            }
+            // Go to a new page
+            if (b.Equals(Dashboard_Button))
+            {
+                Content_Frame.Content = new Dashboard();
+            }
+            else if (b.Equals(Places_Button))
+            {
+                Content_Frame.Content = new Places();
+            }
+            else if (b.Equals(Map_Button))
+            {
+                Content_Frame.Content = new Map();
+            }
+            else if (b.Equals(Tags_Button))
+            {
+                Content_Frame.Content = new Tags();
+            }
+            else if (b.Equals(Web_Button))
+            {
+                Content_Frame.Content = new Web_users();
+            }
+            else if (b.Equals(Admin_Button))
+            {
+                Content_Frame.Content = new Admin();
+            }
+            else if (b.Equals(Inbox_Button))
+            {
+                Content_Frame.Content = new Inbox();
+            }
+            else if (b.Equals(Basic_info_Button))
+            {
+                Content_Frame.Content = new Basic_info(user, this);
+            }
+            else if (b.Equals(Password_Button))
+            {
+                Content_Frame.Content = new Password(user);
+            }
+            else if(b.Equals(Log_out_Button))
+            {
+                var Login = new Login_Window();
+                this.Close();
+                Login.Show();
+            }
         }
 
         /// <summary>
@@ -159,14 +435,17 @@ namespace TipsForTripsDesktop
             MyCon.Open();
             var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
             if (queryResult != null)
+            {
                 // If we have result, then convert it from object to string.
                 name = Convert.ToString(queryResult);
+            }
             else
+            {
                 // Else make id = "" so you can later check it.
                 name = "";
+            }
 
             MyCon.Close();
-
             adminName.DataContext = name;
 
             return name;

@@ -2,19 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\APP2000",
-    "\\APP2000\\APP2000",
-<<<<<<< HEAD
-    "\\Webapp",
-    "\\Webapp\\WebApp",
-    "\\Webapp\\WebApp\\WebApp"
+    "\\APP2000\\TipsForTripsDesktop"
   ],
-  "SelectedNode": "\\Webapp\\WebApp\\WebApp\\WebApp.csproj",
-=======
-    "\\APP2000\\TipsForTripsDesktop",
-    "\\Webapp",
-    "\\Webapp\\WebApp"
-  ],
-  "SelectedNode": "\\APP2000\\TipsForTripsDesktop\\MainWindow.xaml",
->>>>>>> Tobias_Branch
+  "SelectedNode": "\\APP2000\\TipsForTripsDesktop",
   "PreviewInSolutionExplorer": false
 }
