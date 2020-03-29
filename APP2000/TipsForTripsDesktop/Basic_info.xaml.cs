@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -22,18 +23,24 @@ namespace TipsForTripsDesktop
     public partial class Basic_info : Page
     {
         private string username;
+        MainWindow mainWindow;
 
-        public Basic_info(string user)
+        public Basic_info(string user, MainWindow mw)
         {
             username = user;
+            mainWindow = mw;
             InitializeComponent();
             setTextBoxContent();
         }
 
         private void setTextBoxContent()
         {
-            string query = "SELECT full_name FROM user WHERE username = 'raneik';";
+            string query = "SELECT username FROM admin WHERE username = '" + username + "';";
             string Name = ConnectToDatabase(query);
+            Username.Text = Name;
+
+            query = "SELECT full_name FROM user WHERE username = 'raneik';";
+            Name = ConnectToDatabase(query);
             Full_Name.Text = Name;
 
             query = "SELECT email FROM user WHERE username = 'raneik';";
@@ -47,6 +54,54 @@ namespace TipsForTripsDesktop
             query = "SELECT phone_NR FROM user WHERE username = 'raneik';";
             Name = ConnectToDatabase(query);
             Phone_Number.Text = Name;
+        }
+
+        // Enter animation
+        private void Button_Enter(object sender, System.EventArgs e)
+        {
+            Button b = (Button)sender;
+            ColorAnimation buttonAnimation = new ColorAnimation();
+            ColorAnimation textAnimation = new ColorAnimation();
+
+            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#4296d6");
+            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#6caddf");
+            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6caddf"));
+            b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+        }
+
+        // Leave animation
+        private void Button_Leave(object sender, System.EventArgs e)
+        {
+            Button b = (Button)sender;
+            ColorAnimation buttonAnimation = new ColorAnimation();
+            ColorAnimation textAnimation = new ColorAnimation();
+
+            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#6caddf");
+            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#4296d6");
+            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4296d6"));
+            b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+        }
+
+        // Delete click
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete your account?", "Delete profile", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    string query = "DELETE FROM admin WHERE username = '" + username + "';";
+                    ConnectToDatabase(query);
+                    MessageBox.Show("Your account was deleted.", "Delete profile");
+                    Login_Window liw = new Login_Window();
+                    liw.Show();
+                    mainWindow.Close();
+                    break;
+                case MessageBoxResult.No:
+                    MessageBox.Show("Phew, my account is safe!", "Delete profile");
+                    break;
+            }
         }
 
         /// <summary>

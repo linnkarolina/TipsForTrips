@@ -67,9 +67,9 @@ namespace TipsForTripsDesktop
             }
             else
             {
-                var MainWindow = new MainWindow(name);
+                var mw = new MainWindow(name);
                 this.Close();
-                MainWindow.Show();
+                mw.Show();
             }
         }
 
