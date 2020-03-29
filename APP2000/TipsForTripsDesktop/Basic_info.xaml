@@ -188,28 +188,33 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
+                        <!-- Username -->
+                        <TextBlock Grid.Row="0" VerticalAlignment="Bottom" FontSize="15">
+                            Username
+                        </TextBlock>
+                        <TextBox x:Name="Username" Text="{Binding Name, Mode=OneWay}" Grid.Row="1" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                         <!-- Full name -->
-                        <TextBlock Grid.Row="1" VerticalAlignment="Bottom" FontSize="15">
+                        <TextBlock Grid.Row="2" VerticalAlignment="Bottom" FontSize="15">
                             Full name
                         </TextBlock>
-                        <TextBox x:Name="Full_Name" Text="{Binding Name, Mode=OneWay}" Grid.Row="2" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                        <TextBox x:Name="Full_Name" Text="{Binding Name, Mode=OneWay}" Grid.Row="3" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                         <!-- Email -->
-                        <TextBlock Grid.Row="3" VerticalAlignment="Bottom" FontSize="15">
+                        <TextBlock Grid.Row="4" VerticalAlignment="Bottom" FontSize="15">
                             Email
                         </TextBlock>
-                        <TextBox x:Name="Email" Text="{Binding Name, Mode=OneWay}" Grid.Row="4" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                        <TextBox x:Name="Email" Text="{Binding Name, Mode=OneWay}" Grid.Row="5" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                         <!-- Email -->
-                        <TextBlock Grid.Row="5" VerticalAlignment="Bottom" FontSize="15">
+                        <TextBlock Grid.Row="6" VerticalAlignment="Bottom" FontSize="15">
                             Location
                         </TextBlock>
-                        <TextBox x:Name="Location" Text="{Binding Name, Mode=OneWay}" Grid.Row="6" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                        <TextBox x:Name="Location" Text="{Binding Name, Mode=OneWay}" Grid.Row="7" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                         <!-- Phone number -->
-                        <TextBlock Grid.Row="7" VerticalAlignment="Bottom" FontSize="15">
+                        <TextBlock Grid.Row="8" VerticalAlignment="Bottom" FontSize="15">
                             Phone number
                         </TextBlock>
-                        <TextBox x:Name="Phone_Number" Text="{Binding Name, Mode=OneWay}" Grid.Row="8" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                        <TextBox x:Name="Phone_Number" Text="{Binding Name, Mode=OneWay}" Grid.Row="9" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                         <!-- Save -->
-                        <Grid Grid.Row="10">
+                        <Grid Grid.Row="11">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="0.5*" />
