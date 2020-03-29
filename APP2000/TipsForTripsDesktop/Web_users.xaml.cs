@@ -79,6 +79,11 @@ namespace TipsForTripsDesktop
             }
         }
 
+        public void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         public string ConnectToDatabase(string query)
         {
             string name;
@@ -97,7 +102,6 @@ namespace TipsForTripsDesktop
                 // If we have result, then convert it from object to string.
  
                 name = Convert.ToString(queryResult);
-                Console.WriteLine(name);
             }
             else
             {
