@@ -170,16 +170,7 @@ namespace TipsForTripsDesktop
                 }
             }
         }
-
-<<<<<<< HEAD
-        /// <summary>
-        /// Menu color animation
-        /// </summary>
-
-        public void Dash_Enter(object sender, System.EventArgs e)
-=======
         private void OpenSubMenu()
->>>>>>> Tobias_Branch
         {
             Storyboard sb = new Storyboard();
             DoubleAnimation da = new DoubleAnimation();
