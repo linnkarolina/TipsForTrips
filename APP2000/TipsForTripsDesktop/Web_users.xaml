@@ -219,7 +219,7 @@
                                 <DataGridTemplateColumn Header="Delete">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="Delete_Button" Content="Delete" />
+                                            <Button x:Name="Delete_Button" Content="Delete" Click="Delete_Click" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

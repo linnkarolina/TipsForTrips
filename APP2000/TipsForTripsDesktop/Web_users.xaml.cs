@@ -59,6 +59,7 @@ namespace TipsForTripsDesktop
             }
         }
 
+        // Enter animation
         private void Button_Enter(object sender, System.EventArgs e)
         {
             Button b = (Button)sender;
@@ -121,7 +122,26 @@ namespace TipsForTripsDesktop
 
         public void Delete_Click(object sender, RoutedEventArgs e)
         {
-            
+            DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
+            String username = drv[0].ToString();
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete " + username + "?", "Delete user", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    try
+                    {
+                        ConnectToDatabase("DELETE FROM user WHERE username = '" + username + "';");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                    MessageBox.Show(username + " was deleted.", "Delete user");
+                    break;
+                case MessageBoxResult.No:
+                    MessageBox.Show("Phew, " + username + " will see the light another day!", "Delete user");
+                    break;
+            }
         }
 
         public string ConnectToDatabase(string query)
