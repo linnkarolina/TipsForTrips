@@ -81,6 +81,9 @@
     <Compile Include="Login_Window.xaml.cs">
       <DependentUpon>Login_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="New_Web_User.xaml.cs">
+      <DependentUpon>New_Web_User.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Password.xaml.cs">
       <DependentUpon>Password.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Map.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New_Web_User.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

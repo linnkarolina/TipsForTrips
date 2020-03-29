@@ -1,13 +1,12 @@
-﻿<Window x:Class="TipsForTripsDesktop.Edit_Web_User"
+﻿<Window x:Class="TipsForTripsDesktop.New_Web_User"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TipsForTripsDesktop"
         mc:Ignorable="d"
-        Title="Edit web user" Height="400" Width="400"
+        Title="New web user" Height="400" Width="400"
         WindowStartupLocation="CenterScreen">
-
     <Window.Resources>
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
@@ -160,7 +159,7 @@
             </Grid.RowDefinitions>
             <!-- Title -->
             <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center">
-                Edit user
+                New user
             </TextBlock>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -190,32 +189,32 @@
                     <TextBlock Grid.Row="0" VerticalAlignment="Bottom" FontSize="15">
                             Username
                     </TextBlock>
-                    <TextBox x:Name="Username" Text="{Binding Name, Mode=OneWay}" Grid.Row="1" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                    <TextBox x:Name="Username" Grid.Row="1" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                     <!-- Password -->
                     <TextBlock Grid.Row="2" VerticalAlignment="Bottom" FontSize="15">
                             Password
                     </TextBlock>
-                    <TextBox x:Name="Password" Text="{Binding Name, Mode=OneWay}" Grid.Row="3" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                    <TextBox x:Name="Password" Grid.Row="3" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                     <!-- Full name -->
                     <TextBlock Grid.Row="4" VerticalAlignment="Bottom" FontSize="15">
                             Full name
                     </TextBlock>
-                    <TextBox x:Name="Full_Name" Text="{Binding Name, Mode=OneWay}" Grid.Row="5" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                    <TextBox x:Name="Full_Name" Grid.Row="5" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                     <!-- Email -->
                     <TextBlock Grid.Row="6" VerticalAlignment="Bottom" FontSize="15">
                             Email
                     </TextBlock>
-                    <TextBox x:Name="Email" Text="{Binding Name, Mode=OneWay}" Grid.Row="7" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                    <TextBox x:Name="Email" Grid.Row="7" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                     <!-- Location -->
                     <TextBlock Grid.Row="8" VerticalAlignment="Bottom" FontSize="15">
                             Location
                     </TextBlock>
-                    <TextBox x:Name="Location" Text="{Binding Name, Mode=OneWay}" Grid.Row="9" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                    <TextBox x:Name="Location" Grid.Row="9" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                     <!-- Phone number -->
                     <TextBlock Grid.Row="10" VerticalAlignment="Bottom" FontSize="15">
                             Phone number
                     </TextBlock>
-                    <TextBox x:Name="Phone_Number" Text="{Binding Name, Mode=OneWay}" Grid.Row="11" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                    <TextBox x:Name="Phone_Number" Grid.Row="11" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                     <!-- Save -->
                     <Grid Grid.Row="13">
                         <Grid.ColumnDefinitions>
