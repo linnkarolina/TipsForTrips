@@ -69,7 +69,9 @@ namespace TipsForTripsDesktop
                 String email = drv[3].ToString();
                 String full_name = drv[4].ToString();
                 String phone_NR = drv[5].ToString();
-                MessageBox.Show("Username " + username + ", Password " + password + location + email + full_name + phone_NR);
+                Edit_Web_User ewu = new Edit_Web_User(username);
+                ewu.Show();
+                ewu.Topmost = true;
             }
             catch (Exception ex)
             {

@@ -72,6 +72,9 @@
     <Compile Include="Basic_info.xaml.cs">
       <DependentUpon>Basic_info.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Edit_Web_User.xaml.cs">
+      <DependentUpon>Edit_Web_User.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Inbox.xaml.cs">
       <DependentUpon>Inbox.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Edit_Web_User.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
