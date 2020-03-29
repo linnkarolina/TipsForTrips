@@ -190,7 +190,7 @@
                             </Grid.ColumnDefinitions>
                             <!-- New user -->
                             <Grid Grid.Column="0">
-                                <Button Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
+                                <Button Click="New_User_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
                                     <TextBlock FontSize="12">
                                         New user
                                     </TextBlock>
@@ -198,7 +198,7 @@
                             </Grid>
                             <!-- Refresh -->
                             <Grid Grid.Column="2">
-                                <Button Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
+                                <Button Click="Refresh_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
                                     <TextBlock FontSize="12">
                                         Refresh
                                     </TextBlock>
@@ -219,7 +219,7 @@
                                 <DataGridTemplateColumn Header="Delete">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="Delete_Button" Content="Delete" />
+                                            <Button x:Name="Delete_Button" Content="Delete" Click="Delete_Click" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

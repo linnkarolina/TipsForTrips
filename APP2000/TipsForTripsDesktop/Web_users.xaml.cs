@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
+using System.Windows.Media.Animation;
 
 namespace TipsForTripsDesktop
 {
@@ -58,6 +59,46 @@ namespace TipsForTripsDesktop
             }
         }
 
+        // Enter animation
+        private void Button_Enter(object sender, System.EventArgs e)
+        {
+            Button b = (Button)sender;
+            ColorAnimation buttonAnimation = new ColorAnimation();
+            ColorAnimation textAnimation = new ColorAnimation();
+
+            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#4296d6");
+            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#6caddf");
+            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6caddf"));
+            b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+        }
+
+        // Leave animation
+        private void Button_Leave(object sender, System.EventArgs e)
+        {
+            Button b = (Button)sender;
+            ColorAnimation buttonAnimation = new ColorAnimation();
+            ColorAnimation textAnimation = new ColorAnimation();
+
+            buttonAnimation.From = (Color)ColorConverter.ConvertFromString("#6caddf");
+            buttonAnimation.To = (Color)ColorConverter.ConvertFromString("#4296d6");
+            buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+            b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4296d6"));
+            b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
+        }
+
+        public void New_User_Click(object sender, RoutedEventArgs e)
+        {
+            New_Web_User nwe = new New_Web_User();
+            nwe.Show();
+            nwe.Topmost = true;
+        }
+
+        public void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            UserTable();
+        }
+
         public void Edit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -81,7 +122,26 @@ namespace TipsForTripsDesktop
 
         public void Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
+            String username = drv[0].ToString();
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete " + username + "?", "Delete user", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    try
+                    {
+                        ConnectToDatabase("DELETE FROM user WHERE username = '" + username + "';");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                    MessageBox.Show(username + " was deleted.", "Delete user");
+                    break;
+                case MessageBoxResult.No:
+                    MessageBox.Show("Phew, " + username + " will see the light another day!", "Delete user");
+                    break;
+            }
         }
 
         public string ConnectToDatabase(string query)

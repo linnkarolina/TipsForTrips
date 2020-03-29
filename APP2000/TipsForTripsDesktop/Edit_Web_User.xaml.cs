@@ -100,8 +100,8 @@ namespace TipsForTripsDesktop
                 string email = Email.Text;
                 string location = Location.Text;
                 string phone_NR = Phone_Number.Text;
-                string query = "UPDATE user SET username = '" + user + "', password = '" + password + "', full_name = '" + full_name + "', email = '" + email + "', location = '" +
-                    location + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";
+                string query = "UPDATE user SET username = '" + user + "', password = '" + password + "', full_name = '" + full_name + "', email = '" + email + "'," +
+                    " location = '" + location + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";
                 ConnectToDatabase(query);
                 this.Close();
             }
