@@ -58,8 +58,8 @@ namespace TipsForTripsDesktop
         {
             try
             {
-                ConnectToDatabase("INSERT INTO user VALUES('" + Username.Text + "','" + Password.Text + "','" + Full_Name.Text + "'," +
-                    "'" + Email.Text + "','" + Location.Text + "','" + Phone_Number.Text + "');");
+                ConnectToDatabase("INSERT INTO user VALUES('" + Username.Text + "','" + Password.Text + "','" + Location.Text + "'," +
+                    "'" + Email.Text + "','" + Full_Name.Text + "','" + Phone_Number.Text + "');");
                 this.Close();
             }
             catch (Exception ex)
