@@ -32,12 +32,8 @@ namespace TipsForTripsDesktop
 
         private void setTextBoxContent()
         {
-            string query = "SELECT username FROM user WHERE username = '" + username + "';";
+            string query = "SELECT full_name FROM user WHERE username = 'raneik';";
             string Name = ConnectToDatabase(query);
-            Username.Text = Name;
-
-            query = "SELECT full_name FROM user WHERE username = 'raneik';";
-            Name = ConnectToDatabase(query);
             Full_Name.Text = Name;
 
             query = "SELECT email FROM user WHERE username = 'raneik';";
