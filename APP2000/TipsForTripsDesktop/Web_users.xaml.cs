@@ -139,7 +139,7 @@ namespace TipsForTripsDesktop
                     MessageBox.Show(username + " was deleted.", "Delete user");
                     break;
                 case MessageBoxResult.No:
-                    MessageBox.Show("Phew, " + username + " will see the light another day!", "Delete user");
+                    MessageBox.Show("Phew, " + username + " will live to see the light another day!", "Delete user");
                     break;
             }
         }
