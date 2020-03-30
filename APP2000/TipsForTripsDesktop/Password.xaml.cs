@@ -36,7 +36,11 @@ namespace TipsForTripsDesktop
             string Verify_Pass = Verify_Password.Password.ToString();
             string query = "SELECT password FROM admin WHERE username='" + user + "';";
 
-            if (ConnectToDatabase(query) != Cur_Pass)
+            if (New_Pass == "" || Verify_Pass == "")
+            {
+                MessageBox.Show("All fields must be filled.", "Oops...");
+            }
+            else if (ConnectToDatabase(query) != Cur_Pass)
             {
                 Success.DataContext = "";
                 ERROR.DataContext = "The current password is incorrect.";

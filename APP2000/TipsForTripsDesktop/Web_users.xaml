@@ -186,7 +186,10 @@
                                 <ColumnDefinition Width="3*" />
                                 <ColumnDefinition Width="0.5*" />
                                 <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="6.5*" />
+                                <ColumnDefinition Width="0.25*" />
+                                <ColumnDefinition Width="1.25*" />
                             </Grid.ColumnDefinitions>
                             <!-- New user -->
                             <Grid Grid.Column="0">
@@ -202,6 +205,16 @@
                                     <TextBlock FontSize="12">
                                         Refresh
                                     </TextBlock>
+                                </Button>
+                            </Grid>
+                            <!-- Search bar -->
+                            <Grid Grid.Column="4">
+                                <TextBox x:Name="Search_Bar" Text="Search" BorderThickness="3" PreviewMouseLeftButtonUp="Search_MouseUp" VerticalAlignment="Stretch" Padding="5" FontSize="15" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                            </Grid>
+                            <!-- Search button -->
+                            <Grid Grid.Column="6">
+                                <Button Click="Search_Click" Content="&#128269;" FontSize="17" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
+                                 
                                 </Button>
                             </Grid>
                         </Grid>

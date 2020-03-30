@@ -23,10 +23,12 @@ namespace TipsForTripsDesktop
     {
 
         private string username;
+        private Web_users Web_users;
 
-        public Edit_Web_User(string user)
+        public Edit_Web_User(string user, Web_users wu)
         {
             username = user;
+            Web_users = wu;
             InitializeComponent();
             setTextBoxContent();
         }
@@ -94,16 +96,33 @@ namespace TipsForTripsDesktop
         {
             try
             {
-                string user = Username.Text;
-                string password = Password.Text;
-                string full_name = Full_Name.Text;
-                string email = Email.Text;
-                string location = Location.Text;
-                string phone_NR = Phone_Number.Text;
-                string query = "UPDATE user SET username = '" + user + "', password = '" + password + "', full_name = '" + full_name + "', email = '" + email + "'," +
-                    " location = '" + location + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";
-                ConnectToDatabase(query);
-                this.Close();
+                int i = 0;
+                string s = Phone_Number.Text;
+                bool result = int.TryParse(s, out i);
+
+                if (Username.Text == "" || Password.Text == "" || Location.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
+                {
+                    MessageBox.Show("All fields must be filled.", "Oops...");
+                }
+                else if (i == 0)
+                {
+                    MessageBox.Show("Phone number must be a numeric value.", "Oops...");
+                }
+                else
+                {
+                    string user = Username.Text;
+                    string password = Password.Text;
+                    string full_name = Full_Name.Text;
+                    string email = Email.Text;
+                    string location = Location.Text;
+                    string phone_NR = Phone_Number.Text;
+                    string query = "UPDATE user SET username = '" + user + "', password = '" + password + "', full_name = '" + full_name + "', email = '" + email + "'," +
+                        " location = '" + location + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";
+                    ConnectToDatabase(query);
+                    Web_users.UserTable();
+                    this.Close();
+                }
+                
             }
             catch(Exception ex)
             {

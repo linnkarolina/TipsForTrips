@@ -21,8 +21,11 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class New_Web_User : Window
     {
-        public New_Web_User()
+
+        private Web_users Web_users;
+        public New_Web_User(Web_users wu)
         {
+            Web_users = wu;
             InitializeComponent();
         }
 
@@ -58,9 +61,25 @@ namespace TipsForTripsDesktop
         {
             try
             {
-                ConnectToDatabase("INSERT INTO user VALUES('" + Username.Text + "','" + Password.Text + "','" + Location.Text + "'," +
+                int i = 0;
+                string s = Phone_Number.Text;
+                bool result = int.TryParse(s, out i);
+
+                if (Username.Text == "" || Password.Text == "" || Location.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
+                {
+                    MessageBox.Show("All fields must be filled.", "Oops...");
+                }
+                else if (i == 0)
+                {
+                    MessageBox.Show("Phone number must be a numeric value.", "Oops...");
+                }
+                else
+                {
+                    ConnectToDatabase("INSERT INTO user VALUES('" + Username.Text + "','" + Password.Text + "','" + Location.Text + "'," +
                     "'" + Email.Text + "','" + Full_Name.Text + "','" + Phone_Number.Text + "');");
-                this.Close();
+                    Web_users.UserTable();
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {

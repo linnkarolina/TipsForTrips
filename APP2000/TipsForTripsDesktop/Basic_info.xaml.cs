@@ -89,8 +89,23 @@ namespace TipsForTripsDesktop
         {
             try
             {
-                ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',location = '" + Location.Text + "',phone_NR = '" + Phone_Number.Text + "';");
-                MessageBox.Show("Your info has been changed.");
+                int i = 0;
+                string s = Phone_Number.Text;
+                bool result = int.TryParse(s, out i);
+
+                if (Username.Text == "" || Location.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
+                {
+                    MessageBox.Show("All fields must be filled.", "Oops...");
+                }
+                else if (i == 0)
+                {
+                    MessageBox.Show("Phone number must be a numeric value.", "Oops...");
+                }
+                else
+                {
+                    ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',location = '" + Location.Text + "',phone_NR = '" + Phone_Number.Text + "';");
+                    MessageBox.Show("Your info has been changed.");
+                }
             }
             catch(Exception ex) 
             {
