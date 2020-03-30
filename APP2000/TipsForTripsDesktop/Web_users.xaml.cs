@@ -264,14 +264,14 @@ namespace TipsForTripsDesktop
             return total;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            UserTable();
-        }
-
         private void Table_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
         {
 
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            UserTable();
         }
     }
 }

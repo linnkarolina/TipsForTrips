@@ -12,48 +12,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TipsForTripsDesktop
 {
     /// <summary>
-    /// Interaction logic for Basic_info.xaml
+    /// Interaction logic for New_Admin_User.xaml
     /// </summary>
-    public partial class Basic_info : Page
+    public partial class New_Admin_User : Window
     {
-        private string username;
-        MainWindow mainWindow;
 
-        public Basic_info(string user, MainWindow mw)
+        private Admin admin_users;
+
+        public New_Admin_User(Admin au)
         {
-            username = user;
-            mainWindow = mw;
+            admin_users = au;
             InitializeComponent();
-            setTextBoxContent();
-        }
-
-        private void setTextBoxContent()
-        {
-            string query = "SELECT username FROM admin WHERE username = '" + username + "';";
-            string Name = ConnectToDatabase(query);
-            Username.Text = Name;
-
-            query = "SELECT full_name FROM admin WHERE username = '" + username + "';";
-            Name = ConnectToDatabase(query);
-            Full_Name.Text = Name;
-
-            query = "SELECT email FROM admin WHERE username = '" + username + "';";
-            Name = ConnectToDatabase(query);
-            Email.Text = Name;
-
-            query = "SELECT location FROM admin WHERE username = '" + username + "';";
-            Name = ConnectToDatabase(query);
-            Location.Text = Name;
-
-            query = "SELECT phone_NR FROM admin WHERE username = '" + username + "';";
-            Name = ConnectToDatabase(query);
-            Phone_Number.Text = Name;
         }
 
         // Enter animation
@@ -84,8 +58,7 @@ namespace TipsForTripsDesktop
             b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
         }
 
-        // Save click
-        private void Save_Click(object sender, RoutedEventArgs e)
+        public void Save_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -93,7 +66,7 @@ namespace TipsForTripsDesktop
                 string s = Phone_Number.Text;
                 bool result = int.TryParse(s, out i);
 
-                if (Username.Text == "" || Location.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
+                if (Username.Text == "" || Password.Text == "" || Location.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
                 {
                     MessageBox.Show("All fields must be filled.", "Oops...");
                 }
@@ -103,40 +76,24 @@ namespace TipsForTripsDesktop
                 }
                 else
                 {
-                    ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',location = '" + Location.Text + "',phone_NR = '" + Phone_Number.Text + "';");
-                    MessageBox.Show("Your info has been changed.");
+                    ConnectToDatabase("INSERT INTO admin VALUES('" + Username.Text + "','" + Password.Text + "','" + Location.Text + "'," +
+                    "'" + Email.Text + "','" + Full_Name.Text + "','" + Phone_Number.Text + "');");
+                    admin_users.UserTable();
+                    this.Close();
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
         }
 
-        // Delete click
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        public void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete your account?", "Delete profile", MessageBoxButton.YesNo);
-            switch (result)
-            {
-                case MessageBoxResult.Yes:
-                    string query = "DELETE FROM admin WHERE username = '" + username + "';";
-                    ConnectToDatabase(query);
-                    MessageBox.Show("Your account was deleted, you will be signed out.", "Delete profile");
-                    Login_Window liw = new Login_Window();
-                    liw.Show();
-                    mainWindow.Close();
-                    break;
-                case MessageBoxResult.No:
-                    MessageBox.Show("Phew, my account is safe!", "Delete profile");
-                    break;
-            }
+            this.Close();
         }
 
-        /// <summary>
-        /// Database connection
-        /// </summary>
-        private string ConnectToDatabase(string query)
+        public string ConnectToDatabase(string query)
         {
             string name;
 
@@ -152,6 +109,7 @@ namespace TipsForTripsDesktop
             if (queryResult != null)
             {
                 // If we have result, then convert it from object to string.
+
                 name = Convert.ToString(queryResult);
             }
             else
