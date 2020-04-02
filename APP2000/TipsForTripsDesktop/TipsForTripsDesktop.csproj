@@ -87,6 +87,9 @@
     <Compile Include="New_Admin_User.xaml.cs">
       <DependentUpon>New_Admin_User.xaml</DependentUpon>
     </Compile>
+    <Compile Include="New_Tag.xaml.cs">
+      <DependentUpon>New_Tag.xaml</DependentUpon>
+    </Compile>
     <Compile Include="New_Web_User.xaml.cs">
       <DependentUpon>New_Web_User.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="New_Admin_User.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New_Tag.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
