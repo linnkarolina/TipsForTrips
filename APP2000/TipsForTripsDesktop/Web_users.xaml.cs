@@ -37,14 +37,14 @@ namespace TipsForTripsDesktop
             DataTable dt = new DataTable();
             DataColumn username = new DataColumn("Username", typeof(string));
             DataColumn password = new DataColumn("Password", typeof(string));
-            DataColumn location = new DataColumn("Location", typeof(string));
+            DataColumn city = new DataColumn("City", typeof(string));
             DataColumn email = new DataColumn("E-mail", typeof(string));
             DataColumn full_name = new DataColumn("Full name", typeof(string));
             DataColumn phone_NR = new DataColumn("Phone", typeof(string));
 
             dt.Columns.Add(username);
             dt.Columns.Add(password);
-            dt.Columns.Add(location);
+            dt.Columns.Add(city);
             dt.Columns.Add(email);
             dt.Columns.Add(full_name);
             dt.Columns.Add(phone_NR);
@@ -54,7 +54,7 @@ namespace TipsForTripsDesktop
                 DataRow row = dt.NewRow();
                 row[0] = ConnectToDatabase("SELECT username FROM user LIMIT " + i + ",1;");
                 row[1] = ConnectToDatabase("SELECT password FROM user LIMIT " + i + ",1;");
-                row[2] = ConnectToDatabase("SELECT location FROM user LIMIT " + i + ",1;");
+                row[2] = ConnectToDatabase("SELECT city FROM user LIMIT " + i + ",1;");
                 row[3] = ConnectToDatabase("SELECT email FROM user LIMIT " + i + ",1;");
                 row[4] = ConnectToDatabase("SELECT full_name FROM user LIMIT " + i + ",1;");
                 row[5] = ConnectToDatabase("SELECT phone_NR FROM user LIMIT " + i + ",1;");
@@ -108,14 +108,14 @@ namespace TipsForTripsDesktop
             DataTable dt = new DataTable();
             DataColumn username = new DataColumn("Username", typeof(string));
             DataColumn password = new DataColumn("Password", typeof(string));
-            DataColumn location = new DataColumn("Location", typeof(string));
+            DataColumn city = new DataColumn("City", typeof(string));
             DataColumn email = new DataColumn("E-mail", typeof(string));
             DataColumn full_name = new DataColumn("Full name", typeof(string));
             DataColumn phone_NR = new DataColumn("Phone", typeof(string));
 
             dt.Columns.Add(username);
             dt.Columns.Add(password);
-            dt.Columns.Add(location);
+            dt.Columns.Add(city);
             dt.Columns.Add(email);
             dt.Columns.Add(full_name);
             dt.Columns.Add(phone_NR);
@@ -126,7 +126,7 @@ namespace TipsForTripsDesktop
                     DataRow row = dt.NewRow();
                     row[0] = ConnectToDatabase("SELECT username FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
                     row[1] = ConnectToDatabase("SELECT password FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[2] = ConnectToDatabase("SELECT location FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
+                    row[2] = ConnectToDatabase("SELECT city FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
                     row[3] = ConnectToDatabase("SELECT email FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
                     row[4] = ConnectToDatabase("SELECT full_name FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
                     row[5] = ConnectToDatabase("SELECT phone_NR FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
@@ -158,7 +158,7 @@ namespace TipsForTripsDesktop
                 DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
                 String username = drv[0].ToString();
                 String password = drv[1].ToString();
-                String location = drv[2].ToString();
+                String city = drv[2].ToString();
                 String email = drv[3].ToString();
                 String full_name = drv[4].ToString();
                 String phone_NR = drv[5].ToString();

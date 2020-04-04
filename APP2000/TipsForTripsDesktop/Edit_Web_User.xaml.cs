@@ -53,7 +53,7 @@ namespace TipsForTripsDesktop
 
             query = "SELECT location FROM user WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
-            Location.Text = Name;
+            City.Text = Name;
 
             query = "SELECT phone_NR FROM user WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
@@ -100,7 +100,7 @@ namespace TipsForTripsDesktop
                 string s = Phone_Number.Text;
                 bool result = int.TryParse(s, out i);
 
-                if (Username.Text == "" || Password.Text == "" || Location.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
+                if (Username.Text == "" || Password.Text == "" || City.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
                 {
                     MessageBox.Show("All fields must be filled.", "Oops...");
                 }
@@ -114,7 +114,7 @@ namespace TipsForTripsDesktop
                     string password = Password.Text;
                     string full_name = Full_Name.Text;
                     string email = Email.Text;
-                    string location = Location.Text;
+                    string location = City.Text;
                     string phone_NR = Phone_Number.Text;
                     string query = "UPDATE user SET username = '" + user + "', password = '" + password + "', full_name = '" + full_name + "', email = '" + email + "'," +
                         " location = '" + location + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";

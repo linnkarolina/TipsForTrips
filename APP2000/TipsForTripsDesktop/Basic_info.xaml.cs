@@ -47,9 +47,9 @@ namespace TipsForTripsDesktop
             Name = ConnectToDatabase(query);
             Email.Text = Name;
 
-            query = "SELECT location FROM admin WHERE username = '" + username + "';";
+            query = "SELECT city FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
-            Location.Text = Name;
+            City.Text = Name;
 
             query = "SELECT phone_NR FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
@@ -93,7 +93,7 @@ namespace TipsForTripsDesktop
                 string s = Phone_Number.Text;
                 bool result = int.TryParse(s, out i);
 
-                if (Username.Text == "" || Location.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
+                if (Username.Text == "" || City.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
                 {
                     MessageBox.Show("All fields must be filled.", "Oops...");
                 }
@@ -103,7 +103,7 @@ namespace TipsForTripsDesktop
                 }
                 else
                 {
-                    ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',location = '" + Location.Text + "',phone_NR = '" + Phone_Number.Text + "';");
+                    ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',city = '" + City.Text + "',phone_NR = '" + Phone_Number.Text + "';");
                     MessageBox.Show("Your info has been changed.");
                 }
             }
