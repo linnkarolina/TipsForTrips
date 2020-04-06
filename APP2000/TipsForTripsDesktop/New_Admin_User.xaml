@@ -207,11 +207,11 @@
                             Email
                     </TextBlock>
                     <TextBox x:Name="Email" Grid.Row="7" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
-                    <!-- Location -->
+                    <!-- City -->
                     <TextBlock Grid.Row="8" VerticalAlignment="Bottom" FontSize="15">
-                            Location
+                            City
                     </TextBlock>
-                    <TextBox x:Name="Location" Grid.Row="9" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                    <TextBox x:Name="City" Grid.Row="9" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                     <!-- Phone number -->
                     <TextBlock Grid.Row="10" VerticalAlignment="Bottom" FontSize="15">
                             Phone number

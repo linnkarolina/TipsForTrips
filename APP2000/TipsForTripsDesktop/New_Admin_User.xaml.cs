@@ -66,7 +66,7 @@ namespace TipsForTripsDesktop
                 string s = Phone_Number.Text;
                 bool result = int.TryParse(s, out i);
 
-                if (Username.Text == "" || Password.Text == "" || Location.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
+                if (Username.Text == "" || Password.Text == "" || City.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
                 {
                     MessageBox.Show("All fields must be filled.", "Oops...");
                 }
@@ -76,7 +76,7 @@ namespace TipsForTripsDesktop
                 }
                 else
                 {
-                    ConnectToDatabase("INSERT INTO admin VALUES('" + Username.Text + "','" + Password.Text + "','" + Location.Text + "'," +
+                    ConnectToDatabase("INSERT INTO admin VALUES('" + Username.Text + "','" + Password.Text + "','" + City.Text + "'," +
                     "'" + Email.Text + "','" + Full_Name.Text + "','" + Phone_Number.Text + "');");
                     admin_users.UserTable();
                     this.Close();

@@ -51,7 +51,7 @@ namespace TipsForTripsDesktop
             Name = ConnectToDatabase(query);
             Email.Text = Name;
 
-            query = "SELECT location FROM user WHERE username = '" + username + "';";
+            query = "SELECT city FROM user WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             City.Text = Name;
 
@@ -114,10 +114,10 @@ namespace TipsForTripsDesktop
                     string password = Password.Text;
                     string full_name = Full_Name.Text;
                     string email = Email.Text;
-                    string location = City.Text;
+                    string city = City.Text;
                     string phone_NR = Phone_Number.Text;
                     string query = "UPDATE user SET username = '" + user + "', password = '" + password + "', full_name = '" + full_name + "', email = '" + email + "'," +
-                        " location = '" + location + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";
+                        " city = '" + city + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";
                     ConnectToDatabase(query);
                     Web_users.UserTable();
                     this.Close();

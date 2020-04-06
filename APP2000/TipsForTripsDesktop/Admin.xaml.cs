@@ -66,6 +66,11 @@ namespace TipsForTripsDesktop
                 dt.Rows.Add(row);
                 Table.ItemsSource = dt.DefaultView;
             }
+            if (DatabaseCount("SELECT count(*) FROM user;") == 0)
+            {
+                dt.Rows.Clear();
+                Table.ItemsSource = dt.DefaultView;
+            }
         }
 
         // Enter animation

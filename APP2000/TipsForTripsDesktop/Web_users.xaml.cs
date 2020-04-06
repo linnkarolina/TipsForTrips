@@ -29,6 +29,7 @@ namespace TipsForTripsDesktop
         public Web_users()
         {
             InitializeComponent();
+            UserTable();
             searchText = Search_Bar.Text;
         }
 
@@ -59,6 +60,11 @@ namespace TipsForTripsDesktop
                 row[4] = ConnectToDatabase("SELECT full_name FROM user LIMIT " + i + ",1;");
                 row[5] = ConnectToDatabase("SELECT phone_NR FROM user LIMIT " + i + ",1;");
                 dt.Rows.Add(row);
+                Table.ItemsSource = dt.DefaultView;
+            }
+            if (DatabaseCount("SELECT count(*) FROM user;") == 0)
+            {
+                dt.Rows.Clear();
                 Table.ItemsSource = dt.DefaultView;
             }
         }
