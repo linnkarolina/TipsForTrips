@@ -108,6 +108,10 @@ namespace TipsForTripsDesktop
                 {
                     MessageBox.Show("Phone number must be a numeric value.", "Oops...");
                 }
+                else if (ConnectToDatabase("SELECT username FROM admin WHERE username = '" + Username.Text + "';") != "")
+                {
+                    MessageBox.Show("This username is already taken by an administrator.", "Oops...");
+                }
                 else
                 {
                     string user = Username.Text;

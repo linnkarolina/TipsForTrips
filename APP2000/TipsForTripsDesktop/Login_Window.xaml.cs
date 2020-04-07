@@ -59,7 +59,7 @@ namespace TipsForTripsDesktop
         {
             string name = Username.Text;
             string word = Password.Password.ToString();
-            string query = "SELECT * FROM admin WHERE username='"+name+"' AND password='"+word+"';";
+            string query = "SELECT * FROM admin WHERE BINARY username='"+name+"' AND BINARY password='"+word+"';";
 
             if (ConnectToDatabase(query)=="")
             {
