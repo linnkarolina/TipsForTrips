@@ -24,12 +24,10 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class Basic_info : Page
     {
-        private string username;
         MainWindow mainWindow;
 
-        public Basic_info(string user, MainWindow mw)
+        public Basic_info(MainWindow mw)
         {
-            username = user;
             mainWindow = mw;
             InitializeComponent();
             setTextBoxContent();
@@ -37,21 +35,21 @@ namespace TipsForTripsDesktop
 
         private void setTextBoxContent()
         {
-            string query = "SELECT username FROM admin WHERE username = '" + username + "';";
+            string query = "SELECT username FROM admin WHERE username = '" + mainWindow.adminName.Text + "';";
             string Name = ConnectToDatabase(query);
             Username.Text = Name;
 
-            query = "SELECT full_name FROM admin WHERE username = '" + username + "';";
+            query = "SELECT full_name FROM admin WHERE username = '" + mainWindow.adminName.Text + "';";
             Name = ConnectToDatabase(query);
             Full_Name.Text = Name;
 
-            query = "SELECT email FROM admin WHERE username = '" + username + "';";
+            query = "SELECT email FROM admin WHERE username = '" + mainWindow.adminName.Text + "';";
             Name = ConnectToDatabase(query);
             Email.Text = Name;
 
             show_cities();
 
-            query = "SELECT phone_NR FROM admin WHERE username = '" + username + "';";
+            query = "SELECT phone_NR FROM admin WHERE username = '" + mainWindow.adminName.Text + "';";
             Name = ConnectToDatabase(query);
             Phone_Number.Text = Name;
         }
@@ -72,7 +70,7 @@ namespace TipsForTripsDesktop
                     string city = dr.GetString(0);
                     City.Items.Add(city);
 
-                    if(city.Equals(ConnectToDatabase("SELECT city FROM admin WHERE username ='" + username + "';")))
+                    if(city.Equals(ConnectToDatabase("SELECT city FROM admin WHERE username ='" + mainWindow.adminName.Text + "';")))
                     {
                         City.SelectedIndex = i;
                     }
@@ -138,7 +136,7 @@ namespace TipsForTripsDesktop
                 }
                 else
                 {
-                    ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',city = '" + City.Text + "',phone_NR = '" + Phone_Number.Text + "' WHERE username = '" + username + "';");
+                    ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',city = '" + City.Text + "',phone_NR = '" + Phone_Number.Text + "' WHERE username = '" + mainWindow.adminName.Text + "';");
                     mainWindow.adminName.DataContext = Username.Text;
                     MessageBox.Show("Your info has been changed.");
                 }
