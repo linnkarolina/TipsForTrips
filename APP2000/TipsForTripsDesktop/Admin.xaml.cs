@@ -25,12 +25,10 @@ namespace TipsForTripsDesktop
     {
 
         private string searchText;
-        private string user;
         private MainWindow mainWindow;
 
         public Admin(string username, MainWindow mw)
         {
-            user = username;
             mainWindow = mw;
             InitializeComponent();
             UserTable();
@@ -172,7 +170,7 @@ namespace TipsForTripsDesktop
                 String email = drv[3].ToString();
                 String full_name = drv[4].ToString();
                 String phone_NR = drv[5].ToString();
-                Edit_Admin_User ewu = new Edit_Admin_User(username, this);
+                Edit_Admin_User ewu = new Edit_Admin_User(username, this, mainWindow);
                 ewu.Show();
                 ewu.Topmost = true;
             }
@@ -195,7 +193,7 @@ namespace TipsForTripsDesktop
                         MessageBox.Show(username + " was deleted.", "Delete admin");
                         ConnectToDatabase("DELETE FROM admin WHERE username = '" + username + "';");
                         UserTable();
-                        if(username.Equals(user))
+                        if(username.Equals(mainWindow.adminName.Text))
                         {
                             MessageBox.Show("You will be signed out.", "Good bye");
                             Login_Window liw = new Login_Window();

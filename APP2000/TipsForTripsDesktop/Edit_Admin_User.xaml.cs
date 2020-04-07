@@ -24,11 +24,13 @@ namespace TipsForTripsDesktop
 
         private string username;
         private Admin Admin_users;
+        private MainWindow mainWindow;
 
-        public Edit_Admin_User(string user, Admin wu)
+        public Edit_Admin_User(string user, Admin au, MainWindow mw)
         {
             username = user;
-            Admin_users = wu;
+            Admin_users = au;
+            mainWindow = mw;
             InitializeComponent();
             setTextBoxContent();
         }
@@ -123,6 +125,7 @@ namespace TipsForTripsDesktop
                     string query = "UPDATE admin SET username = '" + user + "', password = '" + password + "', full_name = '" + full_name + "', email = '" + email + "'," +
                         " city = '" + city + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";
                     ConnectToDatabase(query);
+                    mainWindow.adminName.DataContext = user;
                     Admin_users.UserTable();
                     this.Close();
                 }

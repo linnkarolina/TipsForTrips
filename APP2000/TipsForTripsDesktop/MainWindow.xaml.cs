@@ -38,7 +38,7 @@ namespace TipsForTripsDesktop
             user = username;
             InitializeComponent();
             string query = "SELECT username FROM admin WHERE username='"+username+"';";
-            ConnectToDatabase(query);
+            adminName.DataContext = ConnectToDatabase(query);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -438,7 +438,6 @@ namespace TipsForTripsDesktop
             }
 
             MyCon.Close();
-            adminName.DataContext = name;
 
             return name;
         }
