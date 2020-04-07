@@ -65,11 +65,18 @@ namespace TipsForTripsDesktop
                 string query = "SELECT * FROM location;";
                 MySqlCommand cmd = new MySqlCommand(query, Con);
                 MySqlDataReader dr = cmd.ExecuteReader();
+                int i = 0;
 
-                while(dr.Read())
+                while (dr.Read())
                 {
                     string city = dr.GetString(0);
                     City.Items.Add(city);
+
+                    if(city.Equals(ConnectToDatabase("SELECT city FROM admin WHERE username ='" + username + "';")))
+                    {
+                        City.SelectedIndex = i;
+                    }
+                    i++;
                 }
 
                 Con.Close(); 
@@ -125,9 +132,14 @@ namespace TipsForTripsDesktop
                 {
                     MessageBox.Show("Phone number must be a numeric value.", "Oops...");
                 }
+                else if (ConnectToDatabase("SELECT username FROM user WHERE username ='" + Username.Text + "';") != "")
+                {
+                    MessageBox.Show("This username is already taken by a regular user.", "Oops...");
+                }
                 else
                 {
-                    ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',city = '" + City.Text + "',phone_NR = '" + Phone_Number.Text + "';");
+                    ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',city = '" + City.Text + "',phone_NR = '" + Phone_Number.Text + "' WHERE username = '" + username + "';");
+                    mainWindow.adminName.DataContext = Username.Text;
                     MessageBox.Show("Your info has been changed.");
                 }
             }
@@ -144,7 +156,7 @@ namespace TipsForTripsDesktop
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    string query = "DELETE FROM admin WHERE username = '" + username + "';";
+                    string query = "DELETE FROM admin WHERE username = '" + mainWindow.adminName.Text + "';";
                     ConnectToDatabase(query);
                     MessageBox.Show("Your account was deleted, you will be signed out.", "Delete profile");
                     Login_Window liw = new Login_Window();
