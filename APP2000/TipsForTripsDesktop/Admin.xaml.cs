@@ -57,16 +57,16 @@ namespace TipsForTripsDesktop
             for (int i = 0; i < DatabaseCount("SELECT count(*) FROM admin;"); i++)
             {
                 DataRow row = dt.NewRow();
-                row[0] = ConnectToDatabase("SELECT username FROM admin LIMIT " + i + ",1;");
-                row[1] = ConnectToDatabase("SELECT password FROM admin LIMIT " + i + ",1;");
-                row[2] = ConnectToDatabase("SELECT city FROM admin LIMIT " + i + ",1;");
-                row[3] = ConnectToDatabase("SELECT email FROM admin LIMIT " + i + ",1;");
-                row[4] = ConnectToDatabase("SELECT full_name FROM admin LIMIT " + i + ",1;");
-                row[5] = ConnectToDatabase("SELECT phone_NR FROM admin LIMIT " + i + ",1;");
+                row[0] = ConnectToDatabase("SELECT username FROM admin ORDER BY username LIMIT " + i + ",1");
+                row[1] = ConnectToDatabase("SELECT password FROM admin ORDER BY username LIMIT " + i + ",1;");
+                row[2] = ConnectToDatabase("SELECT city FROM admin ORDER BY username LIMIT " + i + ",1;");
+                row[3] = ConnectToDatabase("SELECT email FROM admin ORDER BY username LIMIT " + i + ",1;");
+                row[4] = ConnectToDatabase("SELECT full_name FROM admin ORDER BY username LIMIT " + i + ",1;");
+                row[5] = ConnectToDatabase("SELECT phone_NR FROM admin ORDER BY username LIMIT " + i + ",1;");
                 dt.Rows.Add(row);
                 Table.ItemsSource = dt.DefaultView;
             }
-            if (DatabaseCount("SELECT count(*) FROM user;") == 0)
+            if (DatabaseCount("SELECT count(*) FROM admin;") == 0)
             {
                 dt.Rows.Clear();
                 Table.ItemsSource = dt.DefaultView;
@@ -134,12 +134,12 @@ namespace TipsForTripsDesktop
                 for (int i = 0; i < DatabaseCount("SELECT count(*) FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%';"); i++)
                 {
                     DataRow row = dt.NewRow();
-                    row[0] = ConnectToDatabase("SELECT username FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[1] = ConnectToDatabase("SELECT password FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[2] = ConnectToDatabase("SELECT city FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[3] = ConnectToDatabase("SELECT email FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[4] = ConnectToDatabase("SELECT full_name FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[5] = ConnectToDatabase("SELECT phone_NR FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
+                    row[0] = ConnectToDatabase("SELECT username FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[1] = ConnectToDatabase("SELECT password FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[2] = ConnectToDatabase("SELECT city FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[3] = ConnectToDatabase("SELECT email FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[4] = ConnectToDatabase("SELECT full_name FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[5] = ConnectToDatabase("SELECT phone_NR FROM admin WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
                     dt.Rows.Add(row);
                     Table.ItemsSource = dt.DefaultView;
                     searchText = Search_Bar.Text;
@@ -231,7 +231,7 @@ namespace TipsForTripsDesktop
             MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
             */
 
-            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3308;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3308;DATABASE=tipsfortrips;UID=root;PASSWORD=");
             MySqlCommand cmd = new MySqlCommand(query, MyCon);
             MyCon.Open();
             var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null

@@ -207,11 +207,7 @@
                         <TextBlock Grid.Row="6" VerticalAlignment="Bottom" FontSize="15">
                             City
                         </TextBlock>
-                        <ComboBox x:Name="City" Grid.Row ="7" >
-                            <ComboBoxItem Content = "{Binding Name, Mode=OneWay}"/>
-                            <ComboBoxItem Content = "{Binding Name, Mode=OneWay}"/>
-                            <ComboBoxItem Content = "{Binding Name, Mode=OneWay}"/>
-                        </ComboBox>
+                        <ComboBox x:Name="City" Grid.Row ="7" />
                         <!-- Phone number -->
                         <TextBlock Grid.Row="8" VerticalAlignment="Bottom" FontSize="15">
                             Phone number

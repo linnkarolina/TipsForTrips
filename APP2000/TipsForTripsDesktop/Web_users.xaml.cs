@@ -53,12 +53,12 @@ namespace TipsForTripsDesktop
             for (int i = 0; i < DatabaseCount("SELECT count(*) FROM user;"); i++)
             {
                 DataRow row = dt.NewRow();
-                row[0] = ConnectToDatabase("SELECT username FROM user LIMIT " + i + ",1;");
-                row[1] = ConnectToDatabase("SELECT password FROM user LIMIT " + i + ",1;");
-                row[2] = ConnectToDatabase("SELECT city FROM user LIMIT " + i + ",1;");
-                row[3] = ConnectToDatabase("SELECT email FROM user LIMIT " + i + ",1;");
-                row[4] = ConnectToDatabase("SELECT full_name FROM user LIMIT " + i + ",1;");
-                row[5] = ConnectToDatabase("SELECT phone_NR FROM user LIMIT " + i + ",1;");
+                row[0] = ConnectToDatabase("SELECT username FROM user ORDER BY username LIMIT " + i + ",1;");
+                row[1] = ConnectToDatabase("SELECT password FROM user ORDER BY username LIMIT " + i + ",1;");
+                row[2] = ConnectToDatabase("SELECT city FROM user ORDER BY username LIMIT " + i + ",1;");
+                row[3] = ConnectToDatabase("SELECT email FROM user ORDER BY username LIMIT " + i + ",1;");
+                row[4] = ConnectToDatabase("SELECT full_name FROM user ORDER BY username LIMIT " + i + ",1;");
+                row[5] = ConnectToDatabase("SELECT phone_NR FROM user ORDER BY username LIMIT " + i + ",1;");
                 dt.Rows.Add(row);
                 Table.ItemsSource = dt.DefaultView;
             }
@@ -130,12 +130,12 @@ namespace TipsForTripsDesktop
                 for (int i = 0; i < DatabaseCount("SELECT count(*) FROM user WHERE username LIKE '%" + Search_Bar.Text + "%';"); i++)
                 {
                     DataRow row = dt.NewRow();
-                    row[0] = ConnectToDatabase("SELECT username FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[1] = ConnectToDatabase("SELECT password FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[2] = ConnectToDatabase("SELECT city FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[3] = ConnectToDatabase("SELECT email FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[4] = ConnectToDatabase("SELECT full_name FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[5] = ConnectToDatabase("SELECT phone_NR FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
+                    row[0] = ConnectToDatabase("SELECT username FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[1] = ConnectToDatabase("SELECT password FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[2] = ConnectToDatabase("SELECT city FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[3] = ConnectToDatabase("SELECT email FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[4] = ConnectToDatabase("SELECT full_name FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[5] = ConnectToDatabase("SELECT phone_NR FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
                     dt.Rows.Add(row);
                     Table.ItemsSource = dt.DefaultView;
                     searchText = Search_Bar.Text;
@@ -143,14 +143,7 @@ namespace TipsForTripsDesktop
             }
             else
             {
-                DataRow row = dt.NewRow();
-                row[0] = "";
-                row[1] = "";
-                row[2] = "";
-                row[3] = "";
-                row[4] = "";
-                row[5] = "";
-                dt.Rows.Add(row);
+                dt.Rows.Clear();
                 Table.ItemsSource = dt.DefaultView;
                 searchText = Search_Bar.Text;
                 MessageBox.Show("No results were found","Oops...");

@@ -39,14 +39,14 @@ namespace TipsForTripsDesktop
         public void TagTable()
         {
             DataTable dt = new DataTable();
-            DataColumn name = new DataColumn("Name", typeof(string));
+            DataColumn name = new DataColumn("Tag", typeof(string));
 
             dt.Columns.Add(name);
 
-            for (int i = 0; i < DatabaseCount("SELECT count(*) FROM stored_tag;"); i++)
+            for (int i = 0; i < DatabaseCount("SELECT count(*) FROM tag;"); i++)
             {
                 DataRow row = dt.NewRow();
-                row[0] = ConnectToDatabase("SELECT name FROM stored_tag LIMIT " + i + ",1;");
+                row[0] = ConnectToDatabase("SELECT tag FROM tag ORDER BY tag LIMIT " + i + ",1;");
                 dt.Rows.Add(row);
                 Table.ItemsSource = dt.DefaultView;
             }
@@ -97,15 +97,15 @@ namespace TipsForTripsDesktop
             try
             {
                 DataTable dt = new DataTable();
-                DataColumn name = new DataColumn("Name", typeof(string));
+                DataColumn name = new DataColumn("Tag", typeof(string));
 
                 dt.Columns.Add(name);
-                if (ConnectToDatabase("SELECT name FROM stored_tag WHERE name LIKE '%" + Search_Bar.Text + "%';") != "")
+                if (ConnectToDatabase("SELECT tag FROM tag WHERE tag LIKE '%" + Search_Bar.Text + "%';") != "")
                 {
-                    for (int i = 0; i < DatabaseCount("SELECT count(*) FROM stored_tag WHERE name LIKE '%" + Search_Bar.Text + "%';"); i++)
+                    for (int i = 0; i < DatabaseCount("SELECT count(*) FROM tag WHERE tag LIKE '%" + Search_Bar.Text + "%' ORDER BY tag;"); i++)
                     {
                         DataRow row = dt.NewRow();
-                        row[0] = ConnectToDatabase("SELECT name FROM stored_tag WHERE name LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
+                        row[0] = ConnectToDatabase("SELECT tag FROM tag WHERE tag LIKE '%" + Search_Bar.Text + "%' ORDER BY tag LIMIT " + i + ",1;");
                         dt.Rows.Add(row);
                         Table.ItemsSource = dt.DefaultView;
                         searchText = Search_Bar.Text;
@@ -113,9 +113,7 @@ namespace TipsForTripsDesktop
                 }
                 else
                 {
-                    DataRow row = dt.NewRow();
-                    row[0] = "";
-                    dt.Rows.Add(row);
+                    dt.Rows.Clear();
                     Table.ItemsSource = dt.DefaultView;
                     searchText = Search_Bar.Text;
                     MessageBox.Show("No results were found", "Oops...");
@@ -138,7 +136,7 @@ namespace TipsForTripsDesktop
                     try
                     {
                         MessageBox.Show(name + " was deleted.", "Delete tag");
-                        ConnectToDatabase("DELETE FROM stored_tag WHERE name = '" + name + "';");
+                        ConnectToDatabase("DELETE FROM tag WHERE tag = '" + name + "';");
                         TagTable();
                     }
                     catch (Exception ex)

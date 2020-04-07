@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,13 +49,35 @@ namespace TipsForTripsDesktop
             Name = ConnectToDatabase(query);
             Email.Text = Name;
 
-            query = "SELECT city FROM admin WHERE username = '" + username + "';";
-            Name = ConnectToDatabase(query);
-            City.Text = Name;
+            show_cities();
 
             query = "SELECT phone_NR FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Phone_Number.Text = Name;
+        }
+
+        private void show_cities()
+        {
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3308;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            try
+            {
+                Con.Open();
+                string query = "SELECT * FROM location;";
+                MySqlCommand cmd = new MySqlCommand(query, Con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                while(dr.Read())
+                {
+                    string city = dr.GetString(0);
+                    City.Items.Add(city);
+                }
+
+                Con.Close(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         // Enter animation

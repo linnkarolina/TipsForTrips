@@ -29,6 +29,7 @@ namespace TipsForTripsDesktop
         public Inbox()
         {
             InitializeComponent();
+            InboxTable();
             searchText = Search_Bar.Text;
         }
 
@@ -46,9 +47,9 @@ namespace TipsForTripsDesktop
             for (int i = 0; i < DatabaseCount("SELECT count(*) FROM admin_inbox;"); i++)
             {
                 DataRow row = dt.NewRow();
-                row[0] = ConnectToDatabase("SELECT user_username FROM admin_inbox LIMIT " + i + ",1;");
-                row[1] = ConnectToDatabase("SELECT subject FROM admin_inbox LIMIT " + i + ",1;");
-                row[2] = ConnectToDatabase("SELECT time_sent FROM admin_inbox LIMIT " + i + ",1;"); 
+                row[0] = ConnectToDatabase("SELECT user_username FROM admin_inbox ORDER BY time_sent LIMIT " + i + ",1;");
+                row[1] = ConnectToDatabase("SELECT subject FROM admin_inbox ORDER BY time_sent LIMIT " + i + ",1;");
+                row[2] = ConnectToDatabase("SELECT time_sent FROM admin_inbox ORDER BY time_sent LIMIT " + i + ",1;"); 
                 dt.Rows.Add(row);
                 Table.ItemsSource = dt.DefaultView;
             }
@@ -110,9 +111,9 @@ namespace TipsForTripsDesktop
                 for (int i = 0; i < DatabaseCount("SELECT count(*) FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%';"); i++)
                 {
                     DataRow row = dt.NewRow();
-                    row[0] = ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[1] = ConnectToDatabase("SELECT subject FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
-                    row[2] = ConnectToDatabase("SELECT time_sent FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' LIMIT " + i + ",1;");
+                    row[0] = ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' ORDER BY time_sent LIMIT " + i + ",1;");
+                    row[1] = ConnectToDatabase("SELECT subject FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' ORDER BY time_sent LIMIT " + i + ",1;");
+                    row[2] = ConnectToDatabase("SELECT time_sent FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' ORDER BY time_sent LIMIT " + i + ",1;");
                     dt.Rows.Add(row);
                     Table.ItemsSource = dt.DefaultView;
                     searchText = Search_Bar.Text;
@@ -120,11 +121,7 @@ namespace TipsForTripsDesktop
             }
             else
             {
-                DataRow row = dt.NewRow();
-                row[0] = "";
-                row[1] = "";
-                row[2] = "";
-                dt.Rows.Add(row);
+                dt.Rows.Clear();
                 Table.ItemsSource = dt.DefaultView;
                 searchText = Search_Bar.Text;
                 MessageBox.Show("No results were found", "Oops...");

@@ -69,7 +69,7 @@ namespace TipsForTripsDesktop
                 }
                 else
                 {
-                    ConnectToDatabase("INSERT INTO stored_tag VALUES('" + Tag_Name.Text + "');");
+                    ConnectToDatabase("INSERT INTO tag VALUES('" + Tag_Name.Text + "');");
                     tag.TagTable();
                     this.Close();
                 }
