@@ -72,6 +72,9 @@
     <Compile Include="Basic_info.xaml.cs">
       <DependentUpon>Basic_info.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Edit_Admin_User.xaml.cs">
+      <DependentUpon>Edit_Admin_User.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Edit_Web_User.xaml.cs">
       <DependentUpon>Edit_Web_User.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,12 @@
     </Compile>
     <Compile Include="Login_Window.xaml.cs">
       <DependentUpon>Login_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="New_Admin_User.xaml.cs">
+      <DependentUpon>New_Admin_User.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="New_Tag.xaml.cs">
+      <DependentUpon>New_Tag.xaml</DependentUpon>
     </Compile>
     <Compile Include="New_Web_User.xaml.cs">
       <DependentUpon>New_Web_User.xaml</DependentUpon>
@@ -102,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Edit_Admin_User.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,6 +146,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Map.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New_Admin_User.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New_Tag.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

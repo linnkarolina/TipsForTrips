@@ -23,9 +23,14 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class Web_users : Page
     {
+
+        private string searchText;
+
         public Web_users()
         {
             InitializeComponent();
+            UserTable();
+            searchText = Search_Bar.Text;
         }
 
         public void UserTable()
@@ -33,14 +38,14 @@ namespace TipsForTripsDesktop
             DataTable dt = new DataTable();
             DataColumn username = new DataColumn("Username", typeof(string));
             DataColumn password = new DataColumn("Password", typeof(string));
-            DataColumn location = new DataColumn("Location", typeof(string));
+            DataColumn city = new DataColumn("City", typeof(string));
             DataColumn email = new DataColumn("E-mail", typeof(string));
             DataColumn full_name = new DataColumn("Full name", typeof(string));
             DataColumn phone_NR = new DataColumn("Phone", typeof(string));
 
             dt.Columns.Add(username);
             dt.Columns.Add(password);
-            dt.Columns.Add(location);
+            dt.Columns.Add(city);
             dt.Columns.Add(email);
             dt.Columns.Add(full_name);
             dt.Columns.Add(phone_NR);
@@ -48,13 +53,18 @@ namespace TipsForTripsDesktop
             for (int i = 0; i < DatabaseCount("SELECT count(*) FROM user;"); i++)
             {
                 DataRow row = dt.NewRow();
-                row[0] = ConnectToDatabase("SELECT username FROM user LIMIT " + i + ",1;");
-                row[1] = ConnectToDatabase("SELECT password FROM user LIMIT " + i + ",1;");
-                row[2] = ConnectToDatabase("SELECT location FROM user LIMIT " + i + ",1;");
-                row[3] = ConnectToDatabase("SELECT email FROM user LIMIT " + i + ",1;");
-                row[4] = ConnectToDatabase("SELECT full_name FROM user LIMIT " + i + ",1;");
-                row[5] = ConnectToDatabase("SELECT phone_NR FROM user LIMIT " + i + ",1;");
+                row[0] = ConnectToDatabase("SELECT username FROM user ORDER BY username LIMIT " + i + ",1;");
+                row[1] = ConnectToDatabase("SELECT password FROM user ORDER BY username LIMIT " + i + ",1;");
+                row[2] = ConnectToDatabase("SELECT city FROM user ORDER BY username LIMIT " + i + ",1;");
+                row[3] = ConnectToDatabase("SELECT email FROM user ORDER BY username LIMIT " + i + ",1;");
+                row[4] = ConnectToDatabase("SELECT full_name FROM user ORDER BY username LIMIT " + i + ",1;");
+                row[5] = ConnectToDatabase("SELECT phone_NR FROM user ORDER BY username LIMIT " + i + ",1;");
                 dt.Rows.Add(row);
+                Table.ItemsSource = dt.DefaultView;
+            }
+            if (DatabaseCount("SELECT count(*) FROM user;") == 0)
+            {
+                dt.Rows.Clear();
                 Table.ItemsSource = dt.DefaultView;
             }
         }
@@ -89,7 +99,7 @@ namespace TipsForTripsDesktop
 
         public void New_User_Click(object sender, RoutedEventArgs e)
         {
-            New_Web_User nwe = new New_Web_User();
+            New_Web_User nwe = new New_Web_User(this);
             nwe.Show();
             nwe.Topmost = true;
         }
@@ -99,6 +109,47 @@ namespace TipsForTripsDesktop
             UserTable();
         }
 
+        public void Search_Click(object sender, RoutedEventArgs e)
+        {
+            DataTable dt = new DataTable();
+            DataColumn username = new DataColumn("Username", typeof(string));
+            DataColumn password = new DataColumn("Password", typeof(string));
+            DataColumn city = new DataColumn("City", typeof(string));
+            DataColumn email = new DataColumn("E-mail", typeof(string));
+            DataColumn full_name = new DataColumn("Full name", typeof(string));
+            DataColumn phone_NR = new DataColumn("Phone", typeof(string));
+
+            dt.Columns.Add(username);
+            dt.Columns.Add(password);
+            dt.Columns.Add(city);
+            dt.Columns.Add(email);
+            dt.Columns.Add(full_name);
+            dt.Columns.Add(phone_NR);
+            if (ConnectToDatabase("SELECT username FROM user WHERE username LIKE '%" + Search_Bar.Text + "%';") != "")
+            {
+                for (int i = 0; i < DatabaseCount("SELECT count(*) FROM user WHERE username LIKE '%" + Search_Bar.Text + "%';"); i++)
+                {
+                    DataRow row = dt.NewRow();
+                    row[0] = ConnectToDatabase("SELECT username FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[1] = ConnectToDatabase("SELECT password FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[2] = ConnectToDatabase("SELECT city FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[3] = ConnectToDatabase("SELECT email FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[4] = ConnectToDatabase("SELECT full_name FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    row[5] = ConnectToDatabase("SELECT phone_NR FROM user WHERE username LIKE '%" + Search_Bar.Text + "%' ORDER BY username LIMIT " + i + ",1;");
+                    dt.Rows.Add(row);
+                    Table.ItemsSource = dt.DefaultView;
+                    searchText = Search_Bar.Text;
+                }
+            }
+            else
+            {
+                dt.Rows.Clear();
+                Table.ItemsSource = dt.DefaultView;
+                searchText = Search_Bar.Text;
+                MessageBox.Show("No results were found","Oops...");
+            }
+        }
+
         public void Edit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -106,11 +157,11 @@ namespace TipsForTripsDesktop
                 DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
                 String username = drv[0].ToString();
                 String password = drv[1].ToString();
-                String location = drv[2].ToString();
+                String city = drv[2].ToString();
                 String email = drv[3].ToString();
                 String full_name = drv[4].ToString();
                 String phone_NR = drv[5].ToString();
-                Edit_Web_User ewu = new Edit_Web_User(username);
+                Edit_Web_User ewu = new Edit_Web_User(username, this);
                 ewu.Show();
                 ewu.Topmost = true;
             }
@@ -130,17 +181,26 @@ namespace TipsForTripsDesktop
                 case MessageBoxResult.Yes:
                     try
                     {
+                        MessageBox.Show(username + " was deleted.", "Delete user");
                         ConnectToDatabase("DELETE FROM user WHERE username = '" + username + "';");
+                        UserTable();
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message.ToString());
                     }
-                    MessageBox.Show(username + " was deleted.", "Delete user");
                     break;
                 case MessageBoxResult.No:
-                    MessageBox.Show("Phew, " + username + " will see the light another day!", "Delete user");
+                    MessageBox.Show("Phew, " + username + " will live to see the light another day!", "Delete user");
                     break;
+            }
+        }
+
+        private void Search_MouseUp(object sender, RoutedEventArgs e)
+        {
+            if(Search_Bar.Text.Equals(searchText))
+            {
+                Search_Bar.Text = "";
             }
         }
 
@@ -203,14 +263,14 @@ namespace TipsForTripsDesktop
             return total;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            UserTable();
-        }
-
         private void Table_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
         {
 
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            UserTable();
         }
     }
 }

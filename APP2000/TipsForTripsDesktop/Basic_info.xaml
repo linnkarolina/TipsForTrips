@@ -203,11 +203,11 @@
                             Email
                         </TextBlock>
                         <TextBox x:Name="Email" Text="{Binding Name, Mode=OneWay}" Grid.Row="5" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
-                        <!-- Location -->
+                        <!-- City -->
                         <TextBlock Grid.Row="6" VerticalAlignment="Bottom" FontSize="15">
-                            Location
+                            City
                         </TextBlock>
-                        <TextBox x:Name="Location" Text="{Binding Name, Mode=OneWay}" Grid.Row="7" Foreground="Gray" BorderThickness="3" VerticalAlignment="Center" FontSize="13" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
+                        <ComboBox x:Name="City" Grid.Row ="7" />
                         <!-- Phone number -->
                         <TextBlock Grid.Row="8" VerticalAlignment="Bottom" FontSize="15">
                             Phone number
@@ -221,7 +221,7 @@
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="3*" />
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Background="#4296d6" Foreground="White" MouseEnter="Button_Enter" MouseLeave="Button_Leave" VerticalAlignment="Stretch" FontSize="13" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
+                            <Button Grid.Column="0" Background="#4296d6" Foreground="White" Click="Save_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" VerticalAlignment="Stretch" FontSize="13" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
                                 Save
                             </Button>
                             <Button Grid.Column="2" Background="#4296d6" Foreground="White" Click="Delete_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" VerticalAlignment="Stretch" FontSize="13" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">

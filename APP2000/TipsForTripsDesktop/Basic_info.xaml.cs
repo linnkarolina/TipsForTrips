@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,21 +41,43 @@ namespace TipsForTripsDesktop
             string Name = ConnectToDatabase(query);
             Username.Text = Name;
 
-            query = "SELECT full_name FROM user WHERE username = 'raneik';";
+            query = "SELECT full_name FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Full_Name.Text = Name;
 
-            query = "SELECT email FROM user WHERE username = 'raneik';";
+            query = "SELECT email FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Email.Text = Name;
 
-            query = "SELECT location FROM user WHERE username = 'raneik';";
-            Name = ConnectToDatabase(query);
-            Location.Text = Name;
+            show_cities();
 
-            query = "SELECT phone_NR FROM user WHERE username = 'raneik';";
+            query = "SELECT phone_NR FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Phone_Number.Text = Name;
+        }
+
+        private void show_cities()
+        {
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3308;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            try
+            {
+                Con.Open();
+                string query = "SELECT * FROM location;";
+                MySqlCommand cmd = new MySqlCommand(query, Con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                while(dr.Read())
+                {
+                    string city = dr.GetString(0);
+                    City.Items.Add(city);
+                }
+
+                Con.Close(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         // Enter animation
@@ -84,6 +108,35 @@ namespace TipsForTripsDesktop
             b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
         }
 
+        // Save click
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int i = 0;
+                string s = Phone_Number.Text;
+                bool result = int.TryParse(s, out i);
+
+                if (Username.Text == "" || City.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
+                {
+                    MessageBox.Show("All fields must be filled.", "Oops...");
+                }
+                else if (i == 0)
+                {
+                    MessageBox.Show("Phone number must be a numeric value.", "Oops...");
+                }
+                else
+                {
+                    ConnectToDatabase("UPDATE admin SET username = '" + Username.Text + "',full_name = '" + Full_Name.Text + "', email = '" + Email.Text + "',city = '" + City.Text + "',phone_NR = '" + Phone_Number.Text + "';");
+                    MessageBox.Show("Your info has been changed.");
+                }
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
         // Delete click
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
@@ -93,7 +146,7 @@ namespace TipsForTripsDesktop
                 case MessageBoxResult.Yes:
                     string query = "DELETE FROM admin WHERE username = '" + username + "';";
                     ConnectToDatabase(query);
-                    MessageBox.Show("Your account was deleted.", "Delete profile");
+                    MessageBox.Show("Your account was deleted, you will be signed out.", "Delete profile");
                     Login_Window liw = new Login_Window();
                     liw.Show();
                     mainWindow.Close();

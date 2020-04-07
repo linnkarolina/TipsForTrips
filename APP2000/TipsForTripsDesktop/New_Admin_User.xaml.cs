@@ -17,15 +17,16 @@ using System.Windows.Shapes;
 namespace TipsForTripsDesktop
 {
     /// <summary>
-    /// Interaction logic for New_Web_User.xaml
+    /// Interaction logic for New_Admin_User.xaml
     /// </summary>
-    public partial class New_Web_User : Window
+    public partial class New_Admin_User : Window
     {
 
-        private Web_users Web_users;
-        public New_Web_User(Web_users wu)
+        private Admin admin_users;
+
+        public New_Admin_User(Admin au)
         {
-            Web_users = wu;
+            admin_users = au;
             InitializeComponent();
         }
 
@@ -75,9 +76,9 @@ namespace TipsForTripsDesktop
                 }
                 else
                 {
-                    ConnectToDatabase("INSERT INTO user VALUES('" + Username.Text + "','" + Password.Text + "','" + City.Text + "'," +
+                    ConnectToDatabase("INSERT INTO admin VALUES('" + Username.Text + "','" + Password.Text + "','" + City.Text + "'," +
                     "'" + Email.Text + "','" + Full_Name.Text + "','" + Phone_Number.Text + "');");
-                    Web_users.UserTable();
+                    admin_users.UserTable();
                     this.Close();
                 }
             }

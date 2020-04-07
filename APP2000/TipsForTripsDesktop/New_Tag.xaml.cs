@@ -17,15 +17,15 @@ using System.Windows.Shapes;
 namespace TipsForTripsDesktop
 {
     /// <summary>
-    /// Interaction logic for New_Web_User.xaml
+    /// Interaction logic for New_Tag.xaml
     /// </summary>
-    public partial class New_Web_User : Window
+    public partial class New_Tag : Window
     {
+        Tags tag;
 
-        private Web_users Web_users;
-        public New_Web_User(Web_users wu)
+        public New_Tag(Tags tags)
         {
-            Web_users = wu;
+            tag = tags;
             InitializeComponent();
         }
 
@@ -61,23 +61,16 @@ namespace TipsForTripsDesktop
         {
             try
             {
-                int i = 0;
-                string s = Phone_Number.Text;
-                bool result = int.TryParse(s, out i);
+                string s = Tag_Name.Text;
 
-                if (Username.Text == "" || Password.Text == "" || City.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
+                if (Tag_Name.Text == "")
                 {
-                    MessageBox.Show("All fields must be filled.", "Oops...");
-                }
-                else if (i == 0)
-                {
-                    MessageBox.Show("Phone number must be a numeric value.", "Oops...");
+                    MessageBox.Show("The field must be filled.", "Oops...");
                 }
                 else
                 {
-                    ConnectToDatabase("INSERT INTO user VALUES('" + Username.Text + "','" + Password.Text + "','" + City.Text + "'," +
-                    "'" + Email.Text + "','" + Full_Name.Text + "','" + Phone_Number.Text + "');");
-                    Web_users.UserTable();
+                    ConnectToDatabase("INSERT INTO tag VALUES('" + Tag_Name.Text + "');");
+                    tag.TagTable();
                     this.Close();
                 }
             }

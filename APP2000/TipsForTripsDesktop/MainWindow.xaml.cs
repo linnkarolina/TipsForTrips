@@ -379,7 +379,7 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Tags_Button))
             {
-                Content_Frame.Content = new Tags();
+                Content_Frame.Content = new Tags(this);
             }
             else if (b.Equals(Web_Button))
             {
@@ -387,7 +387,7 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Admin_Button))
             {
-                Content_Frame.Content = new Admin();
+                Content_Frame.Content = new Admin(user, this);
             }
             else if (b.Equals(Inbox_Button))
             {

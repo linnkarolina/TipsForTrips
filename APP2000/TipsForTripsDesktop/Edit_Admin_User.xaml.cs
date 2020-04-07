@@ -17,45 +17,45 @@ using System.Windows.Shapes;
 namespace TipsForTripsDesktop
 {
     /// <summary>
-    /// Interaction logic for Edit_Web_User.xaml
+    /// Interaction logic for Edit_Admin_User.xaml
     /// </summary>
-    public partial class Edit_Web_User : Window
+    public partial class Edit_Admin_User : Window
     {
 
         private string username;
-        private Web_users Web_users;
+        private Admin Admin_users;
 
-        public Edit_Web_User(string user, Web_users wu)
+        public Edit_Admin_User(string user, Admin wu)
         {
             username = user;
-            Web_users = wu;
+            Admin_users = wu;
             InitializeComponent();
             setTextBoxContent();
         }
 
         private void setTextBoxContent()
         {
-            string query = "SELECT username FROM user WHERE username = '" + username + "';";
+            string query = "SELECT username FROM admin WHERE username = '" + username + "';";
             string Name = ConnectToDatabase(query);
             Username.Text = Name;
 
-            query = "SELECT password FROM user WHERE username = '" + username + "';";
+            query = "SELECT password FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Password.Text = Name;
 
-            query = "SELECT full_name FROM user WHERE username = '" + username + "';";
+            query = "SELECT full_name FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Full_Name.Text = Name;
 
-            query = "SELECT email FROM user WHERE username = '" + username + "';";
+            query = "SELECT email FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Email.Text = Name;
 
-            query = "SELECT city FROM user WHERE username = '" + username + "';";
+            query = "SELECT city FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             City.Text = Name;
 
-            query = "SELECT phone_NR FROM user WHERE username = '" + username + "';";
+            query = "SELECT phone_NR FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Phone_Number.Text = Name;
         }
@@ -116,15 +116,15 @@ namespace TipsForTripsDesktop
                     string email = Email.Text;
                     string city = City.Text;
                     string phone_NR = Phone_Number.Text;
-                    string query = "UPDATE user SET username = '" + user + "', password = '" + password + "', full_name = '" + full_name + "', email = '" + email + "'," +
+                    string query = "UPDATE admin SET username = '" + user + "', password = '" + password + "', full_name = '" + full_name + "', email = '" + email + "'," +
                         " city = '" + city + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";
                     ConnectToDatabase(query);
-                    Web_users.UserTable();
+                    Admin_users.UserTable();
                     this.Close();
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
