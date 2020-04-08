@@ -101,7 +101,7 @@ namespace TipsForTripsDesktop
 
         public void New_Admin_Click(object sender, RoutedEventArgs e)
         {
-            New_Admin_User nwe = new New_Admin_User(this);
+            New_Admin_User nwe = new New_Admin_User(this, mainWindow);
             nwe.Show();
             nwe.Topmost = true;
         }

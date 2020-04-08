@@ -27,6 +27,31 @@ namespace TipsForTripsDesktop
         {
             Web_users = wu;
             InitializeComponent();
+            Show_Cities();
+        }
+
+        private void Show_Cities()
+        {
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            try
+            {
+                Con.Open();
+                string query = "SELECT * FROM location;";
+                MySqlCommand cmd = new MySqlCommand(query, Con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    string city = dr.GetString(0);
+                    City.Items.Add(city);
+                }
+
+                Con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         // Enter animation
