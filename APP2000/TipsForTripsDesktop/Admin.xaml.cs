@@ -145,17 +145,27 @@ namespace TipsForTripsDesktop
             }
             else
             {
-                DataRow row = dt.NewRow();
-                row[0] = "";
-                row[1] = "";
-                row[2] = "";
-                row[3] = "";
-                row[4] = "";
-                row[5] = "";
-                dt.Rows.Add(row);
+                dt.Rows.Clear();
                 Table.ItemsSource = dt.DefaultView;
                 searchText = Search_Bar.Text;
                 MessageBox.Show("No results were found", "Oops...");
+            }
+        }
+
+        // ===========================================================Tag_Click===========================================================
+        public void Tag_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
+                String username = drv[0].ToString();
+                Admin_Tag at = new Admin_Tag(username/*, this, mainWindow*/);
+                at.Show();
+                at.Topmost = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
             }
         }
 
@@ -170,9 +180,9 @@ namespace TipsForTripsDesktop
                 String email = drv[3].ToString();
                 String full_name = drv[4].ToString();
                 String phone_NR = drv[5].ToString();
-                Edit_Admin_User ewu = new Edit_Admin_User(username, this, mainWindow);
-                ewu.Show();
-                ewu.Topmost = true;
+                Edit_Admin_User eau = new Edit_Admin_User(username, this, mainWindow);
+                eau.Show();
+                eau.Topmost = true;
             }
             catch (Exception ex)
             {
