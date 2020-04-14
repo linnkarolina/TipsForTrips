@@ -50,6 +50,11 @@ namespace TipsForTripsDesktop
                 dt.Rows.Add(row);
                 Table.ItemsSource = dt.DefaultView;
             }
+            if (DatabaseCount("SELECT count(*) FROM tag;") == 0)
+            {
+                dt.Rows.Clear();
+                Table.ItemsSource = dt.DefaultView;
+            }
         }
 
         // Enter animation
@@ -136,6 +141,9 @@ namespace TipsForTripsDesktop
                     try
                     {
                         MessageBox.Show(name + " was deleted.", "Delete tag");
+                        ConnectToDatabase("DELETE FROM user_tag WHERE tag = '" + name + "';");
+                        ConnectToDatabase("DELETE FROM admin_tag WHERE tag = '" + name + "';");
+                        ConnectToDatabase("DELETE FROM trip_tag WHERE tag = '" + name + "';");
                         ConnectToDatabase("DELETE FROM tag WHERE tag = '" + name + "';");
                         TagTable();
                     }
