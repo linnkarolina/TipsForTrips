@@ -98,7 +98,7 @@
                         AREA
                     </TextBlock>
                 </Grid>
-                <!-- Places -->
+                <!-- Trips -->
                 <Button x:Name="Places_Button" Grid.Row="1" HorizontalContentAlignment="Stretch" Background="Transparent" Foreground="#205072" BorderThickness="0" Click="Button_Page_Click" MouseEnter="Submenu_Enter" MouseLeave="Submenu_Leave" Style="{DynamicResource ButtonStyle1}">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -106,7 +106,7 @@
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="1">
-                            Places
+                            Trips
                         </TextBlock>
                     </Grid>
                 </Button>
