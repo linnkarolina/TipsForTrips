@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,6 +57,30 @@ namespace TipsForTripsDesktop
         private void Button_Click(object sender, System.EventArgs e)
         {
             MessageBox.Show("RANDI ER BEST!");
+        }
+
+        // private int counter = 0;
+
+        private void Map_Mouse_Click(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+
+            Point mousePosition = e.GetPosition(TheMap);
+            Location pinLocation = TheMap.ViewportPointToLocation(mousePosition);
+            var latitude = pinLocation.Latitude;
+            var longitude = pinLocation.Longitude;
+
+            Pushpin pin = new Pushpin();
+            // pin.Content = counter += 10;
+            pin.Location = pinLocation;
+            pin.MouseDown += new MouseButtonEventHandler(pin_MouseDown);
+            pin.ToolTip = latitude + ", " + longitude;
+            TheMap.Children.Add(pin);
+        }
+
+        private void pin_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Oisann!");
         }
     }
 }

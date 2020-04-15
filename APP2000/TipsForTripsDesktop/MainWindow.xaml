@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TipsForTripsDesktop"
-        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
         Icon="tree.ico"
         Title="Tips For Trips" Height="450" Width="800"
@@ -106,7 +105,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1" FontSize="12">
                             Trips
                         </TextBlock>
                     </Grid>
@@ -118,7 +117,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1" FontSize="12">
                             Map
                         </TextBlock>
                     </Grid>
@@ -130,7 +129,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1" FontSize="12">
                             Tags
                         </TextBlock>
                     </Grid>
@@ -171,7 +170,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1" FontSize="12">
                             Web users
                         </TextBlock>
                     </Grid>
@@ -183,7 +182,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1" FontSize="12">
                             Administrators
                         </TextBlock>
                     </Grid>
@@ -224,7 +223,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1" FontSize="12">
                             Basic info
                         </TextBlock>
                     </Grid>
@@ -236,7 +235,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1" FontSize="12">
                             Password
                         </TextBlock>
                     </Grid>
