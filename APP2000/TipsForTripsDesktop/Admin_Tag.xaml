@@ -232,8 +232,8 @@
                         </Grid>
                     </Grid>
                     <!-- Table -->
-                    <DataGrid x:Name="Table" Grid.Row="3" IsReadOnly="True" Background="White">
-                        <DataGrid.Columns>
+                    <DataGrid x:Name="Table" Grid.Row="3" IsReadOnly="True" Background="White" MouseUp="CheckedChanged">
+                        <!--<DataGrid.Columns>
                             <DataGridTemplateColumn Header="Checked" Visibility="Visible">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -243,7 +243,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                        </DataGrid.Columns>
+                        </DataGrid.Columns>-->
                     </DataGrid>
                     <Grid Grid.Row="5">
                         <Grid.ColumnDefinitions>

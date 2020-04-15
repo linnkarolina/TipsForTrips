@@ -4,12 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -45,51 +40,79 @@ namespace TipsForTripsDesktop
         public void TagTable()
         {
             DataTable dt = new DataTable();
+            DataColumn check = new DataColumn("Checked", typeof(bool));
             DataColumn tag = new DataColumn("Tag", typeof(string));
 
+            check.DefaultValue = false;
+
+            dt.Columns.Add(check);
             dt.Columns.Add(tag);
+
+            bool[] test = new bool[DatabaseCount("SELECT count(*) FROM admin_tag where username = '" + user + "';")];
 
             for (int i = 0; i < DatabaseCount("SELECT count(*) FROM tag;"); i++)
             {
                 DataRow row = dt.NewRow();
-                row[0] = ConnectToDatabase("SELECT tag FROM tag ORDER BY tag LIMIT " + i + ",1;");
-                dt.Rows.Add(row);
-                Table.ItemsSource = dt.DefaultView;
+                string checkCheck = ConnectToDatabase("SELECT tag FROM tag ORDER BY tag LIMIT " + i + ",1;");
+                row[1] = ConnectToDatabase("SELECT tag FROM tag ORDER BY tag LIMIT " + i + ",1;");
 
-                DataGridRow rowData = Table.ItemContainerGenerator.ContainerFromIndex(i) as DataGridRow;
-                MessageBox.Show(rowData.DataContext.ToString());
-                if (rowData != null)
+                //string checkCheck = ConnectToDatabase("SELECT tag FROM admin_tag WHERE tag IN (SELECT tag FROM tag);");
+                for (int o = 0; o < DatabaseCount("SELECT count(*) FROM admin_tag where username = '" + user + "';"); o++)
                 {
-                    DataGridCellsPresenter cellPresenter = GetVisualChild<DataGridCellsPresenter>(rowData);
-                    DataGridCell cell = (DataGridCell)cellPresenter.ItemContainerGenerator.ContainerFromIndex(0);
-                    if (cell == null)
+                    if (checkCheck == ConnectToDatabase("SELECT tag FROM admin_tag WHERE username = '" + user + "' LIMIT " + o + ",1;"))
                     {
-                        Table.ScrollIntoView(rowData, Table.Columns[0]);
-                        cell = (DataGridCell)cellPresenter.ItemContainerGenerator.ContainerFromIndex(0);
+                        row[0] = true;
+                        test[o] = (bool)row[0];
+                        //row[0] = (Brush)borderBrushConverter.ConvertFrom("#56c596");
                     }
-                    Button test = (Button) cell.Content;
-                    MessageBox.Show(test.Content.ToString());
+                    else
+                    {
+                        row[0] = false;
+                        test[o] = (bool)row[0];
+                        //row[0] = (Brush)borderBrushConverter.ConvertFrom("#FF0000");
+                    }
                 }
 
-                /*Table.ItemsSource = new List<int> { i };
-
-                if ((string)row[0] == ConnectToDatabase("SELECT tag FROM admin_tag WHERE username = '" + user + "';"))
+                /*if (checkCheck == ConnectToDatabase("SELECT tag FROM admin_tag WHERE username = '" + user + "';"))
                 {
-                    MessageBox.Show("Fant noe");
-                    test.Content = "✓";
-                    test.Foreground = (Brush)borderBrushConverter.ConvertFrom("#56c596");
+                    row[0] = true;
+                    //row[0] = (Brush)borderBrushConverter.ConvertFrom("#56c596");
                 }
                 else
                 {
-                    MessageBox.Show("Fant ikkenoe");
-                    test.Content = "✕";
-                    test.Foreground = (Brush)borderBrushConverter.ConvertFrom("#FF0000");
+                    row[0] = false;
+                    //row[0] = (Brush)borderBrushConverter.ConvertFrom("#FF0000");
                 }*/
+                dt.Rows.Add(row);
+                Table.ItemsSource = dt.DefaultView;
             }
             if (DatabaseCount("SELECT count(*) FROM tag;") == 0)
             {
                 dt.Rows.Clear();
                 Table.ItemsSource = dt.DefaultView;
+            }
+        }
+
+        private void CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView drv = Table.SelectedItem as DataRowView;
+                string tag = drv.Row.ItemArray[1].ToString();
+                if (drv.Row.ItemArray[0].ToString() == "True")
+                {
+                    ConnectToDatabase("DELETE FROM admin_tag WHERE username = '" + user + "' AND tag = '" + tag + "';");
+                    TagTable();
+                }
+                else if (drv.Row.ItemArray[0].ToString() == "False")
+                {
+                    ConnectToDatabase("INSERT INTO admin_tag VALUES ('" + tag + "','" + user + "');");
+                    TagTable();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Noe gikk galt");
             }
         }
 
@@ -273,32 +296,8 @@ namespace TipsForTripsDesktop
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            /*Grid grid = sender as Grid;
-            Button Button_Checked = FindVisualChildren<Button>(grid).FirstOrDefault(x => x.Name == "Button_Checked");
-            if (Button_Checked != null)
-            {
-                Button_Checked.Content = "new value...";
-            }*/
+            
         }
 
-        /*private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        yield return (T)child;
-                    }
-
-                    foreach (T childOfChild in FindVisualChildren<T>(child))
-                    {
-                        yield return childOfChild;
-                    }
-                }
-            }
-        }*/
     }
 }
