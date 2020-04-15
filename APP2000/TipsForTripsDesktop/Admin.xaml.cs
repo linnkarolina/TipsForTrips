@@ -193,7 +193,7 @@ namespace TipsForTripsDesktop
         public void Delete_Click(object sender, RoutedEventArgs e)
         {
             DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
-            String username = drv[0].ToString();
+            string username = drv[0].ToString();
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete " + username + "?", "Delete user", MessageBoxButton.YesNo);
             switch (result)
             {

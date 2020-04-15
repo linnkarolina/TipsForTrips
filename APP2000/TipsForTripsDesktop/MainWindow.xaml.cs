@@ -392,7 +392,7 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Inbox_Button))
             {
-                Content_Frame.Content = new Inbox();
+                Content_Frame.Content = new Inbox(this);
             }
             else if (b.Equals(Basic_info_Button))
             {

@@ -25,9 +25,11 @@ namespace TipsForTripsDesktop
     {
 
         private string searchText;
+        private MainWindow mainWindow;
 
-        public Inbox()
+        public Inbox(MainWindow mw)
         {
+            mainWindow = mw;
             InitializeComponent();
             InboxTable();
             searchText = Search_Bar.Text;
@@ -36,10 +38,12 @@ namespace TipsForTripsDesktop
         public void InboxTable()
         {
             DataTable dt = new DataTable();
+            DataColumn ID = new DataColumn("ID", typeof(string));
             DataColumn from = new DataColumn("From", typeof(string));
             DataColumn subject = new DataColumn("Subject", typeof(string));
             DataColumn Received = new DataColumn("Received", typeof(string));
-            
+
+            dt.Columns.Add(ID);
             dt.Columns.Add(from);
             dt.Columns.Add(subject);
             dt.Columns.Add(Received);
@@ -47,9 +51,10 @@ namespace TipsForTripsDesktop
             for (int i = 0; i < DatabaseCount("SELECT count(*) FROM admin_inbox;"); i++)
             {
                 DataRow row = dt.NewRow();
-                row[0] = ConnectToDatabase("SELECT user_username FROM admin_inbox ORDER BY time_sent LIMIT " + i + ",1;");
-                row[1] = ConnectToDatabase("SELECT subject FROM admin_inbox ORDER BY time_sent LIMIT " + i + ",1;");
-                row[2] = ConnectToDatabase("SELECT time_sent FROM admin_inbox ORDER BY time_sent LIMIT " + i + ",1;"); 
+                row[0] = ConnectToDatabase("SELECT message_ID FROM admin_inbox ORDER BY time_sent LIMIT " + i + ",1;");
+                row[1] = ConnectToDatabase("SELECT user_username FROM admin_inbox ORDER BY time_sent LIMIT " + i + ",1;");
+                row[2] = ConnectToDatabase("SELECT subject FROM admin_inbox ORDER BY time_sent LIMIT " + i + ",1;");
+                row[3] = ConnectToDatabase("SELECT time_sent FROM admin_inbox ORDER BY time_sent LIMIT " + i + ",1;"); 
                 dt.Rows.Add(row);
                 Table.ItemsSource = dt.DefaultView;
             }
@@ -85,9 +90,9 @@ namespace TipsForTripsDesktop
 
         public void New_Message_Click(object sender, RoutedEventArgs e)
         {
-            /*New_Web_User nwe = new New_Web_User(this);
-            nwe.Show();
-            nwe.Topmost = true;*/
+            New_Message nm = new New_Message(mainWindow);
+            nm.Show();
+            nm.Topmost = true;
         }
 
         public void Refresh_Click(object sender, RoutedEventArgs e)
@@ -129,24 +134,19 @@ namespace TipsForTripsDesktop
         }
 
         public void Open_Click(object sender, RoutedEventArgs e)
-        {/*
+        {
             try
             {
                 DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
-                String username = drv[0].ToString();
-                String password = drv[1].ToString();
-                String location = drv[2].ToString();
-                String email = drv[3].ToString();
-                String full_name = drv[4].ToString();
-                String phone_NR = drv[5].ToString();
-                Edit_Web_User ewu = new Edit_Web_User(username, this);
-                ewu.Show();
-                ewu.Topmost = true;
+                string message_ID = drv[0].ToString();
+                Open_Message om = new Open_Message(message_ID);
+                om.Show();
+                om.Topmost = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
-            }*/
+            }
         }
 
         public void Delete_Click(object sender, RoutedEventArgs e)

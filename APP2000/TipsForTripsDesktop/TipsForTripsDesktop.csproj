@@ -97,6 +97,12 @@
     <Compile Include="New_Web_User.xaml.cs">
       <DependentUpon>New_Web_User.xaml</DependentUpon>
     </Compile>
+    <Compile Include="New_Message.xaml.cs">
+      <DependentUpon>New_Message.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Open_Message.xaml.cs">
+      <DependentUpon>Open_Message.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Password.xaml.cs">
       <DependentUpon>Password.xaml</DependentUpon>
     </Compile>
@@ -166,6 +172,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="New_Web_User.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New_Message.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Open_Message.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
