@@ -124,6 +124,19 @@ namespace TipsForTripsDesktop
                     searchText = Search_Bar.Text;
                 }
             }
+            else if (ConnectToDatabase("SELECT subject FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%';") != "")
+            {
+                for (int i = 0; i < DatabaseCount("SELECT count(*) FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%';"); i++)
+                {
+                    DataRow row = dt.NewRow();
+                    row[0] = ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%' ORDER BY time_sent LIMIT " + i + ",1;");
+                    row[1] = ConnectToDatabase("SELECT subject FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%' ORDER BY time_sent LIMIT " + i + ",1;");
+                    row[2] = ConnectToDatabase("SELECT time_sent FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%' ORDER BY time_sent LIMIT " + i + ",1;");
+                    dt.Rows.Add(row);
+                    Table.ItemsSource = dt.DefaultView;
+                    searchText = Search_Bar.Text;
+                }
+            }
             else
             {
                 dt.Rows.Clear();
@@ -139,7 +152,7 @@ namespace TipsForTripsDesktop
             {
                 DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
                 string message_ID = drv[0].ToString();
-                Open_Message om = new Open_Message(message_ID);
+                Open_Message om = new Open_Message(message_ID, mainWindow);
                 om.Show();
                 om.Topmost = true;
             }
@@ -150,17 +163,17 @@ namespace TipsForTripsDesktop
         }
 
         public void Delete_Click(object sender, RoutedEventArgs e)
-        {/*
+        {
             DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
-            String username = drv[0].ToString();
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete " + username + "?", "Delete user", MessageBoxButton.YesNo);
+            string message_ID = drv[0].ToString();
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this message?", "Delete message", MessageBoxButton.YesNo);
             switch (result)
             {
                 case MessageBoxResult.Yes:
                     try
                     {
-                        MessageBox.Show(username + " was deleted.", "Delete user");
-                        ConnectToDatabase("DELETE FROM admin_inbox WHERE user_username = '" + username + "';");
+                        MessageBox.Show("Message " + message_ID + " was deleted.", "Delete message");
+                        ConnectToDatabase("DELETE FROM admin_inbox WHERE message_ID = '" + message_ID + "';");
                         InboxTable();
                     }
                     catch (Exception ex)
@@ -169,9 +182,9 @@ namespace TipsForTripsDesktop
                     }
                     break;
                 case MessageBoxResult.No:
-                    MessageBox.Show("Phew, " + username + " will live to see the light another day!", "Delete user");
+                    MessageBox.Show("Okay then.", "Delete message");
                     break;
-            }*/
+            }
         }
 
             private void Search_MouseUp(object sender, RoutedEventArgs e)

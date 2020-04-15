@@ -22,10 +22,11 @@ namespace TipsForTripsDesktop
     public partial class Open_Message : Window
     {
         private string message_ID;
-        public Open_Message(string ID)
+        private MainWindow mainWindow;
+        public Open_Message(string ID, MainWindow mw)
         {
             message_ID = ID;
-            MessageBox.Show(ID);
+            mainWindow = mw;
             InitializeComponent();
             setTextBoxContent();
         }
@@ -42,9 +43,10 @@ namespace TipsForTripsDesktop
 
         public void Answer_Click(object sender, RoutedEventArgs e)
         {
-            Answer_Message am = new Answer_Message();
+            Answer_Message am = new Answer_Message(message_ID, mainWindow);
             am.Show();
             am.Topmost = true;
+            this.Close();
         }
 
         public void Close_Click(object sender, RoutedEventArgs e)
@@ -52,6 +54,7 @@ namespace TipsForTripsDesktop
             this.Close();
         }
 
+        // Enteer animation
         private void Button_Enter(object sender, System.EventArgs e)
         {
             Button b = (Button)sender;
