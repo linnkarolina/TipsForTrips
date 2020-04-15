@@ -17,47 +17,62 @@ using System.Windows.Shapes;
 namespace TipsForTripsDesktop
 {
     /// <summary>
-    /// Interaction logic for New_Admin_User.xaml
+    /// Interaction logic for Answer_Message.xaml
     /// </summary>
-    public partial class New_Admin_User : Window
+    public partial class Answer_Message : Window
     {
-
-        private Admin admin_users;
+        private string message_ID;
         private MainWindow mainWindow;
-
-        public New_Admin_User(Admin au, MainWindow mw)
+        public Answer_Message(string ID, MainWindow mw)
         {
-            admin_users = au;
+            message_ID = ID;
             mainWindow = mw;
             InitializeComponent();
-            Show_Cities();
+            SetTextBoxContent();
         }
 
-        private void Show_Cities()
+        private void SetTextBoxContent()
         {
-            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            string to = ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE message_ID ='" + message_ID + "';");
+            string subject = "Re: " + ConnectToDatabase("SELECT subject FROM admin_inbox WHERE message_ID ='" + message_ID + "';");
+            string message = "\n__________________________________________\nFrom: " + ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE message_ID ='" + message_ID + "';") + "\n\n" + ConnectToDatabase("SELECT message FROM admin_inbox WHERE message_ID ='" + message_ID + "';");
+            To.Text = to;
+            Subject.Text = subject;
+            Message.Text = message;
+        }
+
+        public void Send_Click(object sender, RoutedEventArgs e)
+        {
             try
             {
-                Con.Open();
-                string query = "SELECT * FROM location;";
-                MySqlCommand cmd = new MySqlCommand(query, Con);
-                MySqlDataReader dr = cmd.ExecuteReader();
-
-                while (dr.Read())
+                if (To.Text == "" || Subject.Text == "" || Message.Text == "")
                 {
-                    string city = dr.GetString(0);
-                    City.Items.Add(city);
+                    MessageBox.Show("All fields must be filled.", "Oops...");
                 }
-
-                Con.Close();
+                else if (ConnectToDatabase("SELECT username FROM user WHERE username = '" + To.Text + "';") == "")
+                {
+                    MessageBox.Show("The user " + To.Text + " does not exist.", "Oops...");
+                }
+                else
+                {
+                    ConnectToDatabase("INSERT INTO user_inbox VALUES('NULL','" + mainWindow.adminName.DataContext + "','" + To.Text + "','" + Subject.Text + "'," +
+                    "'" + Message.Text + "',CURRENT_TIMESTAMP());");
+                    this.Close();
+                    MessageBox.Show("Your message was sent.","Successful");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message.ToString());
             }
         }
 
-        // Enter animation
+        public void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        // Enteer animation
         private void Button_Enter(object sender, System.EventArgs e)
         {
             Button b = (Button)sender;
@@ -83,45 +98,6 @@ namespace TipsForTripsDesktop
             buttonAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.25));
             b.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4296d6"));
             b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
-        }
-
-        public void Save_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                int i = 0;
-                string s = Phone_Number.Text;
-                bool result = int.TryParse(s, out i);
-
-                if (Username.Text == "" || Password.Text == "" || City.Text == "" || Email.Text == "" || Full_Name.Text == "" || Phone_Number.Text == "")
-                {
-                    MessageBox.Show("All fields must be filled.", "Oops...");
-                }
-                else if (i == 0)
-                {
-                    MessageBox.Show("Phone number must be a numeric value.", "Oops...");
-                }
-                else if (ConnectToDatabase("SELECT username FROM user WHERE username = '" + Username.Text + "';") != "")
-                {
-                    MessageBox.Show("This username is already taken by a regular user.", "Oops...");
-                }
-                else
-                {
-                    ConnectToDatabase("INSERT INTO admin VALUES('" + Username.Text + "','" + Password.Text + "','" + City.Text + "'," +
-                    "'" + Email.Text + "','" + Full_Name.Text + "','" + Phone_Number.Text + "');");
-                    admin_users.UserTable();
-                    this.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
-        }
-
-        public void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
 
         public string ConnectToDatabase(string query)

@@ -47,14 +47,14 @@ namespace TipsForTripsDesktop
             Name = ConnectToDatabase(query);
             Email.Text = Name;
 
-            show_cities();
+            Show_Cities();
 
             query = "SELECT phone_NR FROM admin WHERE username = '" + mainWindow.adminName.Text + "';";
             Name = ConnectToDatabase(query);
             Phone_Number.Text = Name;
         }
 
-        private void show_cities()
+        private void Show_Cities()
         {
             MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
             try

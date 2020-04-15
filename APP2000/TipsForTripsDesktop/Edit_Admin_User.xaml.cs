@@ -53,13 +53,45 @@ namespace TipsForTripsDesktop
             Name = ConnectToDatabase(query);
             Email.Text = Name;
 
-            query = "SELECT city FROM admin WHERE username = '" + username + "';";
-            Name = ConnectToDatabase(query);
-            City.Text = Name;
+            Show_Cities();
 
             query = "SELECT phone_NR FROM admin WHERE username = '" + username + "';";
             Name = ConnectToDatabase(query);
             Phone_Number.Text = Name;
+        }
+
+        private void Show_Cities()
+        {
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            try
+            {
+                Con.Open();
+                string query = "SELECT * FROM location;";
+                MySqlCommand cmd = new MySqlCommand(query, Con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                int i = 0;
+
+                while (dr.Read())
+                {
+                    string city = dr.GetString(0);
+                    City.Items.Add(city);
+
+                    query = "SELECT city FROM admin WHERE username = '" + username + "';";
+                    string Name = ConnectToDatabase(query);
+
+                    if (city.Equals(Name))
+                    {
+                        City.SelectedIndex = i;
+                    }
+                    i++;
+                }
+
+                Con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         /// <summary>
