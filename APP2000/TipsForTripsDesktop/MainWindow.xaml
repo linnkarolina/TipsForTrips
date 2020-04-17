@@ -106,7 +106,7 @@
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="1" FontSize="15">
-                            Trips
+                            Attractions
                         </TextBlock>
                     </Grid>
                 </Button>

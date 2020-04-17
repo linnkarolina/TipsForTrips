@@ -17,7 +17,7 @@
                 </Grid.RowDefinitions>
                 <!-- Title -->
                 <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center">
-                            Places
+                            Attractions
                 </TextBlock>
             </Grid>
         </Border>
