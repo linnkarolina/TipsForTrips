@@ -105,7 +105,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="12">
+                        <TextBlock Grid.Column="1" FontSize="15">
                             Trips
                         </TextBlock>
                     </Grid>
@@ -117,7 +117,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="12">
+                        <TextBlock Grid.Column="1">
                             Map
                         </TextBlock>
                     </Grid>
@@ -129,7 +129,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="12">
+                        <TextBlock Grid.Column="1">
                             Tags
                         </TextBlock>
                     </Grid>
@@ -170,7 +170,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="12">
+                        <TextBlock Grid.Column="1">
                             Web users
                         </TextBlock>
                     </Grid>
@@ -182,7 +182,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="12">
+                        <TextBlock Grid.Column="1">
                             Administrators
                         </TextBlock>
                     </Grid>
@@ -223,7 +223,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="12">
+                        <TextBlock Grid.Column="1">
                             Basic info
                         </TextBlock>
                     </Grid>
@@ -235,7 +235,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="12">
+                        <TextBlock Grid.Column="1">
                             Password
                         </TextBlock>
                     </Grid>
@@ -265,7 +265,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Signed in as" Foreground="#f3f3f4" FontSize="15"/>
+                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Signed in as" Foreground="#f3f3f4" FontSize="10 pt" />
                     </Grid>
                     <!-- Log in name -->
                     <Grid Grid.Row="1">
@@ -273,7 +273,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" x:Name="adminName" HorizontalAlignment="Left" Text="{Binding}" Foreground="#a3afc0" FontSize="10 pt" />
+                        <TextBlock Grid.Column="1" x:Name="adminName" HorizontalAlignment="Left" Text="{Binding}" Foreground="#a3afc0" FontSize="8 pt" />
                     </Grid>
                 </Grid>
                 <!-- Dashboard -->
@@ -283,7 +283,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1">
                             Dashboard
                         </TextBlock>
                     </Grid>
@@ -296,7 +296,7 @@
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1">
                             Area
                         </TextBlock>
                         <TextBlock x:Name="Area_Tag"  Grid.Column="2" RenderTransformOrigin=".5, .5" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&gt;">
@@ -314,7 +314,7 @@
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1">
                             Users
                         </TextBlock>
                         <TextBlock x:Name="Users_Tag"  Grid.Column="2" RenderTransformOrigin=".5, .5" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&gt;">
@@ -331,7 +331,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1">
                             Inbox
                         </TextBlock>
                     </Grid>
@@ -344,7 +344,7 @@
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1">
                             Profile
                         </TextBlock>
                         <TextBlock x:Name="Profile_Tag"  Grid.Column="2" RenderTransformOrigin=".5, .5" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&gt;">
@@ -361,7 +361,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" FontSize="15">
+                        <TextBlock Grid.Column="1">
                             Log out
                         </TextBlock>
                     </Grid>
