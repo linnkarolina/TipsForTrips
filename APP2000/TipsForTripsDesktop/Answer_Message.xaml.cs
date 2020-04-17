@@ -57,6 +57,7 @@ namespace TipsForTripsDesktop
                 {
                     ConnectToDatabase("INSERT INTO user_inbox VALUES('NULL','" + mainWindow.adminName.DataContext + "','" + To.Text + "','" + Subject.Text + "'," +
                     "'" + Message.Text + "',CURRENT_TIMESTAMP());");
+                    ConnectToDatabase("UPDATE admin_inbox SET isanswered = 1 WHERE message_ID = '" + message_ID + "';");
                     this.Close();
                     MessageBox.Show("Your message was sent.","Successful");
                 }

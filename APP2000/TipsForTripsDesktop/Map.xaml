@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TipsForTripsDesktop"
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Map">
@@ -154,7 +155,7 @@
     </Page.Resources>
     
     <Grid>
-        <Border BorderThickness="3" BorderBrush="White" CornerRadius="10" Grid.RowSpan="2" Margin="20">
+        <Border BorderThickness="3" BorderBrush="white" CornerRadius="10" Grid.RowSpan="2" Margin="20">
             <Grid Background="White" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -167,8 +168,9 @@
                 <!-- Grid for funcionality and map -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*" />
+                        <ColumnDefinition Width="0.125*" />
                         <ColumnDefinition Width="0.75*" />
+                        <ColumnDefinition Width="0.125*" />
                         <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="1">
@@ -186,26 +188,52 @@
                             Coordinates
                         </TextBlock>
                         <!-- Longitude -->
-                        <TextBlock Grid.Row="1" VerticalAlignment="Bottom" FontSize="18">
-                                Longitude
-                        </TextBlock>
-                        <TextBox x:Name="Longitude" Grid.Row="2" BorderThickness="3" VerticalAlignment="Center" Padding="5" FontSize="15" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}">
-                            123456
-                        </TextBox>
-                        <!-- Latitude -->
-                        <TextBlock Grid.Row="3" VerticalAlignment="Bottom" FontSize="18">
-                            Latitude
-                        </TextBlock>
-                        <TextBox x:Name="Latitude" Grid.Row="4" BorderThickness="3" VerticalAlignment="Center" Padding="5" FontSize="15" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}">
-                            654321
-                        </TextBox>
-                        <!-- Button -->
-                        <Grid Grid.Row="6">
+                        <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.5*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Bottom" FontSize="18">
+                                Lon.
+                            </TextBlock>
+                            <TextBox x:Name="Longitude" Text="{Binding longitude}" Grid.Column="1" BorderThickness="3" VerticalAlignment="Center" Padding="5" FontSize="15" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}" />
+                        </Grid>
+                        <!-- Latitude -->
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Bottom" FontSize="18">
+                            Lat.
+                            </TextBlock>
+                            <TextBox x:Name="Latitude" Text="{Binding latitude}" Grid.Column="1" BorderThickness="3" VerticalAlignment="Center" Padding="5" FontSize="15" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}" />
+                        </Grid>
+                        <!-- Buttons -->
+                        <!-- Add pin -->
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.25*" />
+                                    <RowDefinition Height="0.25*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="2" Background="#4296d6" Click="Add_Pin_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Foreground="White" VerticalAlignment="Stretch" FontSize="12" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
+                                    Add pin
+                                </Button>
+                            </Grid>
+                        </Grid>
+                        <!-- Add trip-->
+                        <Grid Grid.Row="6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.25*" />
                                     <RowDefinition Height="*" />
@@ -217,9 +245,37 @@
                             </Grid>
                         </Grid>
                     </Grid>
-                    <DockPanel Grid.Column="2">
-                        
-                    </DockPanel>
+                    <!-- Map -->
+                    <Grid Grid.Column="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="0.05*" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0.035*" />
+                            </Grid.ColumnDefinitions>
+                            <DockPanel Grid.Column="0">
+                                <m:Map x:Name="TheMap" Center="63,10" ZoomLevel="4" Mode="Road" MouseDoubleClick="Map_Mouse_Click" CredentialsProvider="yfc1q3uR1sUI9mYrW80g~q0ahIZ2mjOXgQPtUm0vEkg~AmAVAlSDYCiRDQkGm_L3ZPxtJXcxu3M1YkxHOmeFZ9PxnjsYUB4q4G9vMyexu55k" />
+                            </DockPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.2*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.35*" />
+                                    <RowDefinition Height="1.5*" />
+                                    <RowDefinition Height="10*" />
+                                </Grid.RowDefinitions>
+                                <Button Grid.Column="1" Background="#4296d6" Foreground="White" Grid.Row="1" BorderThickness="0" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Click="Mode_Click" Style="{DynamicResource ButtonStyle1}">
+                                    Mode
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Border>

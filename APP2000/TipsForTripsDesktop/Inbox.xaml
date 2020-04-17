@@ -219,7 +219,6 @@
                             </Grid>
                         </Grid>
                         <!-- Table -->
-                        <TextBlock Grid.Row="2" Text="{Binding}" VerticalAlignment="Bottom" FontSize="20" Foreground="Red" />
                         <DataGrid x:Name="Table" Grid.Row="3" IsReadOnly="True" BorderThickness="0" Background="White">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Open">
