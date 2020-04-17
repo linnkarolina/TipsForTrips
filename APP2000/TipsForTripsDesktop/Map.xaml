@@ -245,6 +245,7 @@
                             </Grid>
                         </Grid>
                     </Grid>
+                    <!-- Map -->
                     <Grid Grid.Column="3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
