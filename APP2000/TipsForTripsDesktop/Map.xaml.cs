@@ -22,7 +22,7 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class Map : Page
     {
-
+        private MainWindow mainWindow;
         private Pushpin pinStart = null;
         private Pushpin pinEnd = null;
         
@@ -31,8 +31,9 @@ namespace TipsForTripsDesktop
         private double endLatitude = 0;
         private double endLongitude = 0;
 
-        public Map()
+        public Map(MainWindow mw)
         {
+            mainWindow = mw;
             InitializeComponent();
         }
 
@@ -65,7 +66,7 @@ namespace TipsForTripsDesktop
 
         private void Button_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show("RANDI ER BEST!");
+            mainWindow.Content_Frame.Content = new Places();
         }
 
         private void Mode_Click(object sender, RoutedEventArgs e)
@@ -84,45 +85,52 @@ namespace TipsForTripsDesktop
 
         private void Add_Pin_Click(object sender, System.EventArgs e)
         {
-            if (pinStart == null)
+            try
             {
-                startLongitude = Convert.ToDouble(Longitude.Text);
-                startLatitude = Convert.ToDouble(Latitude.Text);
-                Location pinLocation = new Microsoft.Maps.MapControl.WPF.Location(startLatitude, startLongitude);
+                if (pinStart == null)
+                {
+                    startLongitude = Convert.ToDouble(Longitude.Text);
+                    startLatitude = Convert.ToDouble(Latitude.Text);
+                    Location pinLocation = new Microsoft.Maps.MapControl.WPF.Location(startLatitude, startLongitude);
 
-                // pin.Content = counter += 10;
-                pinStart = new Pushpin();
-                pinStart.Location = pinLocation;
-                pinStart.MouseDown += new MouseButtonEventHandler(pin_MouseDown);
-                pinStart.ToolTip = startLatitude + ", " + startLongitude;
-                pinStart.Background = new SolidColorBrush(Color.FromRgb(86, 197, 150));
-                pinStart.FontSize = 10;
-                pinStart.Content = "Start";
-                TheMap.Children.Add(pinStart);
-            }
-            else if (pinEnd == null)
-            {
-                endLongitude = Convert.ToDouble(Longitude.Text);
-                endLatitude = Convert.ToDouble(Latitude.Text);
-                Location pinLocation = new Microsoft.Maps.MapControl.WPF.Location(endLatitude, endLongitude);
+                    // pin.Content = counter += 10;
+                    pinStart = new Pushpin();
+                    pinStart.Location = pinLocation;
+                    pinStart.MouseDown += new MouseButtonEventHandler(pin_MouseDown);
+                    pinStart.ToolTip = startLatitude + ", " + startLongitude;
+                    pinStart.Background = new SolidColorBrush(Color.FromRgb(86, 197, 150));
+                    pinStart.FontSize = 10;
+                    pinStart.Content = "Start";
+                    TheMap.Children.Add(pinStart);
+                }
+                else if (pinEnd == null)
+                {
+                    endLongitude = Convert.ToDouble(Longitude.Text);
+                    endLatitude = Convert.ToDouble(Latitude.Text);
+                    Location pinLocation = new Microsoft.Maps.MapControl.WPF.Location(endLatitude, endLongitude);
 
-                // pin.Content = counter += 10;
-                pinEnd = new Pushpin();
-                pinEnd.Location = pinLocation;
-                pinEnd.MouseDown += new MouseButtonEventHandler(pin_MouseDown);
-                pinEnd.ToolTip = endLatitude + ", " + endLongitude;
-                pinEnd.Background = new SolidColorBrush(Color.FromRgb(86, 197, 150));
-                pinEnd.FontSize = 10;
-                pinEnd.Content = "End";
-                TheMap.Children.Add(pinEnd);
+                    // pin.Content = counter += 10;
+                    pinEnd = new Pushpin();
+                    pinEnd.Location = pinLocation;
+                    pinEnd.MouseDown += new MouseButtonEventHandler(pin_MouseDown);
+                    pinEnd.ToolTip = endLatitude + ", " + endLongitude;
+                    pinEnd.Background = new SolidColorBrush(Color.FromRgb(86, 197, 150));
+                    pinEnd.FontSize = 10;
+                    pinEnd.Content = "End";
+                    TheMap.Children.Add(pinEnd);
+                }
+                else
+                {
+                    // Add if you want
+                }
+                if (pinStart != null && pinEnd != null)
+                {
+                    RouteFinder();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // Add if you want
-            }
-            if (pinStart != null && pinEnd != null)
-            {
-                RouteFinder();
+                MessageBox.Show("Longitude or latitude is invalid.","Oops...");
             }
         }
 
