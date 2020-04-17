@@ -27,7 +27,7 @@ namespace TipsForTripsDesktop
         private string searchText;
         private MainWindow mainWindow;
 
-        public Admin(string username, MainWindow mw)
+        public Admin(MainWindow mw)
         {
             mainWindow = mw;
             InitializeComponent();

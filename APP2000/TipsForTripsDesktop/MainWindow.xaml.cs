@@ -368,7 +368,7 @@ namespace TipsForTripsDesktop
             // Go to a new page
             if (b.Equals(Dashboard_Button))
             {
-                Content_Frame.Content = new Dashboard();
+                Content_Frame.Content = new Dashboard(this);
             }
             else if (b.Equals(Places_Button))
             {
@@ -388,7 +388,7 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Admin_Button))
             {
-                Content_Frame.Content = new Admin(user, this);
+                Content_Frame.Content = new Admin(this);
             }
             else if (b.Equals(Inbox_Button))
             {
