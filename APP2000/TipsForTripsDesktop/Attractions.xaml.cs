@@ -168,7 +168,7 @@ namespace TipsForTripsDesktop
             {
                 DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
                 String trip_ID = drv[0].ToString();
-                Edit_Attraction ea = new Edit_Attraction(tip_ID);
+                Edit_Attraction ea = new Edit_Attraction(trip_ID);
                 ea.Show();
                 ea.Topmost = true;
             }

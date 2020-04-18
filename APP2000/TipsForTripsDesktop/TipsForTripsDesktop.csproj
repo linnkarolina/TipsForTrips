@@ -88,6 +88,9 @@
     <Compile Include="Edit_Admin_User.xaml.cs">
       <DependentUpon>Edit_Admin_User.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Edit_Attraction.xaml.cs">
+      <DependentUpon>Edit_Attraction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Edit_Web_User.xaml.cs">
       <DependentUpon>Edit_Web_User.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Edit_Admin_User.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Edit_Attraction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
