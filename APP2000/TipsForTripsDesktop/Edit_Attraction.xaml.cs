@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TipsForTripsDesktop
 {
     /// <summary>
-    /// Interaction logic for New_Attraction.xaml
+    /// Interaction logic for Edit_Attraction.xaml
     /// </summary>
-    public partial class New_Attraction : Window
+    public partial class Edit_Attraction : Window
     {
-        public New_Attraction()
+        public Edit_Attraction()
         {
             InitializeComponent();
         }
