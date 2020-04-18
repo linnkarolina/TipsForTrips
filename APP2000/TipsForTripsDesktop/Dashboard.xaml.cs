@@ -98,7 +98,7 @@ namespace TipsForTripsDesktop
 
         private void Button_Click_Square_Three(object sender, System.EventArgs e)
         {
-            mainWindow.Content_Frame.Content = new Places();
+            mainWindow.Content_Frame.Content = new Attractions();
         }
 
         private void Button_Click_Square_Four(object sender, System.EventArgs e)

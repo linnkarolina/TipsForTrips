@@ -66,7 +66,7 @@ namespace TipsForTripsDesktop
 
         private void Button_Click(object sender, System.EventArgs e)
         {
-            mainWindow.Content_Frame.Content = new Places();
+            mainWindow.Content_Frame.Content = new Attractions();
         }
 
         private void Mode_Click(object sender, RoutedEventArgs e)

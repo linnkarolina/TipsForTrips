@@ -68,8 +68,10 @@ namespace TipsForTripsDesktop
             else
             {
                 var mw = new MainWindow(name);
+                var dashboard = new Dashboard(mw);
                 this.Close();
                 mw.Show();
+                mw.Content_Frame.Content = dashboard;
             }
         }
 

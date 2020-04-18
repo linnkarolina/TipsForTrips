@@ -372,7 +372,7 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Places_Button))
             {
-                Content_Frame.Content = new Places();
+                Content_Frame.Content = new Attractions();
             }
             else if (b.Equals(Map_Button))
             {
