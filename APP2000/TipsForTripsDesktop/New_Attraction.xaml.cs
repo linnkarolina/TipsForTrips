@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,39 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class New_Attraction : Window
     {
+
+        
+
         public New_Attraction()
         {
             InitializeComponent();
+            Big_Image();
+        }
+
+        /*public string DisplayedImage
+        {
+            get { return @"C:\Users\tobia\Documents\GitHub\TipsForTrips\APP2000\TipsForTripsDesktop\Images\Logo\tree.png"; }
+        }*/
+
+        private void Big_Image()
+        {
+            try
+            {
+                if (Panel_Image.Children[0] != null)
+                {
+                    Image img = (Image)Panel_Image.Children[0];
+                    ImageSource imageSource = img.Source;
+                    // ImageSource imageSource = new BitmapImage(new Uri("pack:/APP2000,,/Images/"));
+                    Showed_Image.Source = imageSource;
+                    var bc = new BrushConverter();
+                    Image_Background.Background = (Brush)bc.ConvertFrom("#FFFFFF");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
 
         // Enter animation
@@ -62,5 +93,16 @@ namespace TipsForTripsDesktop
         {
             MessageBox.Show("Hade");
         }
+
+        public void Add_Image_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Add");
+        }
+
+        public void Delete_Image_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Delete");
+        }
+
     }
 }
