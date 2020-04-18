@@ -191,9 +191,9 @@
                                 <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition Width="1.25*" />
                             </Grid.ColumnDefinitions>
-                            <!-- New admin -->
+                            <!-- New attraction -->
                             <Grid Grid.Column="0">
-                                <Button Click="New_Admin_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
+                                <Button Click="New_Attraction_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
                                     <TextBlock FontSize="12">
                                         New attraction
                                     </TextBlock>
@@ -221,13 +221,6 @@
                         <!-- Table -->
                         <DataGrid x:Name="Table" Grid.Row="3" BorderThickness="0" IsReadOnly="True" Background="White">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Tags">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button x:Name="Tag_Button" Content="Tags" Click="Tag_Click"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Edit">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

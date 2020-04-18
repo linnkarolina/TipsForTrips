@@ -125,42 +125,20 @@ namespace TipsForTripsDesktop
             dt.Columns.Add(Received);
             dt.Columns.Add(Answered);
 
-            if (ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%';") != "")
+            if (ConnectToDatabase("SELECT * FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' OR subject LIKE '%" + Search_Bar.Text + "%';") != "")
             {
-                for (int i = 0; i < DatabaseCount("SELECT count(*) FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%';"); i++)
+                for (int i = 0; i < DatabaseCount("SELECT count(*) FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' OR subject LIKE '%" + Search_Bar.Text + "%';"); i++)
                 {
                     DataRow row = dt.NewRow();
-                    row[0] = ConnectToDatabase("SELECT message_ID FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
-                    row[1] = ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
-                    row[2] = ConnectToDatabase("SELECT subject FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
-                    row[3] = ConnectToDatabase("SELECT time_sent FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
-                    if (ConnectToDatabase("SELECT isanswered FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;") == "False")
+                    row[0] = ConnectToDatabase("SELECT message_ID FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' OR subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
+                    row[1] = ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' OR subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
+                    row[2] = ConnectToDatabase("SELECT subject FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' OR subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
+                    row[3] = ConnectToDatabase("SELECT time_sent FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' OR subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
+                    if (ConnectToDatabase("SELECT isanswered FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' OR subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;") == "False")
                     {
                         row[4] = "No";
                     }
-                    else if (ConnectToDatabase("SELECT isanswered FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;") == "True")
-                    {
-                        row[4] = "Yes";
-                    }
-                    dt.Rows.Add(row);
-                    Table.ItemsSource = dt.DefaultView;
-                    searchText = Search_Bar.Text;
-                }
-            }
-            else if (ConnectToDatabase("SELECT subject FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%';") != "")
-            {
-                for (int i = 0; i < DatabaseCount("SELECT count(*) FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%';"); i++)
-                {
-                    DataRow row = dt.NewRow();
-                    row[0] = ConnectToDatabase("SELECT message_ID FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
-                    row[1] = ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
-                    row[2] = ConnectToDatabase("SELECT subject FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
-                    row[3] = ConnectToDatabase("SELECT time_sent FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;");
-                    if (ConnectToDatabase("SELECT isanswered FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;") == "False")
-                    {
-                        row[4] = "No";
-                    }
-                    else if (ConnectToDatabase("SELECT isanswered FROM admin_inbox WHERE subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;") == "True")
+                    else if (ConnectToDatabase("SELECT isanswered FROM admin_inbox WHERE user_username LIKE '%" + Search_Bar.Text + "%' OR subject LIKE '%" + Search_Bar.Text + "%' ORDER BY isanswered, time_sent desc LIMIT " + i + ",1;") == "True")
                     {
                         row[4] = "Yes";
                     }
