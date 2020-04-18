@@ -20,8 +20,12 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class Edit_Attraction : Window
     {
-        public Edit_Attraction()
+
+        private string trip_ID;
+
+        public Edit_Attraction(string ID)
         {
+            trip_ID = ID;
             InitializeComponent();
         }
 
