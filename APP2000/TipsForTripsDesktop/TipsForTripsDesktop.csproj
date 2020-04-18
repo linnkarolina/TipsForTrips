@@ -97,6 +97,9 @@
     <Compile Include="New_Admin_User.xaml.cs">
       <DependentUpon>New_Admin_User.xaml</DependentUpon>
     </Compile>
+    <Compile Include="New_Attraction.xaml.cs">
+      <DependentUpon>New_Attraction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="New_Tag.xaml.cs">
       <DependentUpon>New_Tag.xaml</DependentUpon>
     </Compile>
@@ -177,6 +180,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="New_Attraction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="New_Tag.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,10 +204,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Places.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Tags.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -213,9 +216,6 @@
   <ItemGroup>
     <Compile Include="Map.xaml.cs">
       <DependentUpon>Map.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Places.xaml.cs">
-      <DependentUpon>Places.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
