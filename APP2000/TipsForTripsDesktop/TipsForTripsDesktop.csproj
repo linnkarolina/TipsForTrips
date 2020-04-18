@@ -109,6 +109,9 @@
     <Compile Include="New_Tag.xaml.cs">
       <DependentUpon>New_Tag.xaml</DependentUpon>
     </Compile>
+    <Compile Include="New_Type_Of_Trip.xaml.cs">
+      <DependentUpon>New_Type_Of_Trip.xaml</DependentUpon>
+    </Compile>
     <Compile Include="New_Web_User.xaml.cs">
       <DependentUpon>New_Web_User.xaml</DependentUpon>
     </Compile>
@@ -123,6 +126,9 @@
     </Compile>
     <Compile Include="Tags.xaml.cs">
       <DependentUpon>Tags.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Type_Of_Trip.xaml.cs">
+      <DependentUpon>Type_Of_Trip.xaml</DependentUpon>
     </Compile>
     <Compile Include="Web_users.xaml.cs">
       <DependentUpon>Web_users.xaml</DependentUpon>
@@ -202,6 +208,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="New_Type_Of_Trip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="New_Web_User.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tags.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Type_Of_Trip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

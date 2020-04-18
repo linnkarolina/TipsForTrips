@@ -17,15 +17,16 @@ using System.Windows.Shapes;
 namespace TipsForTripsDesktop
 {
     /// <summary>
-    /// Interaction logic for New_Tag.xaml
+    /// Interaction logic for New_Type_Of_Trip.xaml
     /// </summary>
-    public partial class New_Tag : Window
+    public partial class New_Type_Of_Trip : Window
     {
-        Tags tag;
 
-        public New_Tag(Tags tags)
+        private Type_Of_Trip type_of_trip;
+
+        public New_Type_Of_Trip(Type_Of_Trip tot)
         {
-            tag = tags;
+            type_of_trip = tot;
             InitializeComponent();
         }
 
@@ -61,14 +62,14 @@ namespace TipsForTripsDesktop
         {
             try
             {
-                if (Tag_Name.Text == "")
+                if (Type_Name.Text == "")
                 {
                     MessageBox.Show("The field must be filled.", "Oops...");
                 }
                 else
                 {
-                    ConnectToDatabase("INSERT INTO tag VALUES('" + Tag_Name.Text + "');");
-                    tag.TagTable();
+                    ConnectToDatabase("INSERT INTO type_of_trip VALUES('" + Type_Name.Text + "');");
+                    type_of_trip.TypeTable();
                     this.Close();
                 }
             }

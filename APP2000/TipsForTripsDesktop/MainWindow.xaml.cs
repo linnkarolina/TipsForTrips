@@ -382,6 +382,10 @@ namespace TipsForTripsDesktop
             {
                 Content_Frame.Content = new Tags(this);
             }
+            else if (b.Equals(Type_Of_Trip_Button))
+            {
+                Content_Frame.Content = new Type_Of_Trip();
+            }
             else if (b.Equals(Web_Button))
             {
                 Content_Frame.Content = new Web_users(this);

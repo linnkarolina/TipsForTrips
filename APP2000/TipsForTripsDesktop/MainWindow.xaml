@@ -134,6 +134,18 @@
                         </TextBlock>
                     </Grid>
                 </Button>
+                <!-- Type of trip -->
+                <Button x:Name="Type_Of_Trip_Button" Grid.Row="4" HorizontalContentAlignment="Stretch" Background="Transparent" Foreground="#205072" BorderThickness="0" Click="Button_Page_Click" MouseEnter="Submenu_Enter" MouseLeave="Submenu_Leave" Style="{DynamicResource ButtonStyle1}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" FontSize="15">
+                            Type of trip
+                        </TextBlock>
+                    </Grid>
+                </Button>    
             </Grid>
             <!--Submenu Users-->
             <Grid x:Name="SubMenu_Users" Grid.Column="0" Background="#cff4d2" RenderTransformOrigin="0.5,0.5">
