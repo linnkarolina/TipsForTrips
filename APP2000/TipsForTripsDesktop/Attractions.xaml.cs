@@ -190,6 +190,11 @@ namespace TipsForTripsDesktop
                     try
                     {
                         MessageBox.Show(name + " was deleted.", "Delete attraction");
+                        ConnectToDatabase("DELETE FROM review WHERE trip_ID = '" + ID + "';");
+                        ConnectToDatabase("DELETE FROM image WHERE trip_ID = '" + ID + "';");
+                        ConnectToDatabase("DELETE FROM trip_with_type WHERE trip_ID = '" + ID + "';");
+                        ConnectToDatabase("DELETE FROM map_coordinates WHERE trip_ID = '" + ID + "';");
+                        ConnectToDatabase("DELETE FROM trip_tag WHERE trip_ID = '" + ID + "';");
                         ConnectToDatabase("DELETE FROM trip WHERE trip_ID = '" + ID + "';");
                         AttractionTable();
                     }
@@ -269,11 +274,6 @@ namespace TipsForTripsDesktop
             MyCon.Close();
 
             return total;
-        }
-
-        private void Table_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
-        {
-
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
