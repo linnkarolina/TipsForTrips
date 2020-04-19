@@ -40,7 +40,7 @@ namespace TipsForTripsDesktop
         public void TagTable()
         {
             DataTable dt = new DataTable();
-            DataColumn check = new DataColumn("Checked", typeof(bool));
+            DataColumn check = new DataColumn("Checked", typeof(Boolean));
             DataColumn tag = new DataColumn("Tag", typeof(string));
 
             check.DefaultValue = false;
@@ -48,28 +48,22 @@ namespace TipsForTripsDesktop
             dt.Columns.Add(check);
             dt.Columns.Add(tag);
 
-            bool[] test = new bool[DatabaseCount("SELECT count(*) FROM admin_tag where username = '" + user + "';")];
-
             for (int i = 0; i < DatabaseCount("SELECT count(*) FROM tag;"); i++)
             {
                 DataRow row = dt.NewRow();
-                string checkCheck = ConnectToDatabase("SELECT tag FROM tag ORDER BY tag LIMIT " + i + ",1;");
-                row[1] = ConnectToDatabase("SELECT tag FROM tag ORDER BY tag LIMIT " + i + ",1;");
+                string query = ConnectToDatabase("SELECT tag FROM tag ORDER BY tag LIMIT " + i + ",1;");
+                row[1] = query;
 
-                //string checkCheck = ConnectToDatabase("SELECT tag FROM admin_tag WHERE tag IN (SELECT tag FROM tag);");
                 for (int o = 0; o < DatabaseCount("SELECT count(*) FROM admin_tag where username = '" + user + "';"); o++)
                 {
-                    if (checkCheck == ConnectToDatabase("SELECT tag FROM admin_tag WHERE username = '" + user + "' LIMIT " + o + ",1;"))
+                    if (query == ConnectToDatabase("SELECT tag FROM admin_tag WHERE username = '" + user + "' LIMIT " + o + ",1;"))
                     {
                         row[0] = true;
-                        test[o] = (bool)row[0];
-                        //row[0] = (Brush)borderBrushConverter.ConvertFrom("#56c596");
+                        break;
                     }
                     else
                     {
                         row[0] = false;
-                        test[o] = (bool)row[0];
-                        //row[0] = (Brush)borderBrushConverter.ConvertFrom("#FF0000");
                     }
                 }
 
@@ -110,9 +104,10 @@ namespace TipsForTripsDesktop
                     TagTable();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Noe gikk galt");
+                // MessageBox.Show("Noe gikk galt");
+                MessageBox.Show(ex.ToString());
             }
         }
 
