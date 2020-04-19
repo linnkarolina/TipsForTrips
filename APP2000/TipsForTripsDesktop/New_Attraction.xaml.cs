@@ -221,7 +221,6 @@ namespace TipsForTripsDesktop
 
         private void Image_Clicked(object s)
         {
-            MessageBox.Show("******");
             Image image = (Image)s;
             Showed_Image.Source = image.Source;
         }

@@ -262,7 +262,7 @@
                                 <RowDefinition Height="4*" />
                             </Grid.RowDefinitions>
                             <TextBlock Text="Description *" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20" />
-                            <TextBox x:Name="Desciption" Text="{Binding description, Mode=OneWay    }" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Row="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                            <TextBox x:Name="Description" Text="{Binding description, Mode=OneWay    }" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Row="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                         </Grid>
                     </Grid>
                     <!-- Right square -->
