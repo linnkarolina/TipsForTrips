@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +29,145 @@ namespace TipsForTripsDesktop
         {
             trip_ID = ID;
             InitializeComponent();
+            SetTextBoxContent();
+        }
+
+        private void SetTextBoxContent() 
+        {
+            try
+            {
+                string query = "SELECT startLongitude FROM map_coordinates WHERE trip_ID = '" + trip_ID + "';";
+                string startLon = ConnectToDatabase(query);
+                StartLon.Text = startLon;
+
+                query = "SELECT startLatitude FROM map_coordinates WHERE trip_ID = '" + trip_ID + "';";
+                string startLat = ConnectToDatabase(query);
+                StartLat.Text = startLat;
+
+                query = "SELECT endLongitude FROM map_coordinates WHERE trip_ID = '" + trip_ID + "';";
+                string endLon = ConnectToDatabase(query);
+                EndLon.Text = endLon;
+
+                query = "SELECT endLatitude FROM map_coordinates WHERE trip_ID = '" + trip_ID + "';";
+                string endLat = ConnectToDatabase(query);
+                EndLat.Text = endLat;
+
+                Show_Cities();
+
+                Show_Type();
+
+                query = "SELECT length FROM trip WHERE trip_ID = '" + trip_ID + "';";
+                string length = ConnectToDatabase(query);
+                Length.Text = length;
+
+                query = "SELECT difficulty FROM trip WHERE trip_ID = '" + trip_ID + "';";
+                string difficulty = ConnectToDatabase(query);
+                Difficulty.Text = difficulty;
+
+                query = "SELECT trip_name FROM trip WHERE trip_ID = '" + trip_ID + "';";
+                string name = ConnectToDatabase(query);
+                Name.Text = name;
+
+                query = "SELECT description FROM trip WHERE trip_ID = '" + trip_ID + "';";
+                string description = ConnectToDatabase(query);
+                Desciption.Text = description;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void Show_Cities()
+        {
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            try
+            {
+                Con.Open();
+                string query = "SELECT * FROM location;";
+                MySqlCommand cmd = new MySqlCommand(query, Con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                int i = 0;
+
+                while (dr.Read())
+                {
+                    string city = dr.GetString(0);
+                    City.Items.Add(city);
+
+                    if (city.Equals(ConnectToDatabase("SELECT city FROM trip WHERE trip_ID ='" + trip_ID + "';")))
+                    {
+                        City.SelectedIndex = i;
+                    }
+                    i++;
+                }
+
+                Con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void Show_Type()
+        {
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            try
+            {
+                Con.Open();
+                string query = "SELECT * FROM type_of_trip;";
+                MySqlCommand cmd = new MySqlCommand(query, Con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                int i = 0;
+
+                while (dr.Read())
+                {
+                    string type = dr.GetString(0);
+                    Type_Of_Trip.Items.Add(type);
+
+                    if (type.Equals(ConnectToDatabase("SELECT type_of_trip FROM trip_with_type WHERE trip_ID ='" + trip_ID + "';")))
+                    {
+                        Type_Of_Trip.SelectedIndex = i;
+                    }
+                    i++;
+                }
+
+                Con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void Big_Image()
+        {
+            try
+            {
+                if (Panel_Image.Children.Count != 0)
+                {
+                    Image img = (Image)Panel_Image.Children[0];
+                    ImageSource imageSource = img.Source;
+                    // ImageSource imageSource = new BitmapImage(new Uri("pack:/APP2000,,/Images/"));
+                    Showed_Image.Source = imageSource;
+                    var bc = new BrushConverter();
+                    Image_Background.Background = (Brush)bc.ConvertFrom("#FFFFFF");
+                }
+                else
+                {
+                    var bc = new BrushConverter();
+                    Image_Background.Background = (Brush)bc.ConvertFrom("#EEEEEE");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void Small_Image_Click()
+        {
+
         }
 
         // Enter animation
@@ -64,7 +205,91 @@ namespace TipsForTripsDesktop
 
         public void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hade");
+            this.Close();
+        }
+
+        private void Image_Clicked(object s)
+        {
+            MessageBox.Show("******");
+            Image image = (Image)s;
+            Showed_Image.Source = image.Source;
+        }
+
+        public void Add_Image_Click(object sender, RoutedEventArgs e)
+        {
+            Image img = new Image();
+            img.Margin = new Thickness(0, 0, 5, 0);
+            img.MouseUp += (s, evt) => {
+                Image_Clicked(s);
+            };
+            Panel_Image.Children.Add(img);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select an image";
+            openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" + "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" + "Portable Network Graphic (*.png)|*.png";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                img.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                Big_Image();
+            }
+        }
+
+        public void Delete_Image_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this image?", "Delete image", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    try
+                    {
+                        for (int i = 0; i < Panel_Image.Children.Count; i++)
+                        {
+                            Image img = (Image)Panel_Image.Children[i];
+                            if (img.Source == Showed_Image.Source)
+                            {
+                                Panel_Image.Children.RemoveAt(i);
+                            }
+                        }
+                        Showed_Image.Source = null;
+                        Big_Image();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+        }
+
+        public string ConnectToDatabase(string query)
+        {
+            string name;
+
+            // Azure connection
+            /* 
+            MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
+            */
+
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=tipsfortrips;UID=root;PASSWORD=");
+            MySqlCommand cmd = new MySqlCommand(query, MyCon);
+            MyCon.Open();
+            var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
+            if (queryResult != null)
+            {
+                // If we have result, then convert it from object to string.
+
+                name = Convert.ToString(queryResult);
+            }
+            else
+            {
+                // Else make id = "" so you can later check it.
+                name = "";
+            }
+
+            MyCon.Close();
+
+            return name;
         }
     }
 }

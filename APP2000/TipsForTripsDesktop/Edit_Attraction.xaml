@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TipsForTripsDesktop"
         mc:Ignorable="d"
-        Title="Edit_Attraction" Height="450" Width="800">
+        Title="Edit_Attraction" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
@@ -159,7 +160,7 @@
             </Grid.RowDefinitions>
             <!-- Title -->
             <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center">
-                    New attraction
+                    Edit attraction
             </TextBlock>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -168,73 +169,143 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="17*" />
+                    <RowDefinition Height="16.5*" />
+                    <RowDefinition Height="0.5*" />
                     <RowDefinition Height="2*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Column="1" Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.75*" />
+                        <ColumnDefinition Width="0.05*" />
                         <ColumnDefinition Width="1.25*" />
+                        <ColumnDefinition Width="0.05*" />
                         <ColumnDefinition Width="0.75*" />
                     </Grid.ColumnDefinitions>
                     <!-- Left square -->
                     <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="6*" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Information" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
-                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                            </Grid>
+                        <ScrollViewer VerticalScrollBarVisibility="Visible">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <!-- Map Coordinates -->
+                                    <TextBlock Text="Start longitude *" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBox x:Name="StartLon" Text="{Binding startLon, Mode=OneWay}" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                    <TextBlock Text="Start latitude *" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBox x:Name="StartLat" Text="{Binding startLat, Mode=OneWay}" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                    <TextBlock Text="End longitude" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBox x:Name="EndLon" Text="{Binding endLon, Mode=OneWay}" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                    <TextBlock Text="End latitude" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBox x:Name="EndLat" Text="{Binding endLat, Mode=OneWay}" Grid.Row="7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                </Grid>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <!-- General information -->
+                                    <TextBlock Text="City *" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <ComboBox x:Name="City" Grid.Row="1" IsReadOnly="True" IsEditable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
+                                    <TextBlock Text="Type of trip *" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <ComboBox x:Name="Type_Of_Trip" Grid.Row="3" IsReadOnly="True" IsEditable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
+                                    <TextBlock Text="Length" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBox x:Name="Length" Text="{Binding length, Mode=OneWay}" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                    <TextBlock Text="Difficulty" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBox x:Name="Difficulty" Text="{Binding difficulty, Mode=OneWay}" Grid.Row="7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                </Grid>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <!-- General information -->
+                                    <TextBlock Text="Website" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBox x:Name="Website" Text="{Binding website, Mode=OneWay}" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                </Grid>
+                            </StackPanel>
                         </ScrollViewer>
                     </Grid>
                     <!-- Middle square -->
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="6*" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Information" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
-                        <Grid Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="2.5*" />
-                                <RowDefinition Height="0.5*" />
-                            </Grid.RowDefinitions>
-                            <!-- Title -->
-                            <TextBlock Text="Name" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" />
-                            <TextBox Text="Mountain trip" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" BorderThickness="3" BorderBrush="#56c596" FontSize="20" Style="{DynamicResource TextBoxStyle1}" />
-                        </Grid>
-                    </Grid>
-                    <!-- Right square -->
                     <Grid Grid.Column="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
-                            <RowDefinition Height="1.5*" />
+                            <RowDefinition Height="4*" />
                         </Grid.RowDefinitions>
+                        <!-- Title -->
                         <Grid Grid.Row="0">
-                            <Image>
-
-                            </Image>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Name *" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" />
+                            <TextBox x:Name="Name" Text="{Binding name, Mode=OneWay}" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                         </Grid>
+                        <!-- Description -->
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
-                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="4*" />
                             </Grid.RowDefinitions>
+                            <TextBlock Text="Description *" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20" />
+                            <TextBox x:Name="Desciption" Text="{Binding description, Mode=OneWay    }" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Row="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                        </Grid>
+                    </Grid>
+                    <!-- Right square -->
+                    <Grid Grid.Column="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.5*" />
+                            <RowDefinition Height="0.2*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="0.5*" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" x:Name="Image_Background" Background="#EEEEEE">
+                            <Image x:Name="Showed_Image" Source="{Binding DisplayedImagePath}" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                            </Image>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.25*" />
+                                <RowDefinition Height="0.25*" />
+                                <RowDefinition Height="0.5*" />
+                            </Grid.RowDefinitions>
+                            <ScrollViewer x:Name="test" Grid.Row="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                                <Grid Grid.Row="0" >
+                                    <StackPanel x:Name="Panel_Image" Orientation="Horizontal">
+                                    </StackPanel>
+                                </Grid>
+                            </ScrollViewer>
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" Click="Add_Image_Click" Content="Add" FontSize="13" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyle1}"/>
+                                <Button Grid.Column="3" Click="Delete_Image_Click" Content="Delete" FontSize="13" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyle1}"/>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
                 <!-- Buttons -->
-                <Grid Grid.Column="1" Grid.Row="1">
+                <Grid Grid.Column="1" Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*" />
                         <ColumnDefinition Width="*" />
