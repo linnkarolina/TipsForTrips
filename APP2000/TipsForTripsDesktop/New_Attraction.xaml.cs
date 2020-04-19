@@ -1,4 +1,6 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
+using Microsoft.Win32;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,18 +30,63 @@ namespace TipsForTripsDesktop
         {
             InitializeComponent();
             Big_Image();
+            Show_Cities();
+            Show_Type();
         }
 
-        /*public string DisplayedImage
+        private void Show_Cities()
         {
-            get { return @"C:\Users\tobia\Documents\GitHub\TipsForTrips\APP2000\TipsForTripsDesktop\Images\Logo\tree.png"; }
-        }*/
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            try
+            {
+                Con.Open();
+                string query = "SELECT * FROM location;";
+                MySqlCommand cmd = new MySqlCommand(query, Con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    string city = dr.GetString(0);
+                    City.Items.Add(city);
+                }
+
+                Con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void Show_Type()
+        {
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            try
+            {
+                Con.Open();
+                string query = "SELECT * FROM type_of_trip;";
+                MySqlCommand cmd = new MySqlCommand(query, Con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    string city = dr.GetString(0);
+                    City.Items.Add(city);
+                }
+
+                Con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
 
         private void Big_Image()
         {
             try
             {
-                if (Panel_Image.Children[0] != null)
+                if (Panel_Image.Children.Count != 0)
                 {
                     Image img = (Image)Panel_Image.Children[0];
                     ImageSource imageSource = img.Source;
@@ -48,12 +95,21 @@ namespace TipsForTripsDesktop
                     var bc = new BrushConverter();
                     Image_Background.Background = (Brush)bc.ConvertFrom("#FFFFFF");
                 }
-                
+                else
+                {
+                    var bc = new BrushConverter();
+                    Image_Background.Background = (Brush)bc.ConvertFrom("#EEEEEE");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private void Small_Image_Click()
+        {
+
         }
 
         // Enter animation
@@ -91,17 +147,91 @@ namespace TipsForTripsDesktop
 
         public void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hade");
+            this.Close();
+        }
+
+        private void Image_Clicked(object s)
+        {
+            MessageBox.Show("******");
+            Image image = (Image)s;
+            Showed_Image.Source = image.Source;
         }
 
         public void Add_Image_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Add");
+            Image img = new Image();
+            img.Margin = new Thickness(0,0,5,0);
+            img.MouseUp += (s,evt) => {
+                Image_Clicked(s);
+            };
+            Panel_Image.Children.Add(img);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select an image";
+            openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" + "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" + "Portable Network Graphic (*.png)|*.png";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                img.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                Big_Image();
+            }
         }
 
         public void Delete_Image_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Delete");
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this image?", "Delete image", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    try 
+                    {
+                        for (int i = 0; i < Panel_Image.Children.Count; i++)
+                        {
+                            Image img = (Image) Panel_Image.Children[i];
+                            if (img.Source == Showed_Image.Source)
+                            {
+                                Panel_Image.Children.RemoveAt(i);
+                            }
+                        }
+                        Showed_Image.Source = null;
+                        Big_Image();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+        }
+
+        public string ConnectToDatabase(string query)
+        {
+            string name;
+
+            // Azure connection
+            /* 
+            MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
+            */
+
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=tipsfortrips;UID=root;PASSWORD=");
+            MySqlCommand cmd = new MySqlCommand(query, MyCon);
+            MyCon.Open();
+            var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
+            if (queryResult != null)
+            {
+                // If we have result, then convert it from object to string.
+
+                name = Convert.ToString(queryResult);
+            }
+            else
+            {
+                // Else make id = "" so you can later check it.
+                name = "";
+            }
+
+            MyCon.Close();
+
+            return name;
         }
 
     }

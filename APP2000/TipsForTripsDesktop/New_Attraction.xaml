@@ -7,7 +7,8 @@
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
         mc:Ignorable="d"
-        Title="New attraction" Height="450" Width="800">
+        Title="New attraction" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
@@ -471,9 +472,9 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <!-- Map Coordinates -->
-                                    <TextBlock Text="Start longitude" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBlock Text="Start longitude *" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
                                     <TextBox x:Name="StartLon" Text="" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
-                                    <TextBlock Text="Start latitude" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBlock Text="Start latitude *" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
                                     <TextBox x:Name="StartLat" Text="" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                                     <TextBlock Text="End longitude" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
                                     <TextBox x:Name="EndLon" Text="" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
@@ -492,10 +493,10 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <!-- General information -->
-                                    <TextBlock Text="City" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
-                                    <ComboBox x:Name="City" Text="" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
-                                    <TextBlock Text="Type of trip" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
-                                    <ComboBox x:Name="Type_Of_Trip" Text="" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
+                                    <TextBlock Text="City *" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <ComboBox x:Name="City" Text="Select city" IsEditable="True" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
+                                    <TextBlock Text="Type of trip *" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <ComboBox x:Name="Type_Of_Trip" Text="Select type" IsEditable="True" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
                                     <TextBlock Text="Length" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
                                     <TextBox x:Name="Length" Text="" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                                     <TextBlock Text="Difficulty" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
@@ -525,7 +526,7 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <TextBlock Text="Name" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" />
+                            <TextBlock Text="Name *" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" />
                             <TextBox x:Name="name" Text="" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                         </Grid>
                         <!-- Description -->
@@ -534,7 +535,7 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="4*" />
                             </Grid.RowDefinitions>
-                            <TextBlock Text="Description" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20" />
+                            <TextBlock Text="Description *" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20" />
                             <TextBox x:Name="desciption" Text="" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Row="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                         </Grid>
                     </Grid>
@@ -546,7 +547,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="0.5*" />
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" x:Name="Image_Background" Background="#eeeeee">
+                        <Grid Grid.Row="0" x:Name="Image_Background" Background="#EEEEEE">
                             <Image x:Name="Showed_Image" Source="{Binding DisplayedImagePath}" VerticalAlignment="Center" HorizontalAlignment="Center">
 
                             </Image>
@@ -560,9 +561,6 @@
                             <ScrollViewer x:Name="test" Grid.Row="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
                                 <Grid Grid.Row="0" >
                                     <StackPanel x:Name="Panel_Image" Orientation="Horizontal">
-                                        <Image Source="C:\Users\tobia\Documents\GitHub\TipsForTrips\APP2000\TipsForTripsDesktop\Images\Logo\tree.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                        <Image Source="C:\Users\tobia\Documents\GitHub\TipsForTrips\APP2000\TipsForTripsDesktop\Images\Logo\tree.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                        <Image Source="C:\Users\tobia\Documents\GitHub\TipsForTrips\APP2000\TipsForTripsDesktop\Images\Logo\tree.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </Grid>
                             </ScrollViewer>
