@@ -95,7 +95,7 @@ namespace TipsForTripsDesktop
 
         public void New_Attraction_Click(object sender, RoutedEventArgs e)
         {
-            New_Attraction na = new New_Attraction();
+            New_Attraction na = new New_Attraction(this);
             na.Show();
             na.Topmost = true;
         }
