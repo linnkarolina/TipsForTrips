@@ -152,6 +152,22 @@ namespace TipsForTripsDesktop
             }
         }
 
+        public void Tag_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
+                String username = drv[0].ToString();
+                Web_Users_Tag wut = new Web_Users_Tag(username/*, this, mainWindow*/);
+                wut.Show();
+                wut.Topmost = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
         public void Edit_Click(object sender, RoutedEventArgs e)
         {
             try

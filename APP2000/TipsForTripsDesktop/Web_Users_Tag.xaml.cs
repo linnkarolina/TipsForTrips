@@ -20,18 +20,16 @@ using System.Windows.Controls.Primitives;
 namespace TipsForTripsDesktop
 {
     /// <summary>
-    /// Interaction logic for Admin_Tag.xaml
+    /// Interaction logic for Web_Users_Tag.xaml
     /// </summary>
-    public partial class Admin_Tag : Window
+    public partial class Web_Users_Tag : Window
     {
-
         private string searchText;
-        private string user;
+        private string username;
         private BrushConverter borderBrushConverter = new BrushConverter();
-
-        public Admin_Tag(string username)
+        public Web_Users_Tag(string user)
         {
-            user = username;
+            username = user;
             InitializeComponent();
             TagTable();
             searchText = Search_Bar.Text;
@@ -54,9 +52,9 @@ namespace TipsForTripsDesktop
                 string query = ConnectToDatabase("SELECT tag FROM tag ORDER BY tag LIMIT " + i + ",1;");
                 row[1] = query;
 
-                for (int o = 0; o < DatabaseCount("SELECT count(*) FROM admin_tag where username = '" + user + "';"); o++)
+                for (int o = 0; o < DatabaseCount("SELECT count(*) FROM user_tag where username = '" + username + "';"); o++)
                 {
-                    if (query == ConnectToDatabase("SELECT tag FROM admin_tag WHERE username = '" + user + "' LIMIT " + o + ",1;"))
+                    if (query == ConnectToDatabase("SELECT tag FROM user_tag WHERE username = '" + username + "' LIMIT " + o + ",1;"))
                     {
                         row[0] = true;
                         break;
@@ -84,12 +82,12 @@ namespace TipsForTripsDesktop
                 string tag = drv.Row.ItemArray[1].ToString();
                 if (drv.Row.ItemArray[0].ToString() == "True")
                 {
-                    ConnectToDatabase("DELETE FROM admin_tag WHERE username = '" + user + "' AND tag = '" + tag + "';");
+                    ConnectToDatabase("DELETE FROM user_tag WHERE username = '" + username + "' AND tag = '" + tag + "';");
                     TagTable();
                 }
                 else if (drv.Row.ItemArray[0].ToString() == "False")
                 {
-                    ConnectToDatabase("INSERT INTO admin_tag VALUES ('" + tag + "','" + user + "');");
+                    ConnectToDatabase("INSERT INTO user_tag VALUES ('" + tag + "','" + username + "');");
                     TagTable();
                 }
             }
@@ -128,7 +126,7 @@ namespace TipsForTripsDesktop
             {
                 Table.UpdateLayout();
                 Table.ScrollIntoView(Table.Items[index]);
-                row = (DataGridRow) Table.ItemContainerGenerator.ContainerFromIndex(index);
+                row = (DataGridRow)Table.ItemContainerGenerator.ContainerFromIndex(index);
             }
             return row;
         }
@@ -261,8 +259,7 @@ namespace TipsForTripsDesktop
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            
-        }
 
+        }
     }
 }
