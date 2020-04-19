@@ -133,6 +133,9 @@
     <Compile Include="Web_users.xaml.cs">
       <DependentUpon>Web_users.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Web_Users_Tag.xaml.cs">
+      <DependentUpon>Web_Users_Tag.xaml</DependentUpon>
+    </Compile>
     <Page Include="Admin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -237,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Web_users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Web_Users_Tag.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

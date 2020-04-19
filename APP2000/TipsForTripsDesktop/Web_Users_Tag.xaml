@@ -1,14 +1,13 @@
-﻿<Page x:Class="TipsForTripsDesktop.Web_users"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:TipsForTripsDesktop"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Web_users" Loaded="Page_Loaded">
-    
-    <Page.Resources>
+﻿<Window x:Class="TipsForTripsDesktop.Web_Users_Tag"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TipsForTripsDesktop"
+        mc:Ignorable="d"
+        Title="Web_Users_Tag" Height="400" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
@@ -151,104 +150,113 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Page.Resources>
-    
+        <!-- Button 2 (checked) -->
+        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <!-- Hover properties -->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid>
-        <Border BorderThickness="3" BorderBrush="White" CornerRadius="10" Grid.RowSpan="2" Margin="20">
-            <Grid Background="White" Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="0.25*" />
-                    <RowDefinition Height="6*" />
-                    <RowDefinition Height="0.5*" />
-                </Grid.RowDefinitions>
-                <!-- Title -->
-                <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center">
-                            Web users
-                </TextBlock>
-                <!-- Content -->
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.5*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="0.5*" />
-                            <RowDefinition Height="6*" />
-                        </Grid.RowDefinitions>
-                        <!-- Button space -->
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="0.5*" />
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="6.5*" />
-                                <ColumnDefinition Width="0.25*" />
-                                <ColumnDefinition Width="1.25*" />
-                            </Grid.ColumnDefinitions>
-                            <!-- New user -->
-                            <Grid Grid.Column="0">
-                                <Button Click="New_User_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
-                                    <TextBlock FontSize="12">
-                                        New user
-                                    </TextBlock>
-                                </Button>
-                            </Grid>
-                            <!-- Refresh -->
-                            <Grid Grid.Column="2">
-                                <Button Click="Refresh_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
-                                    <TextBlock FontSize="12">
-                                        Refresh
-                                    </TextBlock>
-                                </Button>
-                            </Grid>
-                            <!-- Search bar -->
-                            <Grid Grid.Column="4">
-                                <TextBox x:Name="Search_Bar" Text="Search" BorderThickness="3" PreviewMouseLeftButtonUp="Search_MouseUp" VerticalAlignment="Stretch" Padding="5" FontSize="15" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
-                            </Grid>
-                            <!-- Search button -->
-                            <Grid Grid.Column="6">
-                                <Button Click="Search_Click" Content="&#128269;" FontSize="17" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
-                                 
-                                </Button>
-                            </Grid>
+        <Grid Background="White" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="6*" />
+            </Grid.RowDefinitions>
+            <!-- Title -->
+            <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center">
+                User tags
+            </TextBlock>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="0.7*" />
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="0.7*" />
+                        <RowDefinition Height="0.5*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <!-- Search bar -->
+                        <Grid Grid.Column="0">
+                            <TextBox x:Name="Search_Bar" Text="Search" BorderThickness="3" PreviewMouseLeftButtonUp="Search_MouseUp" VerticalAlignment="Stretch" Padding="5" FontSize="15" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}"/>
                         </Grid>
-                        <!-- Table -->
-                        <TextBlock Grid.Row="2" Text="{Binding}" VerticalAlignment="Bottom" FontSize="20" Foreground="Red" />
-                        <DataGrid x:Name="Table" Grid.Row="3" BorderThickness="0" IsReadOnly="True" Background="White">
-                            <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Tags">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button x:Name="Tag_Button" Content="Tag" Click="Tag_Click" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Edit">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button x:Name="Edit_Button" Content="Edit" Click="Edit_Click" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Delete">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button x:Name="Delete_Button" Content="Delete" Click="Delete_Click" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <!-- Search button -->
+                        <Grid Grid.Column="2">
+                            <Button Click="Search_Click" Content="&#128269;" FontSize="17" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
+
+                            </Button>
+                        </Grid>
+                    </Grid>
+                    <!-- Table -->
+                    <DataGrid x:Name="Table" Grid.Row="3" BorderThickness="0" IsReadOnly="True" Background="White" MouseUp="CheckedChanged">
+                        <!--<DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Checked" Visibility="Visible">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid Loaded="Grid_Loaded">
+                                            <Button x:Name="Button_Checked" Background="White" Click="Checked_Click" Style="{DynamicResource ButtonStyle2}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>-->
+                    </DataGrid>
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.75*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="0.75*" />
+                        </Grid.ColumnDefinitions>
+                        <!-- Done -->
+                        <Button Grid.Column="1" Click="Done_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" FontSize="13" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
+                            Done
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>
-        </Border>
+        </Grid>
     </Grid>
-</Page>
+</Window>
