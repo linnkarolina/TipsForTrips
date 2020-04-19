@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\APP2000",
-    "\\APP2000\\TipsForTripsDesktop"
+    "\\APP2000\\TipsForTripsDesktop",
+    "\\APP2000\\TipsForTripsDesktop\\Images",
+    "\\APP2000\\TipsForTripsDesktop\\Images\\Logo"
   ],
-  "SelectedNode": "\\APP2000\\TipsForTripsDesktop",
+  "SelectedNode": "\\APP2000\\TipsForTripsDesktop\\Images\\Logo\\tree.png",
   "PreviewInSolutionExplorer": false
 }
