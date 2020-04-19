@@ -291,6 +291,7 @@ namespace TipsForTripsDesktop
             Showed_Image.Source = image.Source;
         }
 
+        //=========================================================================================================================================================
         public void Add_Image_Click(object sender, RoutedEventArgs e)
         {
             Image img = new Image();
@@ -337,6 +338,7 @@ namespace TipsForTripsDesktop
                     break;
             }
         }
+        //=========================================================================================================================================================
 
         public string ConnectToDatabase(string query)
         {
