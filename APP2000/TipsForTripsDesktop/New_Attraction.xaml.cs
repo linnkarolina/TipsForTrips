@@ -25,10 +25,11 @@ namespace TipsForTripsDesktop
     public partial class New_Attraction : Window
     {
 
-        
+        private Attractions attractions;
 
-        public New_Attraction()
+        public New_Attraction(Attractions a)
         {
+            attractions = a;
             InitializeComponent();
             Big_Image();
             Show_Cities();
@@ -91,7 +92,6 @@ namespace TipsForTripsDesktop
                 {
                     Image img = (Image)Panel_Image.Children[0];
                     ImageSource imageSource = img.Source;
-                    // ImageSource imageSource = new BitmapImage(new Uri("pack:/APP2000,,/Images/"));
                     Showed_Image.Source = imageSource;
                     var bc = new BrushConverter();
                     Image_Background.Background = (Brush)bc.ConvertFrom("#FFFFFF");
@@ -106,11 +106,6 @@ namespace TipsForTripsDesktop
             {
                 MessageBox.Show(ex.Message.ToString());
             }
-        }
-
-        private void Small_Image_Click()
-        {
-
         }
 
         // Enter animation
@@ -172,9 +167,7 @@ namespace TipsForTripsDesktop
 
                         byte[] bits = new byte[height * stride];
                         bmp.CopyPixels(bits, stride, 0);
-                        MessageBox.Show(bmp.ToString());
                         imageInBits[i] = bmp;
-                        MessageBox.Show(imageInBits[i].ToString());
                     }
                     catch (Exception ex)
                     {
@@ -211,6 +204,8 @@ namespace TipsForTripsDesktop
                         ConnectToDatabase("INSERT INTO image VALUES (null,'" + trip_ID + "','" + imageInBits[i] + "');");
                     }
                     ConnectToDatabase("INSERT INTO trip_with_type VALUES ('" + trip_ID + "','" + type_of_trip + "');");
+                    attractions.AttractionTable();
+                    this.Close();
                 }
             }
             catch (Exception ex)
