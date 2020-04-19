@@ -497,7 +497,7 @@
                                     <ComboBox x:Name="City" Text="Select city" IsReadOnly="True" IsEditable="True" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
                                     <TextBlock Text="Type of trip *" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
                                     <ComboBox x:Name="Type_Of_Trip" Text="Select type" IsReadOnly="True" IsEditable="True" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
-                                    <TextBlock Text="Length *" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBlock Text="Length in km *" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
                                     <TextBox x:Name="Length" Text="" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                                     <TextBlock Text="Difficulty *" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
                                     <TextBox x:Name="Difficulty" Text="" Grid.Row="7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />

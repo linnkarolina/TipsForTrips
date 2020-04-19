@@ -55,7 +55,7 @@ namespace TipsForTripsDesktop
 
         private void Square_Four()
         {
-            int totalAdminUsers = DatabaseCount("SELECT Count(*) FROM admin_inbox;");
+            int totalAdminUsers = DatabaseCount("SELECT Count(*) FROM admin_inbox WHERE isanswered = 0;");
             Square_4.Text = totalAdminUsers.ToString();
         }
 
