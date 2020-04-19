@@ -74,7 +74,7 @@ namespace TipsForTripsDesktop
                 string description = ConnectToDatabase(query);
                 Description.Text = description;
 
-                query = "SELECT imagw FROM image WHERE trip_ID = '" + trip_ID + "';";
+                query = "SELECT image FROM image WHERE trip_ID = '" + trip_ID + "';";
                 string image = ConnectToDatabase(query);
                 Description.Text = description;
             }
