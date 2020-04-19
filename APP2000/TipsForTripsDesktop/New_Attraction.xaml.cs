@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,7 +72,7 @@ namespace TipsForTripsDesktop
                 while (dr.Read())
                 {
                     string city = dr.GetString(0);
-                    City.Items.Add(city);
+                    Type_Of_Trip.Items.Add(city);
                 }
 
                 Con.Close();
@@ -142,7 +143,80 @@ namespace TipsForTripsDesktop
 
         public void Save_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hei");
+            try
+            {
+                string name = Name.Text;
+                string desctiption = Description.Text;
+                string startLon = StartLon.Text;
+                string startLat = StartLat.Text;
+                string endLon = EndLon.Text;
+                string endLat = EndLat.Text;
+                string city = City.Text;
+                string type_of_trip = Type_Of_Trip.Text;
+                string length = Length.Text;
+                string difficulty = Difficulty.Text;
+                string website = Website.Text;
+                Image[] img = new Image[Panel_Image.Children.Count];
+                object[] imageInBits = new object[Panel_Image.Children.Count];
+                
+                for (int i = 0; i < Panel_Image.Children.Count; i++)
+                {
+                    img[i] = (Image)Panel_Image.Children[i];
+                    try
+                    {
+                        var bmp = img[i].Source as BitmapImage;
+
+                        int height = bmp.PixelHeight;
+                        int width = bmp.PixelWidth;
+                        int stride = width * ((bmp.Format.BitsPerPixel + 7) / 8);
+
+                        byte[] bits = new byte[height * stride];
+                        bmp.CopyPixels(bits, stride, 0);
+                        MessageBox.Show(bmp.ToString());
+                        imageInBits[i] = bmp;
+                        MessageBox.Show(imageInBits[i].ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                
+                // Validation
+                if (name == "" || desctiption == "" || startLon == "" || startLat == "" || city == "Select city" || type_of_trip == "Select type" || length == "" || difficulty == "")
+                {
+                    MessageBox.Show("You need to fill out all the required fields (marked with *).", "Oops...");
+                }
+                else
+                {
+                    if (website == "")
+                    {
+                        ConnectToDatabase("INSERT INTO trip VALUES (null,'" + name + "','" + length + "','" + difficulty + "','" + desctiption + "','" + city + "',null);");
+                    }
+                    else
+                    {
+                        ConnectToDatabase("INSERT INTO trip VALUES (null,'" + name + "','" + length + "','" + difficulty + "','" + desctiption + "','" + city + "','" + website + "');");
+                    }
+                    string trip_ID = ConnectToDatabase("SELECT MAX(trip_ID) FROM trip;");
+                    if (endLon == "" || endLat == "")
+                    {
+                        ConnectToDatabase("INSERT INTO map_coordinates VALUES ('" + trip_ID + "','" + startLat + "','" + startLon + "',null,null);");
+                    }
+                    else
+                    {
+                        ConnectToDatabase("INSERT INTO map_coordinates VALUES ('" + trip_ID + "','" + startLat + "','" + startLon + "','" + endLat + "','" + endLon + "');");
+                    }
+                    for (int i = 0; i < Panel_Image.Children.Count; i++)
+                    {
+                        ConnectToDatabase("INSERT INTO image VALUES (null,'" + trip_ID + "','" + imageInBits[i] + "');");
+                    }
+                    ConnectToDatabase("INSERT INTO trip_with_type VALUES ('" + trip_ID + "','" + type_of_trip + "');");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
 
         public void Cancel_Click(object sender, RoutedEventArgs e)

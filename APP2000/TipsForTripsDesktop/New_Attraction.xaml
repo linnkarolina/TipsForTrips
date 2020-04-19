@@ -494,12 +494,12 @@
                                     </Grid.RowDefinitions>
                                     <!-- General information -->
                                     <TextBlock Text="City *" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
-                                    <ComboBox x:Name="City" Text="Select city" IsEditable="True" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
+                                    <ComboBox x:Name="City" Text="Select city" IsReadOnly="True" IsEditable="True" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
                                     <TextBlock Text="Type of trip *" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
-                                    <ComboBox x:Name="Type_Of_Trip" Text="Select type" IsEditable="True" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
-                                    <TextBlock Text="Length" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <ComboBox x:Name="Type_Of_Trip" Text="Select type" IsReadOnly="True" IsEditable="True" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource ComboBoxStyle1}" />
+                                    <TextBlock Text="Length *" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
                                     <TextBox x:Name="Length" Text="" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
-                                    <TextBlock Text="Difficulty" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
+                                    <TextBlock Text="Difficulty *" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
                                     <TextBox x:Name="Difficulty" Text="" Grid.Row="7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                                 </Grid>
                                 <Grid>
@@ -527,7 +527,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <TextBlock Text="Name *" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" />
-                            <TextBox x:Name="name" Text="" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                            <TextBox x:Name="Name" Text="" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                         </Grid>
                         <!-- Description -->
                         <Grid Grid.Row="1">
@@ -536,7 +536,7 @@
                                 <RowDefinition Height="4*" />
                             </Grid.RowDefinitions>
                             <TextBlock Text="Description *" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20" />
-                            <TextBox x:Name="desciption" Text="" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Row="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                            <TextBox x:Name="Description" Text="" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Row="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                         </Grid>
                     </Grid>
                     <!-- Right square -->
