@@ -473,13 +473,13 @@
                                     </Grid.RowDefinitions>
                                     <!-- Map Coordinates -->
                                     <TextBlock Text="Start longitude *" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
-                                    <TextBox x:Name="StartLon" Text="" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                    <TextBox x:Name="StartLon" Text="{Binding startLongitude, Mode=OneWay}" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                                     <TextBlock Text="Start latitude *" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
-                                    <TextBox x:Name="StartLat" Text="" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                    <TextBox x:Name="StartLat" Text="{Binding startLatitude, Mode=OneWay}" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                                     <TextBlock Text="End longitude" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
-                                    <TextBox x:Name="EndLon" Text="" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                    <TextBox x:Name="EndLon" Text="{Binding endLongitude, Mode=OneWay}" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                                     <TextBlock Text="End latitude" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" />
-                                    <TextBox x:Name="EndLat" Text="" Grid.Row="7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
+                                    <TextBox x:Name="EndLat" Text="{Binding endLatitude, Mode=OneWay    }" Grid.Row="7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="#56c596" FontSize="15" Style="{DynamicResource TextBoxStyle1}" />
                                 </Grid>
                                 <Grid>
                                     <Grid.RowDefinitions>

@@ -66,6 +66,10 @@ namespace TipsForTripsDesktop
                 string difficulty = ConnectToDatabase(query);
                 Difficulty.Text = difficulty;
 
+                query = "SELECT website FROM trip WHERE trip_ID = '" + trip_ID + "';";
+                string website = ConnectToDatabase(query);
+                Website.Text = website;
+
                 query = "SELECT trip_name FROM trip WHERE trip_ID = '" + trip_ID + "';";
                 string name = ConnectToDatabase(query);
                 Name.Text = name;
