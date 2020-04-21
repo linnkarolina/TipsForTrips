@@ -21,6 +21,7 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class New_Tag : Window
     {
+
         Tags tag;
 
         public New_Tag(Tags tags)
