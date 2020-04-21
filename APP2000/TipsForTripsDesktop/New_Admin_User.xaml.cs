@@ -22,13 +22,11 @@ namespace TipsForTripsDesktop
     public partial class New_Admin_User : Window
     {
 
-        private Admin admin_users;
-        private MainWindow mainWindow;
+        private Admin admin_User;
 
-        public New_Admin_User(Admin au, MainWindow mw)
+        public New_Admin_User(Admin au)
         {
-            admin_users = au;
-            mainWindow = mw;
+            admin_User = au;
             InitializeComponent();
             Show_Cities();
         }
@@ -109,7 +107,7 @@ namespace TipsForTripsDesktop
                 {
                     ConnectToDatabase("INSERT INTO admin VALUES('" + Username.Text + "','" + Password.Text + "','" + City.Text + "'," +
                     "'" + Email.Text + "','" + Full_Name.Text + "','" + Phone_Number.Text + "');");
-                    admin_users.UserTable();
+                    admin_User.UserTable();
                     this.Close();
                 }
             }
