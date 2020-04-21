@@ -24,7 +24,7 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class Basic_info : Page
     {
-        MainWindow mainWindow;
+        private MainWindow mainWindow;
 
         public Basic_info(MainWindow mw)
         {
