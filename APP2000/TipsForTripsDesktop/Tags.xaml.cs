@@ -25,12 +25,9 @@ namespace TipsForTripsDesktop
     {
 
         private string searchText;
-        private MainWindow mainWindow;
 
-        public Tags(MainWindow mw)
+        public Tags()
         {
-
-            mainWindow = mw;
             InitializeComponent();
             TagTable();
             searchText = Search_Bar.Text;
@@ -220,11 +217,6 @@ namespace TipsForTripsDesktop
             MyCon.Close();
 
             return total;
-        }
-
-        private void Table_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
-        {
-
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

@@ -380,7 +380,7 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Tags_Button))
             {
-                Content_Frame.Content = new Tags(this);
+                Content_Frame.Content = new Tags();
             }
             else if (b.Equals(Type_Of_Trip_Button))
             {
