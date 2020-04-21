@@ -24,6 +24,7 @@ namespace TipsForTripsDesktop
     public partial class Attractions : Page
     {
         private string searchText;
+
         public Attractions()
         {
             InitializeComponent();
