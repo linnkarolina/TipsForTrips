@@ -26,7 +26,7 @@ namespace TipsForTripsDesktop
     {
         private string searchText;
         private string trip_ID;
-        private BrushConverter borderBrushConverter = new BrushConverter();
+
         public Attraction_Tag(string ID)
         {
             trip_ID = ID;
@@ -255,11 +255,6 @@ namespace TipsForTripsDesktop
             MyCon.Close();
 
             return total;
-        }
-
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
