@@ -22,7 +22,9 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class Password : Page
     {
+
         private string user;
+
         public Password(string username) {
             user = username;
             InitializeComponent();
