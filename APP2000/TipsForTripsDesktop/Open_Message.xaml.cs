@@ -28,10 +28,10 @@ namespace TipsForTripsDesktop
             message_ID = ID;
             mainWindow = mw;
             InitializeComponent();
-            setTextBoxContent();
+            SetTextBoxContent();
         }
 
-        private void setTextBoxContent()
+        private void SetTextBoxContent()
         {
             string from = ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE message_ID ='" + message_ID + "';");
             string subject = ConnectToDatabase("SELECT subject FROM admin_inbox WHERE message_ID ='" + message_ID + "';");
