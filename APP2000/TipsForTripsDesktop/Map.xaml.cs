@@ -22,7 +22,6 @@ namespace TipsForTripsDesktop
     /// </summary>
     public partial class Map : Page
     {
-        private MainWindow mainWindow;
         private Pushpin pinStart = null;
         private Pushpin pinEnd = null;
         
@@ -31,9 +30,8 @@ namespace TipsForTripsDesktop
         private double endLatitude = 0;
         private double endLongitude = 0;
 
-        public Map(MainWindow mw)
+        public Map()
         {
-            mainWindow = mw;
             InitializeComponent();
         }
 
@@ -114,7 +112,7 @@ namespace TipsForTripsDesktop
                     // pin.Content = counter += 10;
                     pinStart = new Pushpin();
                     pinStart.Location = pinLocation;
-                    pinStart.MouseDown += new MouseButtonEventHandler(pin_MouseDown);
+                    pinStart.MouseDown += new MouseButtonEventHandler(Pin_MouseDown);
                     pinStart.ToolTip = startLatitude + ", " + startLongitude;
                     pinStart.Background = new SolidColorBrush(Color.FromRgb(86, 197, 150));
                     pinStart.FontSize = 10;
@@ -130,7 +128,7 @@ namespace TipsForTripsDesktop
                     // pin.Content = counter += 10;
                     pinEnd = new Pushpin();
                     pinEnd.Location = pinLocation;
-                    pinEnd.MouseDown += new MouseButtonEventHandler(pin_MouseDown);
+                    pinEnd.MouseDown += new MouseButtonEventHandler(Pin_MouseDown);
                     pinEnd.ToolTip = endLatitude + ", " + endLongitude;
                     pinEnd.Background = new SolidColorBrush(Color.FromRgb(86, 197, 150));
                     pinEnd.FontSize = 10;
@@ -170,7 +168,7 @@ namespace TipsForTripsDesktop
                 // pin.Content = counter += 10;
                 pinStart = new Pushpin();
                 pinStart.Location = pinLocation;
-                pinStart.MouseDown += new MouseButtonEventHandler(pin_MouseDown);
+                pinStart.MouseDown += new MouseButtonEventHandler(Pin_MouseDown);
                 pinStart.ToolTip = latitude + ", " + longitude;
                 pinStart.Background = new SolidColorBrush(Color.FromRgb(86, 197, 150));
                 pinStart.FontSize = 10;
@@ -191,7 +189,7 @@ namespace TipsForTripsDesktop
                 // pin.Content = counter += 10;
                 pinEnd = new Pushpin();
                 pinEnd.Location = pinLocation;
-                pinEnd.MouseDown += new MouseButtonEventHandler(pin_MouseDown);
+                pinEnd.MouseDown += new MouseButtonEventHandler(Pin_MouseDown);
                 pinEnd.ToolTip = latitude + ", " + longitude;
                 pinEnd.Background = new SolidColorBrush(Color.FromRgb(86, 197, 150));
                 pinEnd.FontSize = 10;
@@ -231,7 +229,7 @@ namespace TipsForTripsDesktop
             TheMap.Children.Add(routeLine);*/
         }
 
-        private void pin_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Pin_MouseDown(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this pin?", "Delete pin", MessageBoxButton.YesNo);

@@ -376,7 +376,7 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Map_Button))
             {
-                Content_Frame.Content = new Map(this);
+                Content_Frame.Content = new Map();
             }
             else if (b.Equals(Tags_Button))
             {
