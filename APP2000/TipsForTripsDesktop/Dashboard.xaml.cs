@@ -23,7 +23,7 @@ namespace TipsForTripsDesktop
     public partial class Dashboard : Page
     {
 
-        MainWindow mainWindow;
+        private MainWindow mainWindow;
 
         public Dashboard(MainWindow mw)
         {
