@@ -221,6 +221,13 @@
                         <!-- Table -->
                         <DataGrid x:Name="Table" Grid.Row="3" BorderThickness="0" IsReadOnly="True" Background="White">
                             <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Tags">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button x:Name="Tag_Button" Content="Tags" Click="Tag_Click"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Edit">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

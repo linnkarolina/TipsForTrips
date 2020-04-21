@@ -25,7 +25,11 @@ namespace TipsForTripsDesktop
     public partial class New_Attraction : Window
     {
 
-        private Attractions attractions;
+        private Attractions attractions = null;
+        private string startLatitude = "";
+        private string startLongitude = "";
+        private string endLatitude = "";
+        private string endLongitude = "";
 
         public New_Attraction(Attractions a)
         {
@@ -34,6 +38,46 @@ namespace TipsForTripsDesktop
             Big_Image();
             Show_Cities();
             Show_Type();
+        }
+
+        public New_Attraction()
+        {
+            InitializeComponent();
+            Big_Image();
+            Show_Cities();
+            Show_Type();
+        }
+
+        public New_Attraction(double startLat, double startLon)
+        {
+            startLatitude = startLat.ToString();
+            startLongitude = startLon.ToString();
+            InitializeComponent();
+            Big_Image();
+            Show_Cities();
+            Show_Type();
+            setCoordinates();
+        }
+
+        public New_Attraction(double startLat, double startLon, double endLat, double endLon)
+        {
+            startLatitude = startLat.ToString();
+            startLongitude = startLon.ToString();
+            endLatitude = endLat.ToString();
+            endLongitude = endLon.ToString();
+            InitializeComponent();
+            Big_Image();
+            Show_Cities();
+            Show_Type();
+            setCoordinates();
+        }
+
+        private void setCoordinates()
+        {
+            StartLat.Text = startLatitude;
+            StartLon.Text = startLongitude;
+            EndLat.Text = endLatitude;
+            EndLon.Text = endLongitude;
         }
 
         private void Show_Cities()
@@ -204,7 +248,10 @@ namespace TipsForTripsDesktop
                         ConnectToDatabase("INSERT INTO image VALUES (null,'" + trip_ID + "','" + imageInBits[i] + "');");
                     }
                     ConnectToDatabase("INSERT INTO trip_with_type VALUES ('" + trip_ID + "','" + type_of_trip + "');");
-                    attractions.AttractionTable();
+                    if (attractions != null)
+                    {
+                        attractions.AttractionTable();
+                    }
                     this.Close();
                 }
             }

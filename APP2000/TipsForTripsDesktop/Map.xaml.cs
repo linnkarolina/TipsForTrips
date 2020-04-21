@@ -66,7 +66,25 @@ namespace TipsForTripsDesktop
 
         private void Button_Click(object sender, System.EventArgs e)
         {
-            mainWindow.Content_Frame.Content = new Attractions();
+            // mainWindow.Content_Frame.Content = new Attractions();
+            if (startLatitude != 0 && startLongitude != 0 && endLatitude == 0 && endLongitude == 0)
+            {
+                New_Attraction na = new New_Attraction(startLatitude, startLongitude);
+                na.Show();
+                na.Topmost = true;
+            }
+            else if (startLatitude != 0 && startLongitude != 0 && endLatitude != 0 && endLongitude != 0)
+            {
+                New_Attraction na = new New_Attraction(startLatitude, startLongitude, endLatitude, endLongitude);
+                na.Show();
+                na.Topmost = true;
+            }
+            else
+            {
+                New_Attraction na = new New_Attraction();
+                na.Show();
+                na.Topmost = true;
+            }
         }
 
         private void Mode_Click(object sender, RoutedEventArgs e)
@@ -146,6 +164,8 @@ namespace TipsForTripsDesktop
                 Location pinLocation = TheMap.ViewportPointToLocation(mousePosition);
                 var latitude = pinLocation.Latitude;
                 var longitude = pinLocation.Longitude;
+                startLongitude = longitude;
+                startLatitude = latitude;
 
                 // pin.Content = counter += 10;
                 pinStart = new Pushpin();
@@ -165,6 +185,8 @@ namespace TipsForTripsDesktop
                 Location pinLocation = TheMap.ViewportPointToLocation(mousePosition);
                 var latitude = pinLocation.Latitude;
                 var longitude = pinLocation.Longitude;
+                endLongitude = longitude;
+                endLatitude = latitude;
 
                 // pin.Content = counter += 10;
                 pinEnd = new Pushpin();
@@ -223,10 +245,14 @@ namespace TipsForTripsDesktop
                         if (sender == pinStart)
                         {
                             pinStart = null;
+                            startLatitude = 0;
+                            startLongitude = 0;
                         }
                         if (sender == pinEnd)
                         {
                             pinEnd = null;
+                            endLatitude = 0;
+                            endLongitude = 0;
                         }
                     }
                     catch (Exception ex)

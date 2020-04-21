@@ -181,17 +181,17 @@
                     </Grid.RowDefinitions>
                     <!-- To -->
                     <TextBlock x:Name="To_Text" Grid.Row="0" Text="To:" FontSize="15"/>
-                    <TextBox x:Name="To" Grid.Row="1" BorderThickness="3" BorderBrush="#56c596">
+                    <TextBox x:Name="To" Grid.Row="1" BorderThickness="3" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}">
                         
                     </TextBox>
                     <!-- Subject -->
                     <TextBlock x:Name="Subject_Text" Grid.Row="2" Text="Subject:" FontSize="15"/>
-                    <TextBox x:Name="Subject" Grid.Row="3" BorderThickness="3" BorderBrush="#56c596">
+                    <TextBox x:Name="Subject" Grid.Row="3" BorderThickness="3" BorderBrush="#56c596" Style="{DynamicResource TextBoxStyle1}">
 
                     </TextBox>
                     <!-- Message -->
                     <TextBlock x:Name="Message_Text" Grid.Row="4" Text="Message:" FontSize="15"/>
-                    <TextBox x:Name="Message" Grid.Row="5" BorderThickness="3" BorderBrush="#56c596" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto">
+                    <TextBox x:Name="Message" Grid.Row="5" BorderThickness="3" BorderBrush="#56c596" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Style="{DynamicResource TextBoxStyle1}">
 
                     </TextBox>
                     <!-- Buttons -->

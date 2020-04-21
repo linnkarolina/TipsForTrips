@@ -160,7 +160,7 @@
                 <RowDefinition Height="6*" />
             </Grid.RowDefinitions>
             <!-- Title -->
-            <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center"><Run Text="New message"/></TextBlock>
+            <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center"><Run Text="Open message"/></TextBlock>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -181,13 +181,13 @@
                     </Grid.RowDefinitions>
                     <!-- From -->
                     <TextBlock x:Name="From_Text" Grid.Row="0" Text="From:" FontSize="15"/>
-                    <TextBox x:Name="From" Grid.Row="1" Text="{Binding from, Mode=OneWay}" BorderThickness="3" BorderBrush="#56c596" IsReadOnly="True"/>
+                    <TextBox x:Name="From" Grid.Row="1" Text="{Binding from, Mode=OneWay}" BorderThickness="3" BorderBrush="#56c596" IsReadOnly="True" Style="{DynamicResource TextBoxStyle1}"/>
                     <!-- Subject -->
                     <TextBlock x:Name="Subject_Text" Grid.Row="2" Text="Subject:" FontSize="15"/>
-                    <TextBox x:Name="Subject" Grid.Row="3" Text="{Binding subject, Mode=OneWay}" BorderThickness="3" BorderBrush="#56c596" IsReadOnly="True"/>
+                    <TextBox x:Name="Subject" Grid.Row="3" Text="{Binding subject, Mode=OneWay}" BorderThickness="3" BorderBrush="#56c596" IsReadOnly="True" Style="{DynamicResource TextBoxStyle1}"/>
                     <!-- Message -->
                     <TextBlock x:Name="Message_Text" Grid.Row="4" Text="Message:" FontSize="15"/>
-                    <TextBox x:Name="Message" Grid.Row="5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="{Binding message, Mode=OneWay}" BorderThickness="3" BorderBrush="#56c596" IsReadOnly="True"/>
+                    <TextBox x:Name="Message" Grid.Row="5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="{Binding message, Mode=OneWay}" BorderThickness="3" BorderBrush="#56c596" IsReadOnly="True" Style="{DynamicResource TextBoxStyle1}"/>
                     <!-- Buttons -->
                     <Grid Grid.Row="7">
                         <Grid.ColumnDefinitions>

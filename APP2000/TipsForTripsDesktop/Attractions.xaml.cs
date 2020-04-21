@@ -93,6 +93,22 @@ namespace TipsForTripsDesktop
             b.Background.BeginAnimation(SolidColorBrush.ColorProperty, buttonAnimation);
         }
 
+        public void Tag_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
+                String trip_ID = drv[0].ToString();
+                Attraction_Tag at = new Attraction_Tag(trip_ID/*, this, mainWindow*/);
+                at.Show();
+                at.Topmost = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
         public void New_Attraction_Click(object sender, RoutedEventArgs e)
         {
             New_Attraction na = new New_Attraction(this);
@@ -138,23 +154,6 @@ namespace TipsForTripsDesktop
                     searchText = Search_Bar.Text;
                     MessageBox.Show("No results were found", "Oops...");
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
-        }
-
-        // ===========================================================Tag_Click===========================================================
-        public void Tag_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
-                String username = drv[0].ToString();
-                Admin_Tag at = new Admin_Tag(username/*, this, mainWindow*/);
-                at.Show();
-                at.Topmost = true;
             }
             catch (Exception ex)
             {
