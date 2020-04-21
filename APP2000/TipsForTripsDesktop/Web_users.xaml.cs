@@ -25,11 +25,9 @@ namespace TipsForTripsDesktop
     {
 
         private string searchText;
-        private MainWindow mainWindow;
 
-        public Web_users(MainWindow mw)
+        public Web_users()
         {
-            mainWindow = mw;
             InitializeComponent();
             UserTable();
             searchText = Search_Bar.Text;
@@ -179,7 +177,7 @@ namespace TipsForTripsDesktop
                 String email = drv[3].ToString();
                 String full_name = drv[4].ToString();
                 String phone_NR = drv[5].ToString();
-                Edit_Web_User ewu = new Edit_Web_User(username, this, mainWindow);
+                Edit_Web_User ewu = new Edit_Web_User(username, this);
                 ewu.Show();
                 ewu.Topmost = true;
             }

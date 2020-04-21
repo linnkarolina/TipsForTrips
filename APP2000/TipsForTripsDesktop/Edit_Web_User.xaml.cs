@@ -23,19 +23,17 @@ namespace TipsForTripsDesktop
     {
 
         private string username;
-        private Web_users Web_users;
-        private MainWindow mainWindow;
+        private Web_users web_User;
 
-        public Edit_Web_User(string user, Web_users wu, MainWindow mw)
+        public Edit_Web_User(string user, Web_users wu)
         {
             username = user;
-            Web_users = wu;
-            mainWindow = mw;
+            web_User = wu;
             InitializeComponent();
-            setTextBoxContent();
+            SetTextBoxContent();
         }
 
-        private void setTextBoxContent()
+        private void SetTextBoxContent()
         {
             string query = "SELECT username FROM user WHERE username = '" + username + "';";
             string Name = ConnectToDatabase(query);
@@ -157,7 +155,7 @@ namespace TipsForTripsDesktop
                     string query = "UPDATE user SET username = '" + user + "', password = '" + password + "', full_name = '" + full_name + "', email = '" + email + "'," +
                         " city = '" + city + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";
                     ConnectToDatabase(query);
-                    Web_users.UserTable();
+                    web_User.UserTable();
                     this.Close();
                 }
                 

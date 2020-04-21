@@ -388,7 +388,7 @@ namespace TipsForTripsDesktop
             }
             else if (b.Equals(Web_Button))
             {
-                Content_Frame.Content = new Web_users(this);
+                Content_Frame.Content = new Web_users();
             }
             else if (b.Equals(Admin_Button))
             {
