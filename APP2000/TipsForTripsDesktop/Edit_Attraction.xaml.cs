@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,13 +75,52 @@ namespace TipsForTripsDesktop
                 string description = ConnectToDatabase(query);
                 Description.Text = description;
 
-                query = "SELECT imagw FROM image WHERE trip_ID = '" + trip_ID + "';";
-                string image = ConnectToDatabase(query);
-                Description.Text = description;
+                object[] bits = new object[DatabaseCount("SELECT * FROM image WHERE trip_ID = '" + trip_ID + "';")];
+                object[] image = new object[DatabaseCount("SELECT * FROM image WHERE trip_ID = '" + trip_ID + "';")];
+                for (int i = 0; i < DatabaseCount("SELECT * FROM image WHERE trip_ID = '" + trip_ID + "';"); i++)
+                {
+                    query = "SELECT image FROM image WHERE trip_ID = '" + trip_ID + "' LIMIT " + i + ",1;";
+                    bits[i] = ConnectToDatabaseImage(query);
+                    image[i] = GetBitmapImageFromBytes((byte[])bits[i]);
+                    Image img = new Image();
+                    Panel_Image.Children.Add(img);
+                    Panel_Image.Children[i] = (UIElement)image[i];
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private BitmapImage GetBitmapImageFromBytes(byte[] bytes)
+        {
+            BitmapImage btm;
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                btm = new BitmapImage();
+                btm.BeginInit();
+                btm.StreamSource = ms;
+                // Below code for caching is crucial.
+                btm.CacheOption = BitmapCacheOption.OnLoad;
+                btm.EndInit();
+                btm.Freeze();
+            }
+            return btm;
+        }
+
+        private System.Drawing.Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
+        {
+            // BitmapImage bitmapImage = new BitmapImage(new Uri("../Images/test.png", UriKind.Relative));
+
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
+                enc.Save(outStream);
+                System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(outStream);
+
+                return new System.Drawing.Bitmap(bitmap);
             }
         }
 
@@ -363,6 +403,65 @@ namespace TipsForTripsDesktop
             {
                 // Else make id = "" so you can later check it.
                 name = "";
+            }
+
+            MyCon.Close();
+
+            return name;
+        }
+
+        public int DatabaseCount(string query)
+        {
+            int total;
+
+            // Azure connection
+            /* 
+            MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
+            */
+
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            MySqlCommand cmd = new MySqlCommand(query, MyCon);
+            MyCon.Open();
+            var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
+            if (queryResult != null)
+            {
+                // If we have result, then convert it from object to string.
+                total = Convert.ToInt32(queryResult);
+            }
+            else
+            {
+                // Else make id = "" so you can later check it.
+                total = 0;
+            }
+
+            MyCon.Close();
+
+            return total;
+        }
+
+        public byte[] ConnectToDatabaseImage(string query)
+        {
+            byte[] name;
+
+            // Azure connection
+            /* 
+            MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
+            */
+
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=tipsfortrips;UID=root;PASSWORD=");
+            MySqlCommand cmd = new MySqlCommand(query, MyCon);
+            MyCon.Open();
+            var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
+            if (queryResult != null)
+            {
+                // If we have result, then convert it from object to string.
+
+                name = (byte[])queryResult;
+            }
+            else
+            {
+                // Else make id = "" so you can later check it.
+                name = null;
             }
 
             MyCon.Close();

@@ -97,6 +97,7 @@
     <Compile Include="Inbox.xaml.cs">
       <DependentUpon>Inbox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InMemoryRandomAccessStream.cs" />
     <Compile Include="Login_Window.xaml.cs">
       <DependentUpon>Login_Window.xaml</DependentUpon>
     </Compile>
