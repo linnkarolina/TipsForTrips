@@ -26,7 +26,7 @@ namespace TipsForTripsDesktop
     {
         private string searchText;
         private string username;
-        private BrushConverter borderBrushConverter = new BrushConverter();
+
         public Web_Users_Tag(string user)
         {
             username = user;
@@ -255,11 +255,6 @@ namespace TipsForTripsDesktop
             MyCon.Close();
 
             return total;
-        }
-
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
