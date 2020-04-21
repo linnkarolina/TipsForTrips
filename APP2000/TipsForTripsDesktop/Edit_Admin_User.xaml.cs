@@ -23,19 +23,19 @@ namespace TipsForTripsDesktop
     {
 
         private string username;
-        private Admin Admin_users;
+        private Admin admin_User;
         private MainWindow mainWindow;
 
         public Edit_Admin_User(string user, Admin au, MainWindow mw)
         {
             username = user;
-            Admin_users = au;
+            admin_User = au;
             mainWindow = mw;
             InitializeComponent();
-            setTextBoxContent();
+            SetTextBoxContent();
         }
 
-        private void setTextBoxContent()
+        private void SetTextBoxContent()
         {
             string query = "SELECT username FROM admin WHERE username = '" + username + "';";
             string Name = ConnectToDatabase(query);
@@ -158,7 +158,7 @@ namespace TipsForTripsDesktop
                         " city = '" + city + "', phone_NR = '" + phone_NR + "' WHERE username = '" + username + "' ;";
                     ConnectToDatabase(query);
                     mainWindow.adminName.DataContext = user;
-                    Admin_users.UserTable();
+                    admin_User.UserTable();
                     this.Close();
                 }
 
