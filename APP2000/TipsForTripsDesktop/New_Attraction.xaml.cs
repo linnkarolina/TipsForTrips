@@ -56,7 +56,7 @@ namespace TipsForTripsDesktop
             Big_Image();
             Show_Cities();
             Show_Type();
-            setCoordinates();
+            SetCoordinates();
         }
 
         public New_Attraction(double startLat, double startLon, double endLat, double endLon)
@@ -69,10 +69,10 @@ namespace TipsForTripsDesktop
             Big_Image();
             Show_Cities();
             Show_Type();
-            setCoordinates();
+            SetCoordinates();
         }
 
-        private void setCoordinates()
+        private void SetCoordinates()
         {
             StartLat.Text = startLatitude;
             StartLon.Text = startLongitude;
