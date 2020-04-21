@@ -22,10 +22,11 @@ namespace TipsForTripsDesktop
     public partial class New_Web_User : Window
     {
 
-        private Web_users Web_users;
+        private Web_users web_User;
+
         public New_Web_User(Web_users wu)
         {
-            Web_users = wu;
+            web_User = wu;
             InitializeComponent();
             Show_Cities();
         }
@@ -106,7 +107,7 @@ namespace TipsForTripsDesktop
                 {
                     ConnectToDatabase("INSERT INTO user VALUES('" + Username.Text + "','" + Password.Text + "','" + City.Text + "'," +
                     "'" + Email.Text + "','" + Full_Name.Text + "','" + Phone_Number.Text + "');");
-                    Web_users.UserTable();
+                    web_User.UserTable();
                     this.Close();
                 }
             }
