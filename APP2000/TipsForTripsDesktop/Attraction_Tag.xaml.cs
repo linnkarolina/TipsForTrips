@@ -119,18 +119,6 @@ namespace TipsForTripsDesktop
             return child;
         }
 
-        public DataGridRow GetRow(int index)
-        {
-            DataGridRow row = Table.ItemContainerGenerator.ContainerFromIndex(index) as DataGridRow;
-            if (row == null)
-            {
-                Table.UpdateLayout();
-                Table.ScrollIntoView(Table.Items[index]);
-                row = (DataGridRow)Table.ItemContainerGenerator.ContainerFromIndex(index);
-            }
-            return row;
-        }
-
         // Enter animation
         private void Button_Enter(object sender, System.EventArgs e)
         {
