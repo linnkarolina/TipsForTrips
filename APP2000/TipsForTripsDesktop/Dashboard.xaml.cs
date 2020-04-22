@@ -88,7 +88,7 @@ namespace TipsForTripsDesktop
 
         private void Button_Click_Square_One(object sender, System.EventArgs e)
         {
-            mainWindow.Content_Frame.Content = new Web_users(mainWindow);
+            mainWindow.Content_Frame.Content = new Web_users();
         }
 
         private void Button_Click_Square_Two(object sender, System.EventArgs e)
