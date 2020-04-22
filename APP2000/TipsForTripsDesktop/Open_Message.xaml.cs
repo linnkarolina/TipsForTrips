@@ -23,6 +23,7 @@ namespace TipsForTripsDesktop
     {
         private string message_ID;
         private MainWindow mainWindow;
+
         public Open_Message(string ID, MainWindow mw)
         {
             message_ID = ID;
