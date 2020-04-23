@@ -219,7 +219,7 @@
                             </Grid>
                         </Grid>
                         <!-- Table -->
-                        <DataGrid x:Name="Table" Grid.Row="3" BorderThickness="0" IsReadOnly="True" Background="White">
+                        <DataGrid x:Name="Table" Grid.Row="3" BorderThickness="0" HorizontalAlignment="Left" IsReadOnly="True" Background="White">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Delete">
                                     <DataGridTemplateColumn.CellTemplate>
