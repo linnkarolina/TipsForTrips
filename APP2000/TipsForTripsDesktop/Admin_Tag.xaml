@@ -233,26 +233,20 @@
                     </Grid>
                     <!-- Table -->
                     <DataGrid x:Name="Table" Grid.Row="3" BorderThickness="0" HorizontalAlignment="Left" IsReadOnly="True" Background="White" MouseUp="CheckedChanged">
-                        <!--<DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Checked" Visibility="Visible">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid Loaded="Grid_Loaded">
-                                            <Button x:Name="Button_Checked" Background="White" Click="Checked_Click" Style="{DynamicResource ButtonStyle2}" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>-->
+                       
                     </DataGrid>
                     <Grid Grid.Row="5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.75*" />
-                            <ColumnDefinition Width="1.5*" />
-                            <ColumnDefinition Width="0.75*" />
+                            <ColumnDefinition Width="1.25*" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="1.25*" />
                         </Grid.ColumnDefinitions>
+                        <!-- Refresh -->
+                        <Button Grid.Column="0" Click="Refresh_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" FontSize="13" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
+                            Refresh
+                        </Button>
                         <!-- Done -->
-                        <Button Grid.Column="1" Click="Done_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" FontSize="13" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
+                        <Button Grid.Column="2" Click="Done_Click" MouseEnter="Button_Enter" MouseLeave="Button_Leave" Background="#4296d6" Foreground="White" VerticalAlignment="Stretch" FontSize="13" BorderThickness="0" Style="{DynamicResource ButtonStyle1}">
                             Done
                         </Button>
                     </Grid>

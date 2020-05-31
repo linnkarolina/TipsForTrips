@@ -2,6 +2,8 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +34,8 @@ namespace TipsForTripsDesktop
             attractions = a;
             InitializeComponent();
             SetTextBoxContent();
+
+            Show_Image();
         }
 
         private void SetTextBoxContent() 
@@ -150,6 +154,32 @@ namespace TipsForTripsDesktop
             }
         }
 
+        private void Show_Image()
+        {
+            /*MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=tipsfortrips;UID=root;PASSWORD=");
+            MySqlCommand cmd = new MySqlCommand("SELECT image FROM image WHERE trip_ID='" + trip_ID + "' LIMIT 1,1;", MyCon);
+            MyCon.Open();
+            byte[] queryResult = Convert.FromBase64String((string)cmd.ExecuteScalar()); //Return an object so first check for null
+            
+            Image img = new Image();
+            using (MemoryStream ms = new MemoryStream(queryResult))
+            {
+                ms.Position = 0;
+                BitmapImage test = new BitmapImage();
+                test.BeginInit();
+                //test.CacheOption = BitmapCacheOption.OnDemand;
+                test.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                test.StreamSource = ms;
+                test.EndInit();
+                img.Source = test;
+                Panel_Image.Children.Add(img);
+                Console.WriteLine("fsf");
+            }
+              
+
+            MyCon.Close();*/
+        }
+
         private void Big_Image()
         {
             try
@@ -207,7 +237,7 @@ namespace TipsForTripsDesktop
             try
             {
                 string name = Name.Text;
-                string desctiption = Description.Text;
+                string description = Description.Text;
                 string startLon = StartLon.Text;
                 string startLat = StartLat.Text;
                 string endLon = EndLon.Text;
@@ -242,38 +272,38 @@ namespace TipsForTripsDesktop
                 }
 
                 // Validation
-                if (name == "" || desctiption == "" || startLon == "" || startLat == "" || city == "Select city" || type_of_trip == "Select type" || length == "" || difficulty == "")
+                if (name == "" || description == "" || startLon == "" || startLat == "" || city == "Select city" || type_of_trip == "Select type" || length == "" || difficulty == "")
                 {
                     MessageBox.Show("You need to fill out all the required fields (marked with *).", "Oops...");
                 }
                 else
                 {
-                    if (website == "")
-                    {
-                        ConnectToDatabase("INSERT INTO trip VALUES (null,'" + name + "','" + length + "','" + difficulty + "','" + desctiption + "','" + city + "',null);");
-                    }
-                    else
-                    {
-                        ConnectToDatabase("INSERT INTO trip VALUES (null,'" + name + "','" + length + "','" + difficulty + "','" + desctiption + "','" + city + "','" + website + "');");
-                    }
-                    string trip_ID = ConnectToDatabase("SELECT MAX(trip_ID) FROM trip;");
+                    ConnectToDatabase("UPDATE trip SET trip_name = '" + name + "', length = '" + length + "', difficulty = '" + difficulty + "', description = '" + description + "', city = '" + city + "', website = '" + website + "' WHERE trip_ID = '" + trip_ID + "';");
                     if (endLon == "" || endLat == "")
                     {
-                        ConnectToDatabase("INSERT INTO map_coordinates VALUES ('" + trip_ID + "','" + startLat + "','" + startLon + "',null,null);");
+                        ConnectToDatabase("UPDATE map_coordinates SET startLatitude = '" + startLat + "', startLongitude'" + startLon + "' WHERE trip_ID = '" + trip_ID + "';");
                     }
                     else
                     {
-                        ConnectToDatabase("INSERT INTO map_coordinates VALUES ('" + trip_ID + "','" + startLat + "','" + startLon + "','" + endLat + "','" + endLon + "');");
+                        ConnectToDatabase("UPDATE map_coordinates SET startLatitude = '" + startLat + "', startLongitude'" + startLon + "', endLatitude = '" + endLat + "', endLongitude = '" + endLon + "' WHERE trip_ID = '" + trip_ID + "';");
                     }
                     for (int i = 0; i < Panel_Image.Children.Count; i++)
                     {
                         if (imageInBits[i].ToString() == ConnectToDatabase("SELECT image FROM image WHERE trip_ID ='" + trip_ID + "' ORDER BY image LIMIT " + i + ",1;"))
                         {
+                            /*string image_ID_as_string = ConnectToDatabase("SELECT image_ID FROM image WHERE trip_ID = '" + trip_ID + "';");
+                            int image_ID = 0;
+                            Int32.TryParse(image_ID_as_string, out image_ID);
+                            string[] imageArray = new string[image_ID];
+                            for (int o = 0; o < image_ID; o++)
+                            {
+                                imageArray[o] = ConnectToDatabase("SELECT image FROM image WHERE trip_ID = '" + image_ID + "';");
+                            }
                             MessageBox.Show("Bilde lagres.");
-                            ConnectToDatabase("INSERT INTO image VALUES (null,'" + trip_ID + "','" + imageInBits[i] + "');");
+                            ConnectToDatabase("INSERT INTO image VALUES (null,'" + trip_ID + "','" + imageInBits[i] + "');");*/
                         }
                     }
-                    ConnectToDatabase("INSERT INTO trip_with_type VALUES ('" + trip_ID + "','" + type_of_trip + "');");
+                    ConnectToDatabase("UPDATE trip_with_type SET type_of_trip = '" + type_of_trip + "' WHERE trip_ID = '" + trip_ID + "';");
                     attractions.AttractionTable();
                     this.Close();
                 }
@@ -295,7 +325,6 @@ namespace TipsForTripsDesktop
             Showed_Image.Source = image.Source;
         }
 
-        //=========================================================================================================================================================
         public void Add_Image_Click(object sender, RoutedEventArgs e)
         {
             Image img = new Image();
@@ -342,7 +371,6 @@ namespace TipsForTripsDesktop
                     break;
             }
         }
-        //=========================================================================================================================================================
 
         public string ConnectToDatabase(string query)
         {
