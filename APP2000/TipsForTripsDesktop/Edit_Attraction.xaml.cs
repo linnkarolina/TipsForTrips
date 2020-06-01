@@ -2,6 +2,8 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +34,8 @@ namespace TipsForTripsDesktop
             attractions = a;
             InitializeComponent();
             SetTextBoxContent();
+
+            Show_Image();
         }
 
         private void SetTextBoxContent() 
@@ -90,7 +94,7 @@ namespace TipsForTripsDesktop
 
         private void Show_Cities()
         {
-            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
             try
             {
                 Con.Open();
@@ -121,7 +125,7 @@ namespace TipsForTripsDesktop
 
         private void Show_Type()
         {
-            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
             try
             {
                 Con.Open();
@@ -148,6 +152,39 @@ namespace TipsForTripsDesktop
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void Show_Image()
+        {
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
+            MyCon.Open();
+            for (int i = 0; i < DatabaseCount("SELECT COUNT(*) FROM image WHERE trip_ID = '" + trip_ID + "';"); i++)
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT image FROM image WHERE trip_ID='" + trip_ID + "' LIMIT " + i + ",1;", MyCon);
+                byte[] queryResult = (byte[])cmd.ExecuteScalar(); //Return an object so first check for null
+
+                var image = new BitmapImage();
+                using (var mem = new MemoryStream(queryResult))
+                {
+                    mem.Position = 0;
+                    image.BeginInit();
+                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = null;
+                    image.StreamSource = mem;
+                    image.EndInit();
+                }
+                image.Freeze();
+                Image image2 = new Image();
+                image2.Margin = new Thickness(0, 0, 5, 0);
+                image2.MouseUp += (s, evt) => {
+                    Image_Clicked(s);
+                };
+                image2.Source = image;
+                Panel_Image.Children.Add(image2);
+            }
+            MyCon.Close();
+            Big_Image();
         }
 
         private void Big_Image()
@@ -207,7 +244,7 @@ namespace TipsForTripsDesktop
             try
             {
                 string name = Name.Text;
-                string desctiption = Description.Text;
+                string description = Description.Text;
                 string startLon = StartLon.Text;
                 string startLat = StartLat.Text;
                 string endLon = EndLon.Text;
@@ -218,62 +255,50 @@ namespace TipsForTripsDesktop
                 string difficulty = Difficulty.Text;
                 string website = Website.Text;
                 Image[] img = new Image[Panel_Image.Children.Count];
-                object[] imageInBits = new object[Panel_Image.Children.Count];
-
-                for (int i = 0; i < Panel_Image.Children.Count; i++)
-                {
-                    img[i] = (Image)Panel_Image.Children[i];
-                    try
-                    {
-                        var bmp = img[i].Source as BitmapImage;
-
-                        int height = bmp.PixelHeight;
-                        int width = bmp.PixelWidth;
-                        int stride = width * ((bmp.Format.BitsPerPixel + 7) / 8);
-
-                        byte[] bits = new byte[height * stride];
-                        bmp.CopyPixels(bits, stride, 0);
-                        imageInBits[i] = bmp;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
 
                 // Validation
-                if (name == "" || desctiption == "" || startLon == "" || startLat == "" || city == "Select city" || type_of_trip == "Select type" || length == "" || difficulty == "")
+                if (name == "" || description == "" || startLon == "" || startLat == "" || city == "Select city" || type_of_trip == "Select type" || length == "" || difficulty == "")
                 {
                     MessageBox.Show("You need to fill out all the required fields (marked with *).", "Oops...");
                 }
                 else
                 {
-                    if (website == "")
-                    {
-                        ConnectToDatabase("INSERT INTO trip VALUES (null,'" + name + "','" + length + "','" + difficulty + "','" + desctiption + "','" + city + "',null);");
-                    }
-                    else
-                    {
-                        ConnectToDatabase("INSERT INTO trip VALUES (null,'" + name + "','" + length + "','" + difficulty + "','" + desctiption + "','" + city + "','" + website + "');");
-                    }
-                    string trip_ID = ConnectToDatabase("SELECT MAX(trip_ID) FROM trip;");
+                    ConnectToDatabase("UPDATE trip SET trip_name = '" + name + "', length = '" + length + "', difficulty = '" + difficulty + "', description = '" + description + "', city = '" + city + "', website = '" + website + "' WHERE trip_ID = '" + trip_ID + "';");
                     if (endLon == "" || endLat == "")
                     {
-                        ConnectToDatabase("INSERT INTO map_coordinates VALUES ('" + trip_ID + "','" + startLat + "','" + startLon + "',null,null);");
+                        ConnectToDatabase("UPDATE map_coordinates SET startLatitude = '" + startLat + "', startLongitude = '" + startLon + "' WHERE trip_ID = '" + trip_ID + "';");
                     }
                     else
                     {
-                        ConnectToDatabase("INSERT INTO map_coordinates VALUES ('" + trip_ID + "','" + startLat + "','" + startLon + "','" + endLat + "','" + endLon + "');");
+                        ConnectToDatabase("UPDATE map_coordinates SET startLatitude = '" + startLat + "', startLongitude = '" + startLon + "', endLatitude = '" + endLat + "', endLongitude = '" + endLon + "' WHERE trip_ID = '" + trip_ID + "';");
                     }
+                    // Lagre bildene
+                    ConnectToDatabase("DELETE FROM image WHERE trip_id = '" + trip_ID + "'");
                     for (int i = 0; i < Panel_Image.Children.Count; i++)
                     {
-                        if (imageInBits[i].ToString() == ConnectToDatabase("SELECT image FROM image WHERE trip_ID ='" + trip_ID + "' ORDER BY image LIMIT " + i + ",1;"))
+                        img[i] = (Image)Panel_Image.Children[i];
+                        try
                         {
-                            MessageBox.Show("Bilde lagres.");
-                            ConnectToDatabase("INSERT INTO image VALUES (null,'" + trip_ID + "','" + imageInBits[i] + "');");
+                            BitmapImage bmp = (BitmapImage)img[i].Source;
+                            MemoryStream memStream = new MemoryStream();
+                            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                            encoder.Frames.Add(BitmapFrame.Create(bmp));
+                            encoder.Save(memStream);
+                            byte[] imageByteArray = memStream.ToArray();
+
+                            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
+                            MyCon.Open();
+                            MySqlCommand cmd = new MySqlCommand("INSERT INTO image VALUES (null,'" + trip_ID + "',?byteArrayImage);", MyCon);
+                            cmd.Parameters.AddWithValue("?byteArrayImage", imageByteArray);
+                            cmd.ExecuteNonQuery();
+                            MyCon.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
                         }
                     }
-                    ConnectToDatabase("INSERT INTO trip_with_type VALUES ('" + trip_ID + "','" + type_of_trip + "');");
+                    ConnectToDatabase("UPDATE trip_with_type SET type_of_trip = '" + type_of_trip + "' WHERE trip_ID = '" + trip_ID + "';");
                     attractions.AttractionTable();
                     this.Close();
                 }
@@ -295,7 +320,6 @@ namespace TipsForTripsDesktop
             Showed_Image.Source = image.Source;
         }
 
-        //=========================================================================================================================================================
         public void Add_Image_Click(object sender, RoutedEventArgs e)
         {
             Image img = new Image();
@@ -342,7 +366,6 @@ namespace TipsForTripsDesktop
                     break;
             }
         }
-        //=========================================================================================================================================================
 
         public string ConnectToDatabase(string query)
         {
@@ -353,7 +376,7 @@ namespace TipsForTripsDesktop
             MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
             */
 
-            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=tipsfortrips;UID=root;PASSWORD=");
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
             MySqlCommand cmd = new MySqlCommand(query, MyCon);
             MyCon.Open();
             var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
@@ -373,5 +396,34 @@ namespace TipsForTripsDesktop
 
             return name;
         }
+        public int DatabaseCount(string query)
+        {
+            int total;
+
+            // Azure connection
+            /* 
+            MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
+            */
+
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
+            MySqlCommand cmd = new MySqlCommand(query, MyCon);
+            MyCon.Open();
+            var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
+            if (queryResult != null)
+            {
+                // If we have result, then convert it from object to string.
+                total = Convert.ToInt32(queryResult);
+            }
+            else
+            {
+                // Else make id = "" so you can later check it.
+                total = 0;
+            }
+
+            MyCon.Close();
+
+            return total;
+        }
+
     }
 }

@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TipsForTripsDesktop"
         mc:Ignorable="d"
-        Icon="tree.ico"
         Title="Tips For Trips" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>

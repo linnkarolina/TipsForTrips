@@ -82,7 +82,7 @@ namespace TipsForTripsDesktop
 
         private void Show_Cities()
         {
-            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
             try
             {
                 Con.Open();
@@ -106,7 +106,7 @@ namespace TipsForTripsDesktop
 
         private void Show_Type()
         {
-            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=TipsForTrips;UID=root;PASSWORD=");
+            MySqlConnection Con = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
             try
             {
                 Con.Open();
@@ -196,28 +196,6 @@ namespace TipsForTripsDesktop
                 string difficulty = Difficulty.Text;
                 string website = Website.Text;
                 Image[] img = new Image[Panel_Image.Children.Count];
-                object[] imageInBits = new object[Panel_Image.Children.Count];
-                
-                for (int i = 0; i < Panel_Image.Children.Count; i++)
-                {
-                    img[i] = (Image)Panel_Image.Children[i];
-                    try
-                    {
-                        var bmp = img[i].Source as BitmapImage;
-
-                        int height = bmp.PixelHeight;
-                        int width = bmp.PixelWidth;
-                        int stride = width * ((bmp.Format.BitsPerPixel + 7) / 8);
-
-                        byte[] bits = new byte[height * stride];
-                        bmp.CopyPixels(bits, stride, 0);
-                        imageInBits[i] = bmp;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
                 
                 // Validation
                 if (name == "" || desctiption == "" || startLon == "" || startLat == "" || city == "Select city" || type_of_trip == "Select type" || length == "" || difficulty == "")
@@ -235,6 +213,30 @@ namespace TipsForTripsDesktop
                         ConnectToDatabase("INSERT INTO trip VALUES (null,'" + name + "','" + length + "','" + difficulty + "','" + desctiption + "','" + city + "','" + website + "');");
                     }
                     string trip_ID = ConnectToDatabase("SELECT MAX(trip_ID) FROM trip;");
+                    for (int i = 0; i < Panel_Image.Children.Count; i++)
+                    {
+                        img[i] = (Image)Panel_Image.Children[i];
+                        try
+                        {
+                            BitmapImage bmp = (BitmapImage)img[i].Source;
+                            MemoryStream memStream = new MemoryStream();
+                            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                            encoder.Frames.Add(BitmapFrame.Create(bmp));
+                            encoder.Save(memStream);
+                            byte[] imageByteArray = memStream.ToArray();
+
+                            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
+                            MyCon.Open();
+                            MySqlCommand cmd = new MySqlCommand("INSERT INTO image VALUES (null,'" + trip_ID + "',?p1);", MyCon);
+                            cmd.Parameters.AddWithValue("?p1", imageByteArray);
+                            cmd.ExecuteNonQuery();
+                            MyCon.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
                     if (endLon == "" || endLat == "")
                     {
                         ConnectToDatabase("INSERT INTO map_coordinates VALUES ('" + trip_ID + "','" + startLat + "','" + startLon + "',null,null);");
@@ -242,10 +244,6 @@ namespace TipsForTripsDesktop
                     else
                     {
                         ConnectToDatabase("INSERT INTO map_coordinates VALUES ('" + trip_ID + "','" + startLat + "','" + startLon + "','" + endLat + "','" + endLon + "');");
-                    }
-                    for (int i = 0; i < Panel_Image.Children.Count; i++)
-                    {
-                        ConnectToDatabase("INSERT INTO image VALUES (null,'" + trip_ID + "','" + imageInBits[i] + "');");
                     }
                     ConnectToDatabase("INSERT INTO trip_with_type VALUES ('" + trip_ID + "','" + type_of_trip + "');");
                     if (attractions != null)
@@ -328,7 +326,7 @@ namespace TipsForTripsDesktop
             MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
             */
 
-            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=tipsfortrips;UID=root;PASSWORD=");
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
             MySqlCommand cmd = new MySqlCommand(query, MyCon);
             MyCon.Open();
             var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null

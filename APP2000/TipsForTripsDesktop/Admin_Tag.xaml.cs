@@ -27,7 +27,6 @@ namespace TipsForTripsDesktop
 
         private string searchText;
         private string user;
-        private BrushConverter borderBrushConverter = new BrushConverter();
 
         public Admin_Tag(string username)
         {
@@ -76,6 +75,51 @@ namespace TipsForTripsDesktop
             }
         }
 
+        // This method is used when chenking or unchecking a tag after doing a search
+        public void TagTableAfterClick()
+        {
+            DataTable dt = new DataTable();
+            DataColumn check = new DataColumn("Checked", typeof(Boolean));
+            DataColumn tag = new DataColumn("Tag", typeof(string));
+
+            check.DefaultValue = false;
+
+            dt.Columns.Add(check);
+            dt.Columns.Add(tag);
+
+            for (int i = 0; i < DatabaseCount("SELECT count(*) FROM tag WHERE tag LIKE '%" + Search_Bar.Text + "%';"); i++)
+            {
+                DataRow row = dt.NewRow();
+                string query = ConnectToDatabase("SELECT tag FROM tag WHERE tag LIKE '%" + Search_Bar.Text + "%' ORDER BY tag LIMIT " + i + ",1;");
+                row[1] = query;
+
+                for (int o = 0; o < DatabaseCount("SELECT count(*) FROM admin_tag WHERE username = '" + user + "' AND tag LIKE '%" + Search_Bar.Text + "%';"); o++)
+                {
+                    if (query == ConnectToDatabase("SELECT tag FROM admin_tag WHERE username = '" + user + "' AND tag LIKE '%" + Search_Bar.Text + "%' LIMIT " + o + ",1;"))
+                    {
+                        row[0] = true;
+                        break;
+                    }
+                    else
+                    {
+                        row[0] = false;
+                    }
+                }
+                dt.Rows.Add(row);
+                Table.ItemsSource = dt.DefaultView;
+            }
+            if (DatabaseCount("SELECT count(*) FROM tag WHERE tag LIKE '%" + Search_Bar.Text + "%';") == 0)
+            {
+                dt.Rows.Clear();
+                Table.ItemsSource = dt.DefaultView;
+            }
+            if (Search_Bar.Text == "")
+            {
+                Search_Bar.Text = "Search";
+                searchText = Search_Bar.Text;
+            }
+        }
+
         private void CheckedChanged(object sender, RoutedEventArgs e)
         {
             try
@@ -85,12 +129,20 @@ namespace TipsForTripsDesktop
                 if (drv.Row.ItemArray[0].ToString() == "True")
                 {
                     ConnectToDatabase("DELETE FROM admin_tag WHERE username = '" + user + "' AND tag = '" + tag + "';");
-                    TagTable();
+                    if (Search_Bar.Text == "Search")
+                    {
+                        Search_Bar.Text = "";
+                    }
+                    TagTableAfterClick();
                 }
                 else if (drv.Row.ItemArray[0].ToString() == "False")
                 {
                     ConnectToDatabase("INSERT INTO admin_tag VALUES ('" + tag + "','" + user + "');");
-                    TagTable();
+                    if (Search_Bar.Text == "Search")
+                    {
+                        Search_Bar.Text = "";
+                    }
+                    TagTableAfterClick();
                 }
             }
             catch (Exception ex)
@@ -98,39 +150,6 @@ namespace TipsForTripsDesktop
                 // MessageBox.Show("Noe gikk galt");
                 MessageBox.Show(ex.ToString());
             }
-        }
-
-        // AUTO-generated
-        public static T GetVisualChild<T>(Visual parent) where T : Visual
-        {
-            T child = default(T);
-            int numVisuals = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < numVisuals; i++)
-            {
-                Visual v = (Visual)VisualTreeHelper.GetChild(parent, i);
-                child = v as T;
-                if (child == null)
-                {
-                    child = GetVisualChild<T>(v);
-                }
-                if (child != null)
-                {
-                    break;
-                }
-            }
-            return child;
-        }
-
-        public DataGridRow GetRow(int index)
-        {
-            DataGridRow row = Table.ItemContainerGenerator.ContainerFromIndex(index) as DataGridRow;
-            if (row == null)
-            {
-                Table.UpdateLayout();
-                Table.ScrollIntoView(Table.Items[index]);
-                row = (DataGridRow) Table.ItemContainerGenerator.ContainerFromIndex(index);
-            }
-            return row;
         }
 
         // Enter animation
@@ -172,15 +191,34 @@ namespace TipsForTripsDesktop
         public void Search_Click(object sender, RoutedEventArgs e)
         {
             DataTable dt = new DataTable();
+            DataColumn check = new DataColumn("Checked", typeof(Boolean));
             DataColumn tag = new DataColumn("Tag", typeof(string));
 
+            check.DefaultValue = false;
+
+            dt.Columns.Add(check);
             dt.Columns.Add(tag);
+
             if (ConnectToDatabase("SELECT tag FROM tag WHERE tag LIKE '%" + Search_Bar.Text + "%';") != "")
             {
                 for (int i = 0; i < DatabaseCount("SELECT count(*) FROM tag WHERE tag LIKE '%" + Search_Bar.Text + "%';"); i++)
                 {
                     DataRow row = dt.NewRow();
-                    row[0] = ConnectToDatabase("SELECT tag FROM tag WHERE tag LIKE '%" + Search_Bar.Text + "%' ORDER BY tag LIMIT " + i + ",1;");
+                    string query = ConnectToDatabase("SELECT tag FROM tag WHERE tag LIKE '%" + Search_Bar.Text + "%' ORDER BY tag LIMIT " + i + ",1;");
+                    for (int o = 0; o < DatabaseCount("SELECT count(*) FROM admin_tag where username = '" + user + "';"); o++)
+                    {
+                        if (query == ConnectToDatabase("SELECT tag FROM admin_tag WHERE username = '" + user + "' AND tag LIKE '%" + Search_Bar.Text + "%' LIMIT " + o + ",1;"))
+                        {
+                            row[0] = true;
+                            break;
+                        }
+                        else
+                        {
+                            row[0] = false;
+                        }
+                    }
+
+                    row[1] = query;
                     dt.Rows.Add(row);
                     Table.ItemsSource = dt.DefaultView;
                     searchText = Search_Bar.Text;
@@ -193,6 +231,13 @@ namespace TipsForTripsDesktop
                 searchText = Search_Bar.Text;
                 MessageBox.Show("No results were found", "Oops...");
             }
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            Search_Bar.Text = "Search";
+            searchText = Search_Bar.Text;
+            TagTable();
         }
 
         private void Done_Click(object sender, RoutedEventArgs e)
@@ -257,11 +302,6 @@ namespace TipsForTripsDesktop
             MyCon.Close();
 
             return total;
-        }
-
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-            
         }
 
     }
