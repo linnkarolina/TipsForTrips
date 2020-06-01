@@ -220,8 +220,7 @@
                             </Grid>
                         </Grid>
                         <!-- Table -->
-                        <TextBlock Grid.Row="2" Text="{Binding}" VerticalAlignment="Bottom" FontSize="20" Foreground="Red" />
-                        <DataGrid x:Name="Table" Grid.Row="3" BorderThickness="0" IsReadOnly="True" Background="White">
+                        <DataGrid x:Name="Table" Grid.Row="3" BorderThickness="0" HorizontalAlignment="Left" IsReadOnly="True" Background="White">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Tags">
                                     <DataGridTemplateColumn.CellTemplate>
