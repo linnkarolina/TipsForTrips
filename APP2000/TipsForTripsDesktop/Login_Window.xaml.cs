@@ -85,7 +85,7 @@ namespace TipsForTripsDesktop
             MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
             */
 
-            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=tipsfortrips;UID=root;PASSWORD=");
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
             MySqlCommand cmd = new MySqlCommand(query, MyCon);
             MyCon.Open();
             var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
