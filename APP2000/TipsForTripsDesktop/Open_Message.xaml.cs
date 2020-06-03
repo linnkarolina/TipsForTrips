@@ -23,8 +23,10 @@ namespace TipsForTripsDesktop
     {
         private string message_ID;
         private MainWindow mainWindow;
-        public Open_Message(string ID, MainWindow mw)
+        private Inbox inbox;
+        public Open_Message(string ID, MainWindow mw, Inbox inboxSent)
         {
+            inbox = inboxSent;
             message_ID = ID;
             mainWindow = mw;
             InitializeComponent();
@@ -43,7 +45,7 @@ namespace TipsForTripsDesktop
 
         public void Answer_Click(object sender, RoutedEventArgs e)
         {
-            Answer_Message am = new Answer_Message(message_ID, mainWindow);
+            Answer_Message am = new Answer_Message(message_ID, mainWindow, inbox);
             am.Show();
             am.Topmost = true;
             this.Close();

@@ -29,7 +29,6 @@ namespace TipsForTripsDesktop
         private bool checkUsers = true;
         private bool checkProfile = true;
         private double width;
-        private Button b;
         private Grid g;
         private string user;
 
@@ -43,7 +42,7 @@ namespace TipsForTripsDesktop
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            b = (Button)sender;
+            Button b = (Button)sender;
             if (b.Equals(Area_Button))
             {
                 g = SubMenu_Area;

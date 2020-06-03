@@ -31,6 +31,7 @@ namespace TipsForTripsDesktop
             mainWindow = mw;
             InitializeComponent();
             setTextBoxContent();
+            TagTable();
         }
 
         private void setTextBoxContent()
@@ -81,6 +82,101 @@ namespace TipsForTripsDesktop
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void TagTable()
+        {
+            DataTable dt = new DataTable();
+            DataColumn check = new DataColumn("Checked", typeof(Boolean));
+            DataColumn tag = new DataColumn("Tag", typeof(string));
+
+            check.DefaultValue = false;
+
+            dt.Columns.Add(check);
+            dt.Columns.Add(tag);
+
+            for (int i = 0; i < DatabaseCount("SELECT count(*) FROM tag;"); i++)
+            {
+                DataRow row = dt.NewRow();
+                string query = ConnectToDatabase("SELECT tag FROM tag ORDER BY tag LIMIT " + i + ",1;");
+                row[1] = query;
+
+                for (int o = 0; o < DatabaseCount("SELECT count(*) FROM admin_tag where username = '" + mainWindow.adminName.Text + "';"); o++)
+                {
+                    if (query == ConnectToDatabase("SELECT tag FROM admin_tag WHERE username = '" + mainWindow.adminName.Text + "' LIMIT " + o + ",1;"))
+                    {
+                        row[0] = true;
+                        break;
+                    }
+                    else
+                    {
+                        row[0] = false;
+                    }
+                }
+                dt.Rows.Add(row);
+                Table.ItemsSource = dt.DefaultView;
+            }
+            if (DatabaseCount("SELECT count(*) FROM tag;") == 0)
+            {
+                dt.Rows.Clear();
+                Table.ItemsSource = dt.DefaultView;
+            }
+        }
+        public void TagTableAfterClick()
+        {
+            DataTable dt = new DataTable();
+            DataColumn check = new DataColumn("Checked", typeof(Boolean));
+            DataColumn tag = new DataColumn("Tag", typeof(string));
+
+            check.DefaultValue = false;
+
+            dt.Columns.Add(check);
+            dt.Columns.Add(tag);
+
+            for (int i = 0; i < DatabaseCount("SELECT count(*) FROM tag;"); i++)
+            {
+                DataRow row = dt.NewRow();
+                string query = ConnectToDatabase("SELECT tag FROM tag ORDER BY tag LIMIT " + i + ",1;");
+                row[1] = query;
+
+                for (int o = 0; o < DatabaseCount("SELECT count(*) FROM admin_tag WHERE username = '" + mainWindow.adminName.Text + "';"); o++)
+                {
+                    if (query == ConnectToDatabase("SELECT tag FROM admin_tag WHERE username = '" + mainWindow.adminName.Text + "' LIMIT " + o + ",1;"))
+                    {
+                        row[0] = true;
+                        break;
+                    }
+                    else
+                    {
+                        row[0] = false;
+                    }
+                }
+                dt.Rows.Add(row);
+                Table.ItemsSource = dt.DefaultView;
+            }
+        }
+
+        private void CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView drv = Table.SelectedItem as DataRowView;
+                string tag = drv.Row.ItemArray[1].ToString();
+                if (drv.Row.ItemArray[0].ToString() == "True")
+                {
+                    ConnectToDatabase("DELETE FROM admin_tag WHERE username = '" + mainWindow.adminName.Text + "' AND tag = '" + tag + "';");
+                }
+                else if (drv.Row.ItemArray[0].ToString() == "False")
+                {
+                    ConnectToDatabase("INSERT INTO admin_tag VALUES ('" + tag + "','" + mainWindow.adminName.Text + "');");
+                }
+                TagTableAfterClick();
+            }
+            catch (Exception ex)
+            {
+                // MessageBox.Show("Noe gikk galt");
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -198,5 +294,35 @@ namespace TipsForTripsDesktop
 
             return name;
         }
+
+        public int DatabaseCount(string query)
+        {
+            int total;
+
+            // Azure connection
+            /* 
+            MySqlConnection MyCon = new MySqlConnection("SERVER=app2000.mysql.database.azure.com;DATABASE=app2000;UID=trygve@app2000;PASSWORD=Ostekake123");
+            */
+
+            MySqlConnection MyCon = new MySqlConnection("SERVER=localhost;PORT=3306;DATABASE=app2000;UID=root;PASSWORD=");
+            MySqlCommand cmd = new MySqlCommand(query, MyCon);
+            MyCon.Open();
+            var queryResult = cmd.ExecuteScalar(); //Return an object so first check for null
+            if (queryResult != null)
+            {
+                // If we have result, then convert it from object to string.
+                total = Convert.ToInt32(queryResult);
+            }
+            else
+            {
+                // Else make id = "" so you can later check it.
+                total = 0;
+            }
+
+            MyCon.Close();
+
+            return total;
+        }
+
     }
 }

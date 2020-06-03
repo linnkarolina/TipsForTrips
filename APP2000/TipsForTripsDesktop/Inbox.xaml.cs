@@ -162,7 +162,7 @@ namespace TipsForTripsDesktop
             {
                 DataRowView drv = (DataRowView)((Button)e.Source).DataContext;
                 string message_ID = drv[0].ToString();
-                Open_Message om = new Open_Message(message_ID, mainWindow);
+                Open_Message om = new Open_Message(message_ID, mainWindow, this);
                 om.Show();
                 om.Topmost = true;
             }

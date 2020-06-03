@@ -23,8 +23,11 @@ namespace TipsForTripsDesktop
     {
         private string message_ID;
         private MainWindow mainWindow;
-        public Answer_Message(string ID, MainWindow mw)
+        private Inbox inbox;
+
+        public Answer_Message(string ID, MainWindow mw, Inbox inboxSent)
         {
+            inbox = inboxSent;
             message_ID = ID;
             mainWindow = mw;
             InitializeComponent();
@@ -35,7 +38,7 @@ namespace TipsForTripsDesktop
         {
             string to = ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE message_ID ='" + message_ID + "';");
             string subject = "Re: " + ConnectToDatabase("SELECT subject FROM admin_inbox WHERE message_ID ='" + message_ID + "';");
-            string message = "\n__________________________________________\nFrom: " + ConnectToDatabase("SELECT user_username FROM admin_inbox WHERE message_ID ='" + message_ID + "';") + "\n\n" + ConnectToDatabase("SELECT message FROM admin_inbox WHERE message_ID ='" + message_ID + "';");
+            string message = "\n__________________________________________\n" + ConnectToDatabase("SELECT message FROM admin_inbox WHERE message_ID ='" + message_ID + "';");
             To.Text = to;
             Subject.Text = subject;
             Message.Text = message;
@@ -58,6 +61,7 @@ namespace TipsForTripsDesktop
                     ConnectToDatabase("INSERT INTO user_inbox VALUES('NULL','" + mainWindow.adminName.DataContext + "','" + To.Text + "','" + Subject.Text + "'," +
                     "'" + Message.Text + "',CURRENT_TIMESTAMP());");
                     ConnectToDatabase("UPDATE admin_inbox SET isanswered = 1 WHERE message_ID = '" + message_ID + "';");
+                    inbox.InboxTable();
                     this.Close();
                     MessageBox.Show("Your message was sent.","Successful");
                 }
